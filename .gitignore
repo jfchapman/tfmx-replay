@@ -1,4 +1,7 @@
 build/
+# Visual Studio (its folder view: IDE state and the CMake build folder)
+.vs/
+out/
 *.o
 *.a
 *.so
