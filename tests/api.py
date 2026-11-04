@@ -16,7 +16,7 @@ class Settings(ctypes.Structure):
     _fields_ = [('sample_rate', ctypes.c_int), ('stereo_separation', ctypes.c_int), ('interpolation', ctypes.c_int),
                 ('volume_ramping', ctypes.c_int), ('loop_count', ctypes.c_int), ('variant', ctypes.c_int),
                 ('gain', ctypes.c_float), ('amiga_model', ctypes.c_int), ('led_filter', ctypes.c_int),
-                ('fade_seconds', ctypes.c_float)]
+                ('fade_seconds', ctypes.c_float), ('mix_setting', ctypes.c_int)]
 
 
 class Info(ctypes.Structure):

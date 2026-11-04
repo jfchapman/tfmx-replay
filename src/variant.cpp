@@ -1,10 +1,31 @@
-﻿// TFMXreplay: replayer behaviour switches.
+// TFMXreplay: replayer behaviour switches.
 #include "variant.h"
 
 namespace tfmx {
 
+namespace {
+
+// The 7V songs whose games set their mixer to something other than 18, read from the games.
+struct MixSetting {
+	uint64_t checksum;
+	int setting;
+};
+
+const MixSetting kMixSettings[] = {
+	{0x4A1944EE4E8F9F5Cull, 14},  // turrican 3 intro
+	{0xC40D799D8DC57214ull, 14},  // hexuma-title
+	{0x72509D77915C7004ull, 16},  // bundesliga manager-title
+	{0x63A07B490AE3D90Aull, 9},   // bckid-titel
+};
+
+}  // namespace
+
 Behaviour behaviour_of(tfmx_variant variant, const Module &module) {
 	Behaviour b{};
+	b.mix_setting = 18;
+	for (const MixSetting &song : kMixSettings)
+		if (song.checksum == module.checksum)
+			b.mix_setting = song.setting;
 	// Turrican 2 shipped two builds: a 7V one for its title (Pro-like) and a small 4-voice one for
 	// the loading screens and levels, which is GemX's generation but defers the 00 b1 cut.
 	const bool t2_small = variant == TFMX_VARIANT_TURRICAN2 && !module.has_7v;
@@ -35,7 +56,7 @@ Behaviour behaviour_of(tfmx_variant variant, const Module &module) {
 		b.split_jumps = true;
 		b.play_macro = true;
 		b.sid = true;
-		b.dmaon_delays_effects = true;
+		b.dmaon_delays_effects = variant != TFMX_VARIANT_TURRICAN2;
 		b.dma_wait_from_command = true;
 		b.f7_time = true;
 		b.note_skips_effects = variant != TFMX_VARIANT_GEMX && variant != TFMX_VARIANT_TURRICAN2;

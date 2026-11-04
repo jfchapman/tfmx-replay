@@ -25,6 +25,7 @@ const uint16_t kPeriods[64] = {
 const int kOrder4[4] = {0, 1, 2, 3};
 const int kOrder7[8] = {0, 1, 2, 4, 5, 6, 7, 3};
 
+
 inline int s8(uint32_t v) { return int8_t(uint8_t(v)); }
 inline int s16(uint32_t v) { return int16_t(uint16_t(v)); }
 
@@ -56,9 +57,9 @@ void Replayer::write(int voice, PaulaWrite::Reg reg, uint32_t value) {
 		break;
 	case PaulaWrite::DMA_ON:
 		// In 7V the replayer runs after the tick's mixing, so its DMA starts come well into the
-		// tick: on real hardware somewhere from 20% to over 95% of it (Apidya title captures,
-		// §15.20). Half a tick is used.
-		paula_->dma_on(voice, seven_ ? 0.5 * tick_seconds() : 0.0);
+		// tick: about 82% of the way in on Turrican 2's title, measured from a recording of it (20% to
+		// over 95% in the Apidya title's captures, §15.20).
+		paula_->dma_on(voice, seven_ ? 0.82 * tick_seconds() : 0.0);
 		break;
 	case PaulaWrite::NOTE: break;
 	}
@@ -116,13 +117,16 @@ void Replayer::mark_loop(double target) {
 	}
 }
 
+// The mix block, from trackstep EFFE0003 and the mixer setting: round((100 + x) * setting / 10) words
+// at a period of about 3580 / setting.
+int Replayer::mix_words() const { return ((100 + std::max(seven_adjust_, -32)) * mix_setting_ + 5) / 10; }
+int Replayer::mix_period() const { return (3580 + mix_setting_ / 2) / mix_setting_; }
+
 double Replayer::tick_seconds() const {
 	if (seven_) {
-		// The tick is one block of the mix buffer on voice 3: round((100 + x) * 1.8) words at
-		// period 199 with the mixer setting the games use (18), 4 CPU cycles per word and period
-		// unit. That's about 20.2 ms at x = 0; other mixer settings give the same rate (Â§15.15).
-		const int words = ((100 + std::max(seven_adjust_, -32)) * 18 + 5) / 10;
-		return words * 199 * 4 / 7093790.0;
+		// The tick is one block of the mix buffer on voice 3, 4 CPU cycles per word and period unit.
+		// That's about 20.2 ms at x = 0 (§15.15).
+		return mix_words() * mix_period() * 4 / 7093790.0;
 	}
 	if (bpm_ >= 16) {
 		// A BPM tempo programs a CIA timer (PAL clock 709,379 Hz). Pro builds use 1,790,456 / BPM
@@ -295,6 +299,13 @@ void Replayer::process_rows() {
 	// depends on the trackstep and track state, so once that repeats exactly, the song has looped.
 	if (loops_ != loops_before)
 		seen_.clear();
+	// With every track stopped the state can't change, but that's the song's end, not a loop: tick()
+	// lets the last sounds ring out.
+	bool any = false;
+	for (const Track &t : tracks_)
+		any |= t.active;
+	if (!any)
+		return;
 	uint64_t h = 1469598103934665603ull;
 	auto mix = [&](uint64_t x) { h = (h ^ x) * 1099511628211ull; };
 	mix(uint64_t(line_));
@@ -532,6 +543,7 @@ void Replayer::tick() {
 	tick_count_++;
 	const int count = seven_ ? 8 : 4;
 	const int *order = seven_ ? kOrder7 : kOrder4;
+	const int mix_bytes = 2 * mix_words(), mix_per = mix_period();  // before any change this tick
 
 	// Deferred cuts (00/13 with b1 != 0) happen together at the start of the macro phase.
 	auto deferred_cuts = [&] {
@@ -581,6 +593,8 @@ void Replayer::tick() {
 		track_phase();
 		macro_phase();
 	}
+	if (seven_)
+		paula_->mix_block(mix_bytes, mix_per);
 	for (Voice &v : voice_)
 		if (v.lock > 0)
 			v.lock--;
@@ -607,6 +621,8 @@ void Replayer::run_voice(int n) {
 			return;
 		v.written_volume = v.volume;
 		write(n, PaulaWrite::VOL, uint32_t(v.volume * master_ / 64));
+		if (seven_ && n >= 4)
+			paula_->channel(n).mix_volume = v.volume;
 	};
 	auto run_effects = [&] {
 		if (v.skip_effects) {
@@ -767,13 +783,15 @@ bool Replayer::exec(int n, const uint8_t *c) {
 			set_len(n, uint16_t(std::max(v.sid_length / 2, 1)));
 		}
 		v.dma_on_request = true;
+		if (seven_ && n >= 4)
+			paula_->mix_latch(n, v.period, v.volume);
 		// Pro clears the voice's audio interrupt here, so a request still pending from an
 		// earlier DMA start doesn't count for a later 1A (a fresh DMA start raises a new one).
 		if (b_.dma_wait_from_command)
 			v.dma_wait_mark = paula_->channel(n).block_starts;
 		if (b1 >= 0x80) {
 			v.effects = false;
-		} else if (b1 == 0 && b_.dmaon_delays_effects) {
+		} else if (b1 == 0 && b_.dmaon_delays_effects && !(seven_ && n >= 4)) {
 			v.effects = false;
 			v.effects_next_tick = true;
 		} else {

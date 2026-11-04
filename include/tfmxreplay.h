@@ -121,6 +121,10 @@ typedef struct tfmx_settings {
 	                                     TFMX has no command for it, and the replayers turn it off */
 	float fade_seconds;               /* after its loops, a looped song plays on, fading out over this
 	                                     many seconds. 0 = stop at the loop point (default) */
+	int mix_setting;                  /* 7V songs: the software mixer's quality, 8-22, which each game
+	                                     set for itself. The mix runs at about 16 kHz * setting / 18,
+	                                     and the setting also moves the tempo slightly.
+	                                     0 = the song's own game, if known, otherwise 18 (default) */
 } tfmx_settings;
 
 /* Fills settings with the defaults. */

@@ -25,12 +25,20 @@ const double kLedQ = 0.7071;  // Butterworth
 
 uint32_t bytes_of(uint16_t len) { return (len ? uint32_t(len) : 0x10000u) * 2; }
 
+// The 7V mixer's fixed-point position, and the shortest block it plays.
+const int kMixFraction = 11;
+const uint32_t kMixMinimumBytes = 64;
+
 }  // namespace
 
 void Paula::reset(int channels) {
 	ch_.assign(size_t(channels), Channel());
 	tails_.assign(size_t(channels), Tail());
 	seven_ = false;
+	mix_front_.clear();
+	mix_back_.clear();
+	mix_old_.clear();
+	mix_play_ = 0;
 	filter_[0] = filter_[1] = FilterState();
 }
 
@@ -60,7 +68,14 @@ void Paula::dma_on(int n, double delay) {
 	if (c.dma)
 		return;
 	c.delay = delay;
-	if (ramp_step_ > 0 && c.ramp_vol > 0.5f) {
+	if (seven_ && n >= 4) {
+		// The mixer's first byte is the sample's second.
+		c.mix_lc = c.mix_next_lc;
+		c.mix_bytes = bytes_of(c.mix_next_len);
+		c.mix_pos = (1u << kMixFraction) - 1;
+		c.mix_on = true;
+		c.mix_held = false;
+	} else if (ramp_step_ > 0 && c.ramp_vol > 0.5f) {
 		// The voice is restarting while still audible: let the old sound fade out separately.
 		tails_[size_t(n)].c = c;
 		tails_[size_t(n)].active = true;
@@ -78,7 +93,7 @@ void Paula::dma_off(int n) {
 	Channel &c = ch_[size_t(n)];
 	if (!c.dma)
 		return;
-	if (ramp_step_ > 0 && c.ramp_vol > 0.5f) {
+	if (ramp_step_ > 0 && c.ramp_vol > 0.5f && !(seven_ && n >= 4)) {
 		tails_[size_t(n)].c = c;
 		tails_[size_t(n)].active = true;
 	}
@@ -128,6 +143,7 @@ void Paula::advance(double seconds) {
 	}
 	for (Tail &t : tails_)
 		t.active = false;
+	mix_play_ += seconds * kPaulaClock / mix_period_;
 }
 
 float Paula::voice_sample(Channel &c) {
@@ -145,6 +161,66 @@ float Paula::voice_sample(Channel &c) {
 	const float b = sm - 2.5f * s0 + 2.0f * s1 - 0.5f * s2;
 	const float d = -0.5f * sm + 0.5f * s1;
 	return ((a * t + b) * t + d) * t + s0;
+}
+
+void Paula::mix_latch(int n, int period, int volume) {
+	Channel &c = ch_[size_t(n)];
+	c.mix_next_lc = c.lc;
+	c.mix_next_len = c.len;
+	c.mix_per = period ? period : c.per;
+	c.mix_vol = volume;
+}
+
+void Paula::mix_block(int bytes, int period) {
+	mix_play_ = mix_front_.empty() ? 0 : mix_play_ - double(mix_front_.size());
+	mix_old_.swap(mix_front_);
+	mix_front_.swap(mix_back_);
+	mix_period_ = period;
+
+	std::vector<int> sum(size_t(bytes), 0);
+	for (size_t n = 4; n < ch_.size(); n++) {
+		Channel &c = ch_[n];
+		if (!c.mix_on || c.mix_bytes < kMixMinimumBytes)
+			continue;
+		// DMA off doesn't silence a voice: the mixer stops stepping, and holds the sample it was on.
+		const uint32_t step =
+		    c.mix_held ? 0 : uint32_t(period) * (1u << kMixFraction) / uint32_t(std::max(c.mix_per, 1));
+		const int volume = std::min(c.mix_vol, 63);  // a table of 64 volumes
+		for (int i = 0; i < bytes; i++) {
+			const uint32_t addr = c.mix_lc + (c.mix_pos >> kMixFraction);
+			if (smpl_ && addr < smpl_->size())
+				sum[size_t(i)] += (int(int8_t((*smpl_)[addr])) * volume) >> 6;
+			c.mix_pos += step;
+			if (c.mix_pos >= c.mix_bytes << kMixFraction) {
+				c.mix_pos -= c.mix_bytes << kMixFraction;
+				c.mix_lc = c.mix_next_lc;
+				c.mix_bytes = bytes_of(c.mix_next_len);
+			}
+		}
+	}
+	// Everything else reaches the mixer a tick after the replayer writes it.
+	for (size_t n = 4; n < ch_.size(); n++) {
+		Channel &c = ch_[n];
+		c.mix_next_lc = c.lc;
+		c.mix_next_len = c.len;
+		c.mix_per = c.per;
+		c.mix_vol = c.mix_volume;
+		c.mix_held = !c.dma;
+	}
+	mix_back_.resize(size_t(bytes));
+	for (int i = 0; i < bytes; i++)
+		mix_back_[size_t(i)] = int8_t(std::clamp(sum[size_t(i)], -128, 127));
+}
+
+// pos is relative to the block playing. Interpolation reads a little past either end of it.
+float Paula::mix_sample(double pos) const {
+	if (pos < 0)
+		return mix_old_.empty() ? 0.0f : float(mix_old_.back()) / 128.0f;
+	const size_t i = size_t(pos);
+	if (i < mix_front_.size())
+		return float(mix_front_[i]) / 128.0f;
+	const size_t j = i - mix_front_.size();
+	return j < mix_back_.size() ? float(mix_back_[j]) / 128.0f : 0.0f;
 }
 
 float Paula::filter(int side, float x) {
@@ -171,7 +247,17 @@ void Paula::render(float *out, int frames) {
 			// Hardware voices 0 and 3 are on the left, 1 and 2 on the right. In 7V mode voices
 			// 4-7 replace voice 3, sharing its side.
 			const int s = (n == 1 || n == 2) ? 1 : 0;
-			const float scale = n >= 4 ? 0.5f : 1.0f;
+			if (seven_ && n >= 3) {
+				// Not heard directly. Voices 4-7 still count their blocks (macro 1A).
+				Channel &c = ch_[n];
+				if (n >= 4 && c.dma) {
+					if (c.delay > 0)
+						c.delay -= 1.0 / rate_;
+					else
+						step(c, kPaulaClock / std::max<int>(c.per, kMinPeriod) / rate_);
+				}
+				continue;
+			}
 			for (int pass = 0; pass < 2; pass++) {
 				Channel &c = pass ? tails_[n].c : ch_[n];
 				if (pass && !tails_[n].active)
@@ -192,11 +278,30 @@ void Paula::render(float *out, int frames) {
 					c.ramp_vol = target;
 				}
 				if (c.ramp_vol > 0)
-					side[s] += voice_sample(c) * c.ramp_vol / 64.0f * scale;
+					side[s] += voice_sample(c) * c.ramp_vol / 64.0f;
 				step(c, kPaulaClock / std::max<int>(c.per, kMinPeriod) / rate_);
 				if (pass && c.ramp_vol <= 0)
 					tails_[n].active = false;
 			}
+		}
+		if (seven_) {
+			// Hardware voice 3 at full volume, on the left.
+			const double p = mix_play_;
+			float x = mix_sample(p);
+			if (interp_ != TFMX_INTERPOLATION_NONE) {
+				const float t = float(p - std::floor(p)), s1 = mix_sample(p + 1);
+				if (interp_ == TFMX_INTERPOLATION_LINEAR) {
+					x += (s1 - x) * t;
+				} else {
+					const float sm = mix_sample(p - 1), s2 = mix_sample(p + 2);
+					const float a = -0.5f * sm + 1.5f * x - 1.5f * s1 + 0.5f * s2;
+					const float b = sm - 2.5f * x + 2.0f * s1 - 0.5f * s2;
+					const float d = -0.5f * sm + 0.5f * s1;
+					x = ((a * t + b) * t + d) * t + x;
+				}
+			}
+			side[0] += x;
+			mix_play_ += kPaulaClock / mix_period_ / rate_;
 		}
 		// The filters are on the two analogue outputs, so they come before the stereo separation.
 		const float l = filter(0, side[0] * base), r = filter(1, side[1] * base);

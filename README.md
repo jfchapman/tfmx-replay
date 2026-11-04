@@ -11,7 +11,7 @@ and others also used, from 1989 to the mid-1990s.
   subsongs that repeat another's music, and tells songs that loop from ones that end in silence.
 - Output options: sample rate, stereo separation, interpolation (none, linear, cubic),
   Amiga output filters (A500, A1200 or none, plus the LED filter), anti-click volume ramping,
-  loop count, fade-out, gain.
+  loop count, fade-out, gain, 7V mixer quality.
 - The different replayer generations ("variants"): TFMX Pro and 7V, TFMX 1.5, and the earlier
   builds used by Masterblazer, X-Out and Rock'n'Roll, and GemX's (also Monkey Island's). Detected
   from the song, or chosen. *Turrican 2*'s two builds share a variant of their own, which has to
@@ -34,6 +34,12 @@ to skip the tools. For a 32-bit Windows build, add `-A Win32` with a Visual Stud
 use `find_package(TFMXreplay)` and link `TFMXreplay::tfmxreplay`.
 
 Without CMake, with GNU make and gcc or clang: `make` (static library and tools) or `make shared`.
+
+For the web, `wasm\build.cmd` builds a single `build\wasm\tfmxreplay.wasm` with
+[Emscripten](https://emscripten.org/) (run it from the repository's root, with `em++` on the path).
+It needs no JavaScript from Emscripten: instantiate it, call its `_initialize` export, and give it
+a do-nothing `env.emscripten_notify_memory_growth` import. `wasm/tfmxreplay_wasm.cpp` adds
+`tfmx_wasm_open` and `tfmx_wasm_configure`, which take the settings as plain numbers.
 
 ## Using the library
 
@@ -107,10 +113,15 @@ Current state:
   now and then.
 - **7V:** *Apidya*'s end music, the *Turrican 2* title and all three *B.C. Kid* title subsongs
   match exactly on the three hardware voices the traces can compare (the fourth plays the software
-  mix of voices 4-7). Seven more games' 7V songs (*Turrican 3*, *Hexuma*, *Anstoss* and others) also
+  mix of voices 4-7, which is compared separately, below). Seven more games' 7V songs (*Turrican 3*, *Hexuma*, *Anstoss* and others) also
   match exactly when played through B.C. Kid's 7V replayer. *Apidya*'s title
   matches exactly too, checked against captures of the real game running in WinUAE (which also
-  verified the *Hexuma*, *Bundesliga Manager* and *Anstoss* titles). The mix itself hasn't been compared yet.
+  verified the *Hexuma*, *Bundesliga Manager* and *Anstoss* titles).
+- **The 7V mix:** an emulation of the original's software mixer (rate, volume table, clamping, timing),
+  checked byte for byte against its buffers. *Carl Lewis Challenge* is identical over 1,200 ticks,
+  *Apidya*'s title over 1,499 of 1,500, and its six-minute end song differs in 0.02% of its bytes,
+  nearly all single bytes at loop points. *Turrican 2*'s title and *Turrican 3*'s intro are nearly
+  identical, *Hexuma*'s title close. A WinUAE recording of *Turrican 2* agrees at gain 1.00.
 - **Turrican 2 in game** (its small 4-voice build, `TFMX_VARIANT_TURRICAN2`): *level 1-desert*
   and *level 5-aliens* match exactly in 13 of their 15 subsongs. One differs in 4 ticks because of a
   note the game's own music left behind, and one in a portamento meeting a vibrato.

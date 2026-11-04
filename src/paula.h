@@ -28,6 +28,18 @@ struct Channel {
 	// The last sample of the previous block (for interpolation across a loop point).
 	float prev = 0;
 
+	// 7V: voices 4-7 as the software mixer sees them. Its own block, its position in 21.11 fixed
+	// point, and what it latched from the registers.
+	uint32_t mix_lc = 0;
+	uint32_t mix_bytes = 2;
+	uint32_t mix_pos = 0;
+	uint32_t mix_next_lc = 0;
+	uint16_t mix_next_len = 1;
+	int mix_per = 428;
+	bool mix_on = false, mix_held = false;
+	int mix_vol = 0;
+	int mix_volume = 0;  // the voice's volume, without the master volume
+
 	// Anti-click ramp: the volume actually applied, moving toward vol.
 	float ramp_vol = 0;
 };
@@ -53,8 +65,18 @@ public:
 	// Mixes 'frames' stereo frames, added into out (left, right interleaved).
 	void render(float *out, int frames);
 
-	// Voices 4-7 (7V mode) are mixed into hardware voice 3's side at this scale.
+	// 7V: hardware voice 3 plays a software mix of voices 4-7 instead.
 	void set_7v(bool on) { seven_ = on; }
+
+	// 7V: a macro's DMA on: a new note reaches the mixer as it is at this point in the macro.
+	void mix_latch(int n, int period, int volume);
+
+	// 7V, once a tick: the block mixed last tick starts playing on hardware voice 3, and the next one
+	// is mixed from the voices as they are now. 'bytes' at Paula period 'period'.
+	void mix_block(int bytes, int period);
+
+	// The block just mixed (for tests).
+	const std::vector<int8_t> &mix_next() const { return mix_back_; }
 
 private:
 	float sample_at(const Channel &c, uint32_t index) const;
@@ -62,6 +84,7 @@ private:
 	void step(Channel &c, double samples);
 	float voice_sample(Channel &c);
 	float filter(int side, float x);
+	float mix_sample(double pos) const;
 
 	std::vector<Channel> ch_;
 	struct Tail {
@@ -76,6 +99,11 @@ private:
 	float sep_ = 1.0f;
 	float gain_ = 1.0f;
 	bool seven_ = false;
+
+	// The 7V mix: the block before, the block playing, the next, and the position in the middle one.
+	std::vector<int8_t> mix_old_, mix_front_, mix_back_;
+	double mix_play_ = 0;
+	int mix_period_ = 199;
 
 	// The output filters, per side: the fixed one-pole low-pass, then the two-pole LED filter.
 	double fixed_coef_ = 0;  // 0 = off

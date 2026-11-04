@@ -273,8 +273,7 @@ The real replayer only sets Paula's registers. The loader has to reproduce how P
 - It's turned on by trackstep command EFFE0003 with bit 15 of *w4* clear. The low byte of *w4*, as a signed value clamped to ≥ −32, adjusts the tick rate: timer = 14,318 × (100 + x) / 100.
   - **Measured (§15.15):** the tick is one block of the mix buffer on hardware voice 3, which is round((100 + x) × 1.8) words at period 199 with mixer setting 18. That's 20.2 ms at x = 0, the same rate as the timer formula (14,318 CIA ticks = 20.18 ms). Mixer setting 12 (98 words at period 298 for x = −18) gives the same rate.
 - Voices 4–7 exist. Notes can address voices 0–7, and macros run in the order 0, 1, 2, 4, 5, 6, 7, 3.
-- Hardware voice 3 is replaced by a **software mix of voices 4–7**. [TP] mixes them at full output quality and clips.
-  - **? Unknown:** the real replayer mixes into a buffer at some fixed rate and resolution, and its sound depends on that. Needs a trace of the replayer's mix buffer.
+- Hardware voice 3 is replaced by a **software mix of voices 4–7**, at volume 64. §15.21 has the mixer in full. In short, each voice adds `(sample × min(volume, 63)) >> 6` to one 8-bit sum, clamped to ±127/−128, so a voice at full volume is as loud as a hardware voice. The mix rate is a setting each game chooses, not song data.
 - [UADE] detection: any subsong's trackstep containing `EFFE 0003 FFxx 00xx`. Plus two hard-coded titles: BMWi and the B.C. Kid title.
 
 ## 9. Things nobody has documented
@@ -832,3 +831,30 @@ Two WinUAE captures of *apidya (title)* (capture 1 from the start, capture 2 fro
   - A few may be different versions, for example the Jukebox *Turrican 2* title is 9 KB bigger, with patterns 103+ differing. Worth a closer look later as an alternative source.
 - **PMS 0.2** (Sebastian Mies, 1994–95) is the DOS player behind the Jukebox. Its revision notes say "still no real TFMX docs" and it doesn't implement 7V timing, so it isn't a behavioural reference. Its readme's hand-tuned tempo table turned out useful anyway (§3.2).
 - Copyright: the CD's contents are commercial ("neither shareware nor freeware"). Use them as reference and test material only.
+
+### 15.21 The 7V mixer (2026-11-04)
+The mix buffer can be read straight out of the original replayer's memory, so this comes from the buffers it wrote: one-note test songs through *Turrican 2*'s build, then whole songs, compared with TFMXreplay byte by byte. A WinUAE recording of the *Turrican 2* title (no filter, no interpolation) checked the result as sound.
+
+**Each block,** for voices 4–7, one byte at a time:
+- **Level:** `(sample × min(volume, 63)) >> 6`, arithmetic shift, so volume 64 equals 63. No scaling down for the number of voices: the bytes add up and clamp at −128 and 127. A voice at full volume is as loud as a hardware voice, and four loud voices distort.
+- **Master volume:** the mixer ignores it. A fade moves hardware voices 0–2 only (all three builds tested).
+- **Pitch:** 21.11 fixed point. `step = mix period × 2048 / period`, rounded down, with the position starting at 2047/2048: the first byte is the sample's first or second, and the phase carries across blocks. All 48 notes, at four mixer settings, match for 12 blocks.
+- **Loop:** at the block's end the position wraps, keeping its fraction, and the next block is whatever LC and LEN hold. After a wrap, an occasional byte falls one sample off, at most about 0.3% of the bytes of a short loop. The phase carries across the wrap within what can be measured, so the cause is a rounding too small to see.
+- **Blocks under 64 bytes** (LEN < 32) are silent.
+- **DMA off** doesn't silence the voice: stepping stops and it holds its last sample, a DC level, until the next start.
+
+**Timing.** The handler writes the buffer pointer, mixes into that buffer, and then runs the replayer, whose hardware writes therefore land late in the tick (about 82% of the way through in the *Turrican 2* title; the mixing is what takes the time). The block plays from the next block start. Period, volume, sample start and length, and DMA off reach the mixer a tick after the same value would reach a hardware voice. A new note is the exception: it's mixed in the tick of its DMA start, with the volume and period as they stood at the 01 command.
+
+**Mixer settings,** read from the games: 18 (period 199) in *Turrican 2*'s title, *Apidya*, *Carl Lewis Challenge*, *Anstoss* and *Mega-lo-Mania*, 16 (224) in *Bundesliga Manager*, 14 (256) in *Turrican 3* and *Hexuma*, 9 (398) in *B.C. Kid*. The period is about 3580 / setting. The WinUAE recording fits 18, not the 12 seen earlier in that game. Rounding moves the tick slightly between settings, so the setting has a small effect on tempo. `tfmx_settings.mix_setting` overrides it.
+
+**Replayer findings.** 01 with b1 = 0 holds effects back only on hardware voices: voices 4–7 aren't held back in any build tested, and *Turrican 2*'s 7V build doesn't hold back any voice, so an envelope right after DMA on steps a tick sooner there. The mixer buffers showed both, on voices the Paula traces can't see.
+
+**Results (mix buffers, byte for byte, with the song in slow RAM where it doesn't fit the game's own space):**
+- *Apidya* end song, subsong 1, all 6:13 on Apidya's own build: 17,148 of 18,200 ticks identical, 1,470 bytes differing in all (0.02%), nearly all single bytes at a loop point. Hardware voices 0–2: 0 of 18,201 ticks differ.
+- *Carl Lewis Challenge*: all 1,200 of 1,200 ticks identical. *Apidya* title: 1,499 of 1,500 (one block length at a mid-song change). *Turrican 3* intro: 1,478 of 1,500.
+- *Turrican 2* title, subsong 0: 1,997 of the first 2,000 ticks. Those 3 ticks are a 1F with no previous note, which reads a period from outside the table, so only that build's memory can answer. Over 6,000 ticks the rest are single bytes.
+- *Hexuma* title: 1,186 of 1,200, not yet explained.
+- *B.C. Kid*'s build runs setting 13 when the harness asks for 9, so its results are at 13; the game itself uses 9.
+- The WinUAE recording of *Turrican 2*: left channel at gain 1.00 with residuals down to −41 dB, and the offset from the hardware voices within 2 samples. In the first two minutes the game itself loses a few ticks, which the song's timing doesn't explain.
+
+**Song ends.** A trackstep line that stops every track is the end of a song, not a loop, even though the sequencer's state then repeats. 606 of the 1,608 subsongs in the modland collection end this way and had been counted as looped, with "loops" of at most 0.16 s; 13 of them are songs of 30 s or more. They now play on for the two seconds that let the last notes ring out.

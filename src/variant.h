@@ -37,6 +37,7 @@ struct Behaviour {
 	bool split_jumps;         // 1C/1D jump if note/volume > b1 (otherwise ignored)
 	bool play_macro;          // 21 works
 	bool sid;                 // 22-29 work
+	int mix_setting;          // the 7V mixer setting of the song's game
 	bool dmaon_delays_effects;  // 01 with b1 = 0 holds the effects back until the next tick
 	bool bpm_coarse;          // BPM tempo sets only the CIA timer's high byte: 7093 / BPM (1.5)
 	bool no_bpm;              // no BPM mode: a tempo >= 16 is speed (tempo - 16) at 50 Hz (X-Out)

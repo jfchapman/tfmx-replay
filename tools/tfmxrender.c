@@ -31,6 +31,7 @@ static void usage(void) {
 	        "  -p <percent>  stereo separation, 0-100 (default 100)\n"
 	        "  -m <us>       volume ramping in microseconds, 0 = off (default 2000)\n"
 	        "  -v <variant>  pro, 1.5, masterblazer, xout, rocknroll, gemx, turrican2, t3small, hexuma (default: detect)\n"
+	        "  -x <setting>  7V mixer setting, 8-22 (default: the song's game, or 18)\n"
 	        "  -n            print the song's information only\n"
 	        "\n"
 	        "If the smpl file isn't given, it's found from the mdat name: mdat.<name> -> smpl.<name>,\n"
@@ -204,7 +205,7 @@ int main(int argc, char **argv) {
 			settings.led_filter = 1;
 		} else if (!strcmp(a, "-d")) {
 			subsong = -1;
-		} else if (value && strchr("osrlipmvfF", a[1]) && !a[2]) {
+		} else if (value && strchr("osrlipmvfFx", a[1]) && !a[2]) {
 			i++;
 			switch (a[1]) {
 			case 'o': out = value; break;
@@ -212,6 +213,7 @@ int main(int argc, char **argv) {
 			case 'r': settings.sample_rate = atoi(value); break;
 			case 'l': settings.loop_count = atoi(value); break;
 			case 'F': settings.fade_seconds = (float)atof(value); break;
+			case 'x': settings.mix_setting = atoi(value); break;
 			case 'p': settings.stereo_separation = atoi(value); break;
 			case 'm': settings.volume_ramping = atoi(value); break;
 			case 'i':

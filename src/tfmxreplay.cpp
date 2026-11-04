@@ -65,7 +65,8 @@ bool valid(const tfmx_settings &s) {
 	       s.stereo_separation <= 100 && s.interpolation >= TFMX_INTERPOLATION_NONE &&
 	       s.interpolation <= TFMX_INTERPOLATION_CUBIC && s.volume_ramping >= 0 && s.loop_count >= -1 &&
 	       s.variant >= TFMX_VARIANT_AUTO && s.variant <= TFMX_VARIANT_HEXUMA && s.gain >= 0 &&
-	       s.amiga_model >= TFMX_AMIGA_A500 && s.amiga_model <= TFMX_AMIGA_NONE && s.fade_seconds >= 0;
+	       s.amiga_model >= TFMX_AMIGA_A500 && s.amiga_model <= TFMX_AMIGA_NONE && s.fade_seconds >= 0 &&
+	       (s.mix_setting == 0 || (s.mix_setting >= 8 && s.mix_setting <= 22));
 }
 
 void apply_output(tfmx_module *m) {
@@ -89,6 +90,7 @@ const Analysis &analyse(tfmx_module *m, int index) {
 	paula.set_output(kAnalysisRate, TFMX_INTERPOLATION_NONE, 0, 100, 1.0f, TFMX_AMIGA_NONE, false);
 	Replayer r;
 	r.init(&m->module, behaviour_of(variant_of(m), m->module), &paula);
+	r.set_mix_setting(m->settings.mix_setting);
 	r.start(m->module.subsongs[size_t(index)]);
 
 	std::vector<float> mix;
@@ -186,6 +188,7 @@ void restart(tfmx_module *m) {
 	m->paula.set_memory(&m->module.smpl);
 	apply_output(m);
 	m->replayer.init(&m->module, behaviour_of(m->variant, m->module), &m->paula);
+	m->replayer.set_mix_setting(m->settings.mix_setting);
 	m->replayer.start(m->module.subsongs[size_t(m->subsong)]);
 	m->tick_left = 0;
 	m->frames_played = 0;
@@ -324,6 +327,7 @@ void tfmx_default_settings(tfmx_settings *s) {
 	s->amiga_model = TFMX_AMIGA_A500;
 	s->led_filter = 0;
 	s->fade_seconds = 0;
+	s->mix_setting = 0;
 }
 
 int tfmx_probe(const void *data, size_t size) {

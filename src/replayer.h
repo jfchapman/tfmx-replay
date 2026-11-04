@@ -27,6 +27,10 @@ public:
 
 	double tick_seconds() const;  // length of the next tick
 	int voices() const { return seven_ ? 7 : 4; }
+	int mix_words() const;
+	int mix_period() const;
+	// 0 = the setting the variant table gives the song.
+	void set_mix_setting(int setting) { mix_setting_ = setting ? setting : b_.mix_setting; }
 	bool ended() const { return ended_; }
 	int loops() const { return loops_; }  // times the song has reached its end and looped
 	int line() const { return line_; }    // current trackstep line
@@ -158,6 +162,7 @@ private:
 	int bpm_ = 0;               // 0 = the default 50 Hz tick
 	bool seven_ = false;
 	int seven_adjust_ = 0;
+	int mix_setting_ = 18;
 	int master_ = 64;
 	uint32_t tick_count_ = 0;
 	int current_track_ = 0;     // the track being processed (for the test log)
