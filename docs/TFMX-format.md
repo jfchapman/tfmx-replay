@@ -702,9 +702,9 @@ New rules:
    - Paula's period changes now stretch the block in progress, as on real hardware.
    - The minimum period is 113, as in the library.
    - CIA ticks are spaced by the timer the replayer sets, and get the replayer's audio interrupts.
-   - The Abandoned Places build also writes CIA-A port bit 1 (the audio filter / LED).
+   - **The audio filter (CIA-A port bit 1, the power LED):** every replayer build in the savestates sets the bit (in GemX, inside its audio reset routine), which turns the LED filter off, and none has code that clears it. The format has no command for it (§3.2), so a TFMX song can't turn the filter on.
 
-**Still open:** GemX, Monkey Island, the Turrican 2 small build, the Stember builds, 7V (Apidya title and end, Turrican 2 title) and SID compared song by song; the Masterblazer volume differences; a per-game variant table.
+**Still open:** GemX, Monkey Island, the Turrican 2 small build, the Stember builds, 7V (Apidya title and end, Turrican 2 title) and SID compared song by song; the Masterblazer volume differences. Songs whose variant can't be told from their contents are in a table of mdat checksums (`src/variant.cpp`), each checked on its own game's replayer: all of Turrican 2, the Turrican 3 loader, Hexuma's level songs, Masterblazer's intro, Z-Out's songs (they look like 1.5 but play on Masterblazer's rules), Rock'n'Roll's intro and Turrican's bonus song.
 
 ### 15.14 Masterblazer, GemX and Monkey Island compared (2026-11-02, evening)
 Results (1,500 ticks each, `tests/regress.py` reruns every cached comparison):

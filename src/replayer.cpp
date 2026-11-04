@@ -97,9 +97,23 @@ void Replayer::start(const Subsong &subsong) {
 	restarts_ = 0;
 	idle_ticks_ = 0;
 	seen_.clear();
+	line_time_.assign(size_t(m_->trackstep_lines), -1.0);
+	loop_start_ = loop_end_ = -1;
+	// The first rows are read in tick 0 (Pro, Masterblazer) or tick 1 (1.5, X-Out). When the song
+	// comes back to a line later, its rows are read at once, so the first time counts from there.
+	time_ = b_.start_reads_row ? 0 : tick_seconds();
 	load_line();
-	// The first rows are read in tick 0 (Pro, Masterblazer) or tick 1 (1.5, X-Out).
+	time_ = 0;
 	row_counter_ = b_.start_reads_row ? 0 : 1;
+}
+
+// The song has come back to something it played at time 'target'. The first time is the loop point.
+void Replayer::mark_loop(double target) {
+	loops_++;
+	if (loop_end_ < 0) {
+		loop_start_ = target;
+		loop_end_ = time_;
+	}
 }
 
 double Replayer::tick_seconds() const {
@@ -165,6 +179,8 @@ void Replayer::load_line() {
 			ended_ = true;
 			return;
 		}
+		if (line_time_[size_t(line_)] < 0)
+			line_time_[size_t(line_)] = time_;
 		const uint8_t *l = m_->trackstep_line(line_);
 		if (be16(l) == 0xEFFE) {
 			const int cmd = be16(l + 2), w3 = be16(l + 4), w4 = be16(l + 6);
@@ -175,8 +191,8 @@ void Replayer::load_line() {
 			case 1:  // loop: jump to w3, w4 times (0 = forever)
 				// A count of 0 or FF00 means forever (Turrican 1's songs use FF00 to loop the song).
 				if (!b_.effe1_count || w4 == 0 || w4 == 0xFF00) {
-					if (w3 <= line_)
-						loops_++;  // a backward jump forever is the song's loop point
+					if (w3 <= line_)  // a backward jump forever is the song's loop point
+						mark_loop(line_time_[size_t(w3)]);
 					line_ = w3;
 					continue;
 				}
@@ -213,7 +229,7 @@ void Replayer::load_line() {
 			line_++;
 			if (line_ > sub_.end) {
 				line_ = sub_.start;
-				loops_++;
+				mark_loop(line_time_[size_t(line_)]);
 			}
 			continue;
 		}
@@ -254,7 +270,7 @@ void Replayer::advance_line() {
 	line_++;
 	if (line_ > sub_.end) {
 		line_ = sub_.start;
-		loops_++;
+		mark_loop(line_time_[size_t(line_)]);
 	}
 	load_line();
 }
@@ -291,11 +307,12 @@ void Replayer::process_rows() {
 		mix(uint64_t(t.transpose & 0xFF) << 32 | t.return_pattern);
 		mix(t.return_step);
 	}
-	if (!seen_.insert(h).second) {
-		loops_++;
+	const auto state = seen_.find(h);
+	if (state != seen_.end()) {
+		mark_loop(state->second);
 		seen_.clear();
-		seen_.insert(h);
 	}
+	seen_.emplace(h, time_);
 }
 
 bool Replayer::run_track(int t) {
@@ -578,6 +595,7 @@ void Replayer::tick() {
 	} else if (++idle_ticks_ * tick_seconds() >= 2.0) {
 		ended_ = true;
 	}
+	time_ += tick_seconds();
 }
 
 void Replayer::run_voice(int n) {

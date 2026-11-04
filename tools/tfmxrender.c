@@ -22,8 +22,12 @@ static void usage(void) {
 	        "  -s <n>        subsong index (default 0)\n"
 	        "  -a            render every subsong to its own file\n"
 	        "  -r <rate>     sample rate (default 44100)\n"
+	        "  -d            render the default subsong (the main song)\n"
 	        "  -l <n>        extra loops of a looping song (default 0)\n"
-	        "  -i <mode>     interpolation: none, linear, cubic (default cubic)\n"
+	        "  -F <seconds>  fade out a looping song over this long (default 0: stop at the loop point)\n"
+	        "  -i <mode>     interpolation: none, linear, cubic (default none)\n"
+	        "  -f <model>    fixed output filter: a500, a1200, none (default a500)\n"
+	        "  -L            turn on the LED filter\n"
 	        "  -p <percent>  stereo separation, 0-100 (default 100)\n"
 	        "  -m <us>       volume ramping in microseconds, 0 = off (default 2000)\n"
 	        "  -v <variant>  pro, 1.5, masterblazer, xout, rocknroll, gemx, turrican2, t3small, hexuma (default: detect)\n"
@@ -196,19 +200,29 @@ int main(int argc, char **argv) {
 			all = 1;
 		} else if (!strcmp(a, "-n")) {
 			info = 1;
-		} else if (value && strchr("osrlipmv", a[1]) && !a[2]) {
+		} else if (!strcmp(a, "-L")) {
+			settings.led_filter = 1;
+		} else if (!strcmp(a, "-d")) {
+			subsong = -1;
+		} else if (value && strchr("osrlipmvfF", a[1]) && !a[2]) {
 			i++;
 			switch (a[1]) {
 			case 'o': out = value; break;
 			case 's': subsong = atoi(value); break;
 			case 'r': settings.sample_rate = atoi(value); break;
 			case 'l': settings.loop_count = atoi(value); break;
+			case 'F': settings.fade_seconds = (float)atof(value); break;
 			case 'p': settings.stereo_separation = atoi(value); break;
 			case 'm': settings.volume_ramping = atoi(value); break;
 			case 'i':
 				settings.interpolation = !strcmp(value, "none")     ? TFMX_INTERPOLATION_NONE
 				                         : !strcmp(value, "linear") ? TFMX_INTERPOLATION_LINEAR
 				                                                    : TFMX_INTERPOLATION_CUBIC;
+				break;
+			case 'f':
+				settings.amiga_model = !strcmp(value, "none")    ? TFMX_AMIGA_NONE
+				                       : !strcmp(value, "a1200") ? TFMX_AMIGA_A1200
+				                                                 : TFMX_AMIGA_A500;
 				break;
 			case 'v':
 				settings.variant = !strcmp(value, "pro")            ? TFMX_VARIANT_PRO
@@ -264,20 +278,35 @@ int main(int argc, char **argv) {
 	if (info) {
 		const char *text = tfmx_text(module);
 		printf("variant:  %s\n", tfmx_variant_name(tfmx_get_variant(module)));
-		printf("subsongs: %d\n", tfmx_subsong_count(module));
+		printf("subsongs: %d (default %d)\n", tfmx_subsong_count(module), tfmx_default_subsong(module));
 		for (i = 0; i < tfmx_subsong_count(module); i++) {
-			double d = tfmx_subsong_duration(module, i);
-			printf("  %2d: song %2d, ", i, tfmx_subsong_number(module, i));
-			if (d < 0)
+			tfmx_subsong_info s;
+			double d;
+			tfmx_get_subsong_info(module, i, &s);
+			d = s.duration;
+			printf("  %2d: song %2d, ", i, s.number);
+			if (d < 0) {
 				printf("no end found\n");
-			else
-				printf("%d:%04.1f\n", (int)(d / 60), d - 60 * (int)(d / 60));
+				continue;
+			}
+			printf("%d:%04.1f (%.3f s)", (int)(d / 60), d - 60 * (int)(d / 60), d);
+			if (s.loop_start >= 0)
+				printf(", loop from %.3f s%s", s.loop_start, s.looped ? "" : " (ends silent)");
+			if (!s.audible)
+				printf(", silent");
+			if (s.repeat_of >= 0)
+				printf(", repeat of %d", s.repeat_of);
+			printf("\n");
 		}
 		if (*text)
 			printf("text:\n%s\n", text);
 	} else {
 		char name[512], path[600];
-		int first = all ? 0 : subsong, last = all ? tfmx_subsong_count(module) - 1 : subsong;
+		int first, last;
+		if (subsong < 0)
+			subsong = tfmx_default_subsong(module);
+		first = all ? 0 : subsong;
+		last = all ? tfmx_subsong_count(module) - 1 : subsong;
 		song_name(mdat_path, name, sizeof name);
 		for (i = first; i <= last && !result; i++) {
 			if (tfmx_select_subsong(module, i)) {

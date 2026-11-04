@@ -7,9 +7,11 @@ and others also used, from 1989 to the mid-1990s.
 - Plain C API (`include/tfmxreplay.h`), static or shared library, no dependencies.
 - Builds with CMake or a plain Makefile; tested with MSVC (x64 and 32-bit).
 - Two-file songs (`mdat.*` + `smpl.*`) and single-file TFHD songs.
-- Subsongs, with lengths and loop points, seeking, and the song's text.
+- Subsongs, with lengths and loop points, seeking, and the song's text. Finds the main subsong and
+  subsongs that repeat another's music, and tells songs that loop from ones that end in silence.
 - Output options: sample rate, stereo separation, interpolation (none, linear, cubic),
-  anti-click volume ramping, loop count, gain.
+  Amiga output filters (A500, A1200 or none, plus the LED filter), anti-click volume ramping,
+  loop count, fade-out, gain.
 - The different replayer generations ("variants"): TFMX Pro and 7V, TFMX 1.5, and the earlier
   builds used by Masterblazer, X-Out and Rock'n'Roll, and GemX's (also Monkey Island's). Detected
   from the song, or chosen. *Turrican 2*'s two builds share a variant of their own, which has to

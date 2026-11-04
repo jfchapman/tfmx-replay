@@ -36,7 +36,8 @@ class Paula {
 public:
 	void reset(int channels);
 	void set_memory(const std::vector<uint8_t> *smpl) { smpl_ = smpl; }
-	void set_output(int sample_rate, tfmx_interpolation interpolation, int ramp_us, int separation, float gain);
+	void set_output(int sample_rate, tfmx_interpolation interpolation, int ramp_us, int separation, float gain,
+	                tfmx_amiga_model model, bool led_filter);
 
 	Channel &channel(int n) { return ch_[size_t(n)]; }
 	int channels() const { return int(ch_.size()); }
@@ -60,6 +61,7 @@ private:
 	void next_block(Channel &c);
 	void step(Channel &c, double samples);
 	float voice_sample(Channel &c);
+	float filter(int side, float x);
 
 	std::vector<Channel> ch_;
 	struct Tail {
@@ -69,11 +71,20 @@ private:
 	std::vector<Tail> tails_;  // cut voices fading out (anti-click)
 	const std::vector<uint8_t> *smpl_ = nullptr;
 	int rate_ = 44100;
-	tfmx_interpolation interp_ = TFMX_INTERPOLATION_CUBIC;
+	tfmx_interpolation interp_ = TFMX_INTERPOLATION_NONE;
 	float ramp_step_ = 0;  // volume units per output frame, 0 = no ramping
 	float sep_ = 1.0f;
 	float gain_ = 1.0f;
 	bool seven_ = false;
+
+	// The output filters, per side: the fixed one-pole low-pass, then the two-pole LED filter.
+	double fixed_coef_ = 0;  // 0 = off
+	bool led_ = false;
+	double led_b0_ = 0, led_a1_ = 0, led_a2_ = 0;
+	struct FilterState {
+		double fixed = 0, led1 = 0, led2 = 0;
+	};
+	FilterState filter_[2];
 };
 
 }  // namespace tfmx

@@ -23,6 +23,7 @@ struct Subsong {
 struct Module {
 	std::vector<uint8_t> mdat;
 	std::vector<uint8_t> smpl;       // writable: SID synthesises into the start of it
+	uint64_t checksum = 0;           // of mdat, to recognise known songs (variant detection)
 	Magic magic = Magic::TfmxSong;
 	bool packed = false;             // the offsets at 0x1D0 are used
 	uint32_t trackstep = 0;          // file offset of trackstep line 0

@@ -15,6 +15,14 @@ namespace {
 
 const int kMinPeriod = 113;
 
+const double kPi = 3.14159265358979323846;
+
+// Output filter corners in Hz: the commonly quoted measurements of the machines.
+const double kA500Corner = 4900;
+const double kA1200Corner = 28867;
+const double kLedCorner = 3275;
+const double kLedQ = 0.7071;  // Butterworth
+
 uint32_t bytes_of(uint16_t len) { return (len ? uint32_t(len) : 0x10000u) * 2; }
 
 }  // namespace
@@ -23,9 +31,22 @@ void Paula::reset(int channels) {
 	ch_.assign(size_t(channels), Channel());
 	tails_.assign(size_t(channels), Tail());
 	seven_ = false;
+	filter_[0] = filter_[1] = FilterState();
 }
 
-void Paula::set_output(int sample_rate, tfmx_interpolation interpolation, int ramp_us, int separation, float gain) {
+void Paula::set_output(int sample_rate, tfmx_interpolation interpolation, int ramp_us, int separation, float gain,
+                       tfmx_amiga_model model, bool led_filter) {
+	// One pole, matched to the analogue filter.
+	const double corner = model == TFMX_AMIGA_A500 ? kA500Corner : model == TFMX_AMIGA_A1200 ? kA1200Corner : 0;
+	fixed_coef_ = corner > 0 ? 1 - std::exp(-2 * kPi * corner / sample_rate) : 0;
+	// Two poles, by the bilinear transform with the corner prewarped.
+	led_ = led_filter;
+	const double k = std::tan(kPi * kLedCorner / sample_rate);
+	const double norm = 1 / (1 + k / kLedQ + k * k);
+	led_b0_ = k * k * norm;
+	led_a1_ = 2 * (k * k - 1) * norm;
+	led_a2_ = (1 - k / kLedQ + k * k) * norm;
+
 	rate_ = sample_rate;
 	interp_ = interpolation;
 	// A full-scale volume change (64) takes ramp_us microseconds.
@@ -126,6 +147,22 @@ float Paula::voice_sample(Channel &c) {
 	return ((a * t + b) * t + d) * t + s0;
 }
 
+float Paula::filter(int side, float x) {
+	FilterState &f = filter_[side];
+	double y = x;
+	if (fixed_coef_ > 0) {
+		f.fixed += fixed_coef_ * (y - f.fixed);
+		y = f.fixed;
+	}
+	if (led_) {
+		const double in = y;
+		y = led_b0_ * in + f.led1;
+		f.led1 = 2 * led_b0_ * in - led_a1_ * y + f.led2;
+		f.led2 = led_b0_ * in - led_a2_ * y;
+	}
+	return float(y);
+}
+
 void Paula::render(float *out, int frames) {
 	const float base = 0.5f * gain_;  // two full-scale voices per side reach 1.0
 	for (int f = 0; f < frames; f++) {
@@ -161,7 +198,8 @@ void Paula::render(float *out, int frames) {
 					tails_[n].active = false;
 			}
 		}
-		const float l = side[0] * base, r = side[1] * base;
+		// The filters are on the two analogue outputs, so they come before the stereo separation.
+		const float l = filter(0, side[0] * base), r = filter(1, side[1] * base);
 		const float mix = 0.5f + 0.5f * sep_, cross = 0.5f - 0.5f * sep_;
 		out[2 * f] += l * mix + r * cross;
 		out[2 * f + 1] += r * mix + l * cross;

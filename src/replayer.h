@@ -2,7 +2,7 @@
 #pragma once
 
 #include <cstdint>
-#include <unordered_set>
+#include <unordered_map>
 #include <vector>
 
 #include "module.h"
@@ -30,6 +30,11 @@ public:
 	bool ended() const { return ended_; }
 	int loops() const { return loops_; }  // times the song has reached its end and looped
 	int line() const { return line_; }    // current trackstep line
+	double time() const { return time_; }  // seconds played by the ticks so far
+	// The first loop: the time the song came back to, and when it did. -1 until it has looped; the
+	// start stays -1 if the song jumped to a line it hadn't played.
+	double loop_start() const { return loop_start_; }
+	double loop_end() const { return loop_end_; }
 
 	std::vector<PaulaWrite> *log = nullptr;  // if set, every Paula write is appended
 
@@ -117,6 +122,7 @@ private:
 	// Trackstep and patterns
 	void load_line();
 	void advance_line();
+	void mark_loop(double target);
 	void process_rows();
 	bool run_track(int t);
 	void note_on(int voice, int note, int macro, int velocity, int finetune);
@@ -161,7 +167,10 @@ private:
 	int loops_ = 0;
 	int restarts_ = 0;          // F0 reloads within one tick (guards against empty loops)
 	int idle_ticks_ = 0;        // ticks since every track stopped
-	std::unordered_set<uint64_t> seen_;  // sequencer states since the last loop (for loop detection)
+	std::unordered_map<uint64_t, double> seen_;  // sequencer states since the last loop, with their times
+	std::vector<double> line_time_;  // when each trackstep line was first reached, -1 = not yet
+	double time_ = 0;                // when the current tick starts
+	double loop_start_ = -1, loop_end_ = -1;
 };
 
 }  // namespace tfmx

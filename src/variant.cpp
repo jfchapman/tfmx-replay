@@ -136,7 +136,43 @@ Behaviour behaviour_of(tfmx_variant variant, const Module &module) {
 	return b;
 }
 
+// Songs that can't be told from their contents, each checked against its own game's replayer (mdat
+// checksums; the names are modland's).
+struct KnownSong {
+	uint64_t checksum;
+	tfmx_variant variant;
+};
+
+const KnownSong kKnownSongs[] = {
+	{0x0EA0827F2A56176Dull, TFMX_VARIANT_TURRICAN2},        // turrican 2 level 0-intro
+	{0xB065F19BB8207C76ull, TFMX_VARIANT_TURRICAN2},        // turrican 2 level 1-desert
+	{0xDC7442D54C210DD9ull, TFMX_VARIANT_TURRICAN2},        // turrican 2 level 2-cave
+	{0x7B867913AD9FA782ull, TFMX_VARIANT_TURRICAN2},        // turrican 2 level 3-flight
+	{0x144B1ABF0E853D75ull, TFMX_VARIANT_TURRICAN2},        // turrican 2 level 4-factory
+	{0x2D77785303492C7Bull, TFMX_VARIANT_TURRICAN2},        // turrican 2 level 5-aliens
+	{0x11764AF4AFF82D15ull, TFMX_VARIANT_TURRICAN2},        // turrican 2 loading
+	{0xB521C066ED2AD597ull, TFMX_VARIANT_TURRICAN3_SMALL},  // turrican 3 loader
+	{0x747BC3475AB79E79ull, TFMX_VARIANT_HEXUMA},           // hexuma-house
+	{0xA9CE5D9B57BE0DC7ull, TFMX_VARIANT_HEXUMA},           // hexuma-ice
+	{0xFF13A4315D659C12ull, TFMX_VARIANT_HEXUMA},           // hexuma-mine
+	{0xEF072A9DFFE766A7ull, TFMX_VARIANT_HEXUMA},           // hexuma-ocean
+	{0xBDC8105281054FA0ull, TFMX_VARIANT_HEXUMA},           // hexuma-robot
+	{0x5E47EB9A0E357E86ull, TFMX_VARIANT_HEXUMA},           // hexuma-stoneage
+	{0xC141B7FDDF75EE3Aull, TFMX_VARIANT_MASTERBLAZER},     // masterblazer intro
+	{0x33139DC60B7CE354ull, TFMX_VARIANT_MASTERBLAZER},     // z-out
+	{0xF9A1F31B42A5E3EDull, TFMX_VARIANT_MASTERBLAZER},     // z-out level 2
+	{0x103FD5E1829D5F5Bull, TFMX_VARIANT_MASTERBLAZER},     // z-out level 3
+	{0x929A49EFEE90760Dull, TFMX_VARIANT_MASTERBLAZER},     // z-out level 4
+	{0x54CA05DAD14C2F49ull, TFMX_VARIANT_MASTERBLAZER},     // z-out level 5
+	{0xFCA2DB4D7D677E36ull, TFMX_VARIANT_MASTERBLAZER},     // z-out level 6
+	{0x668A930DC707D3DFull, TFMX_VARIANT_ROCKNROLL},        // rocknroll-intro
+	{0x9CBEEBC37F5C4ADEull, TFMX_VARIANT_15},               // turrican bonus
+};
+
 tfmx_variant detect_variant(const Module &m) {
+	for (const KnownSong &song : kKnownSongs)
+		if (song.checksum == m.checksum)
+			return song.variant;
 	if (m.magic == Magic::Odd)
 		return TFMX_VARIANT_ROCKNROLL;
 	if (m.magic == Magic::LowerCase)

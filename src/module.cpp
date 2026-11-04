@@ -68,6 +68,9 @@ bool Module::load(const uint8_t *mdat_data, size_t mdat_size, const uint8_t *smp
 		return false;
 	mdat.assign(mdat_data, mdat_data + mdat_size);
 	smpl.assign(smpl_data, smpl_data + smpl_size);
+	checksum = 14695981039346656037ull;  // FNV-1a
+	for (const uint8_t byte : mdat)
+		checksum = (checksum ^ byte) * 1099511628211ull;
 	// Macros read a little past a sample's end at times (and SID writes buffers at the start), so
 	// keep at least a few KB of zeros available.
 	if (smpl.size() < 0x1000)

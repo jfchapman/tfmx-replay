@@ -66,14 +66,26 @@ typedef enum tfmx_error {
 TFMX_API const char *tfmx_error_string(tfmx_error error);
 
 typedef enum tfmx_interpolation {
-	TFMX_INTERPOLATION_NONE = 0, /* nearest sample, like the Amiga (bright, with aliasing) */
+	TFMX_INTERPOLATION_NONE = 0, /* nearest sample, like the Amiga (bright, with aliasing): default */
 	TFMX_INTERPOLATION_LINEAR,
-	TFMX_INTERPOLATION_CUBIC     /* default */
+	TFMX_INTERPOLATION_CUBIC
 } tfmx_interpolation;
 
 /*
+ * The fixed low-pass filter on the Amiga's audio output, always in the path whatever the power
+ * LED shows. The separate LED filter is tfmx_settings.led_filter.
+ */
+typedef enum tfmx_amiga_model {
+	TFMX_AMIGA_A500 = 0,  /* 6 dB/octave at about 4.9 kHz: default */
+	TFMX_AMIGA_A1200,     /* 6 dB/octave at about 29 kHz: close to flat */
+	TFMX_AMIGA_NONE       /* no fixed filter */
+} tfmx_amiga_model;
+
+/*
  * Replayer behaviour. TFMX was never standardised: each game shipped its own build of the
- * replayer, and the builds differ in timing and effect details. AUTO picks one from the song.
+ * replayer, and the builds differ in timing and effect details. AUTO picks one from the song's
+ * contents, or from a table of known songs for those that can't be told apart that way (the
+ * variants marked "known songs" below are only picked from the table).
  */
 typedef enum tfmx_variant {
 	TFMX_VARIANT_AUTO = 0,
@@ -86,23 +98,29 @@ typedef enum tfmx_variant {
 	TFMX_VARIANT_TURRICAN2,    /* Turrican 2's two builds: for 7V songs (the title) Pro, but a new
 	                              note's first update also runs the effects; for 4-voice songs
 	                              (loading, levels) GemX-like, deferring 00's cut as Pro does.
-	                              Never picked by AUTO */
+	                              Known songs */
 	TFMX_VARIANT_TURRICAN3_SMALL, /* Turrican 3's small 4-voice build (its loading music): Pro
 	                                 without the AddBegin sweep, 06/15/16, 1C/1D and FC. The game's
-	                                 other builds (7V and in-game) are plain Pro. Never picked by
-	                                 AUTO */
+	                                 other builds (7V and in-game) are plain Pro. Known songs */
 	TFMX_VARIANT_HEXUMA         /* Hexuma's in-game build: Pro, but macro vibrato (0C) does
-	                                 nothing. Never picked by AUTO */
+	                                 nothing. Known songs */
 } tfmx_variant;
 
 typedef struct tfmx_settings {
 	int sample_rate;                  /* output rate in Hz, 8000-192000 (default 44100) */
 	int stereo_separation;            /* 0 = mono, 100 = hard Amiga panning (default 100) */
-	tfmx_interpolation interpolation; /* default TFMX_INTERPOLATION_CUBIC */
+	tfmx_interpolation interpolation; /* default TFMX_INTERPOLATION_NONE */
 	int volume_ramping;               /* anti-click ramp in microseconds, 0 = off (default 2000) */
-	int loop_count;                   /* extra times to play a looping song: 0 = play once (default), -1 = forever */
+	int loop_count;                   /* extra times to play a looped song (see tfmx_subsong_info):
+	                                     0 = play once (default), -1 = forever */
 	tfmx_variant variant;             /* default TFMX_VARIANT_AUTO */
 	float gain;                       /* output gain, 1.0 = default */
+	tfmx_amiga_model amiga_model;     /* the fixed output filter, default TFMX_AMIGA_A500 */
+	int led_filter;                   /* 1 = the "LED" filter (12 dB/octave at about 3.3 kHz), as with the
+	                                     power LED bright. 0 = off (default). Songs can't switch it:
+	                                     TFMX has no command for it, and the replayers turn it off */
+	float fade_seconds;               /* after its loops, a looped song plays on, fading out over this
+	                                     many seconds. 0 = stop at the loop point (default) */
 } tfmx_settings;
 
 /* Fills settings with the defaults. */
@@ -132,12 +150,40 @@ TFMX_API int tfmx_subsong_count(const tfmx_module *module);
 /* The song file's own number (0-31) for a subsong index. */
 TFMX_API int tfmx_subsong_number(const tfmx_module *module, int index);
 
+/* The subsong index for a song file number (0-31), or -1 if the file has no such subsong. */
+TFMX_API int tfmx_subsong_index(const tfmx_module *module, int number);
+
 /*
- * Length of a subsong in seconds, up to its end or the point where it loops, plus loop_count
- * extra loops. Computed by a fast run of the replayer, so it costs a little time on first call.
+ * Playing length of a subsong in seconds with the current settings: up to its end or the point
+ * where it loops, plus any loop_count extra loops and fade_seconds if it's a looped song.
  * Returns -1 if it couldn't be determined (no end found within 30 minutes).
  */
 TFMX_API double tfmx_subsong_duration(tfmx_module *module, int index);
+
+/* What's known about a subsong, whatever the settings. */
+typedef struct tfmx_subsong_info {
+	int number;          /* the song file's own number (0-31) */
+	double duration;     /* one play-through in seconds, -1 if no end was found */
+	double loop_start;   /* where the song continues from at the end of a play-through, in seconds; -1 if it doesn't */
+	double loop_length;  /* seconds from loop_start to the end of the play-through, 0 if it doesn't loop */
+	int looped;          /* 1 if the song is heard to loop: it loops, and doesn't end in silence first. Other
+	                        songs stop at the end of a play-through, whatever loop_count and fade_seconds say */
+	int audible;         /* 0 for a silent subsong (or an empty one, such as a sound effects slot) */
+	int repeat_of;       /* the index of a longer subsong that plays the same music, or -1. Different start
+	                        points into one song count as the same music */
+} tfmx_subsong_info;
+
+/*
+ * Fills info for a subsong. Returns 0 on success. The first call listens to every subsong of the
+ * song, a few milliseconds each on a desktop; the results are kept until the variant changes.
+ */
+TFMX_API int tfmx_get_subsong_info(tfmx_module *module, int index, tfmx_subsong_info *info);
+
+/*
+ * The subsong to play when only one will do: the longest that's audible and not a repeat,
+ * or an earlier one within 10% of that length. It's 0 if nothing qualifies. -1 on error.
+ */
+TFMX_API int tfmx_default_subsong(tfmx_module *module);
 
 /*
  * The song's text block: up to 6 lines of 40 characters (title, composer, date...), as written
@@ -164,11 +210,21 @@ TFMX_API int tfmx_select_subsong(tfmx_module *module, int index);
 TFMX_API size_t tfmx_render_s16(tfmx_module *module, int16_t *buffer, size_t frames);
 TFMX_API size_t tfmx_render_float(tfmx_module *module, float *buffer, size_t frames);
 
-/* Seeks within the current subsong, in seconds. Returns the new position. */
+/*
+ * Seeks by time played since the start of the subsong, in seconds (a time past the first
+ * play-through is in the later loops or the fade-out). Returns the new position. It renders from
+ * the start and discards the audio, so the sound is exact and the time taken grows with the position.
+ */
 TFMX_API double tfmx_seek(tfmx_module *module, double seconds);
 
-/* Current position in the current subsong, in seconds. */
+/* Time played since the start of the subsong, in seconds: it keeps rising through loops. */
 TFMX_API double tfmx_position(const tfmx_module *module);
+
+/*
+ * Where the song is now, in seconds: like tfmx_position until the song loops, then back in the
+ * range from loop_start to duration. For a seek bar on a looping song.
+ */
+TFMX_API double tfmx_song_position(const tfmx_module *module);
 
 /*
  * Changes settings on an open module. sample_rate and variant take effect from the next
