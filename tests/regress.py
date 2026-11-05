@@ -1,4 +1,4 @@
-﻿"""Re-run every whole-song comparison that has a cached reference trace (build/traces).
+"""Re-run every whole-song comparison that has a cached reference trace (build/traces).
 
 Usage: python regress.py <modland TFMX folder> [profile ...]
 Finds each song's mdat under the folder by name, runs check_song.py with the profile's variant,

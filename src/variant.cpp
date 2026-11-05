@@ -15,7 +15,7 @@ const MixSetting kMixSettings[] = {
 	{0x4A1944EE4E8F9F5Cull, 20},  // turrican 3 intro (the game's jukebox; its intro animation uses 14)
 	{0xC40D799D8DC57214ull, 14},  // hexuma-title
 	{0x72509D77915C7004ull, 16},  // bundesliga manager-title
-	{0x63A07B490AE3D90Aull, 9},   // bckid-titel
+	{0x63A07B490AE3D90Aull, 13},  // bckid-titel (the game's jukebox; its intro uses 9)
 	{0x79D98BA39100F0C0ull, 17},  // apidya (end)
 };
 
@@ -175,6 +175,7 @@ const KnownSong kKnownSongs[] = {
 	{0x11764AF4AFF82D15ull, TFMX_VARIANT_TURRICAN2},        // turrican 2 loading
 	{0xB521C066ED2AD597ull, TFMX_VARIANT_TURRICAN3_SMALL},  // turrican 3 loader
 	{0x747BC3475AB79E79ull, TFMX_VARIANT_HEXUMA},           // hexuma-house
+	{0xC40D799D8DC57214ull, TFMX_VARIANT_HEXUMA},           // hexuma-title
 	{0xA9CE5D9B57BE0DC7ull, TFMX_VARIANT_HEXUMA},           // hexuma-ice
 	{0xFF13A4315D659C12ull, TFMX_VARIANT_HEXUMA},           // hexuma-mine
 	{0xEF072A9DFFE766A7ull, TFMX_VARIANT_HEXUMA},           // hexuma-ocean

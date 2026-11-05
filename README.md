@@ -120,9 +120,11 @@ Current state:
 - **The 7V mix:** an emulation of the original's software mixer (rate, volume table, clamping, timing),
   checked byte for byte against its buffers. *Carl Lewis Challenge* is identical over 1,200 ticks,
   *Apidya*'s title over 1,499 of 1,500, and its six-minute end song differs in 0.1% of its bytes,
-  mostly single bytes at loop points. *Turrican 2*'s title and *Turrican 3*'s title music (14,970 of
-  15,000 ticks) are nearly identical, *Hexuma*'s title close. WinUAE recordings of *Turrican 2*,
-  *Turrican 3* and *Apidya*'s end music agree at gain 1.00.
+  mostly single bytes at loop points. *Turrican 2*'s title, *Turrican 3*'s title music (14,970 of 15,000
+  ticks) and *Hexuma*'s title (7,492 of 7,500) are nearly identical.
+- **Recordings:** WinUAE recordings of eleven songs from ten games agree with TFMXreplay's output in
+  tempo, level and timing, staying locked for the whole song once a game's own early ticks are
+  allowed for. Songs can have more than one mixer setting: where a game has a jukebox, its is used.
 - **Turrican 2 in game** (its small 4-voice build, `TFMX_VARIANT_TURRICAN2`): *level 1-desert*
   and *level 5-aliens* match exactly in 13 of their 15 subsongs. One differs in 4 ticks because of a
   note the game's own music left behind, and one in a portamento meeting a vibrato.

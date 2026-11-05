@@ -56,10 +56,9 @@ void Replayer::write(int voice, PaulaWrite::Reg reg, uint32_t value) {
 		voice_[voice].dma_wait_mark = c.block_starts;
 		break;
 	case PaulaWrite::DMA_ON:
-		// In 7V the replayer runs after the tick's mixing, so its DMA starts come well into the
-		// tick: about 82% of the way in on Turrican 2's title, measured from a recording of it (20% to
-		// over 95% in the Apidya title's captures, §15.20).
-		paula_->dma_on(voice, seven_ ? 0.82 * tick_seconds() : 0.0);
+		// In 7V the replayer runs after the tick's mixing, so its DMA starts come when that's done:
+		// measured from recordings of eight songs, 2.4 ms + 0.08 ms per word of the block (§15.21).
+		paula_->dma_on(voice, seven_ ? 0.0024 + 0.00008 * (playing_words_ ? playing_words_ : mix_words()) : 0.0);
 		break;
 	case PaulaWrite::NOTE: break;
 	}
@@ -136,7 +135,7 @@ double Replayer::tick_seconds() const {
 		const double timer = b_.bpm_coarse ? double((7093 / bpm_) << 8) : double(1790456 / bpm_);
 		return timer / 709379.0;
 	}
-	return 1.0 / 50.0;
+	return 71051 / kPaulaClock;  // a PAL frame: 313 lines of 227 colour clocks, 49.92 Hz
 }
 
 int Replayer::period_of(int note, int finetune) const {
@@ -883,7 +882,8 @@ bool Replayer::exec(int n, const uint8_t *c) {
 		v.porta = true;
 		return false;
 	case 0x0C:  // vibrato
-		if (b_.no_macro_vibrato)
+		// Hexuma's builds: it never reaches the hardware voices, but the mixer's voices have it.
+		if (b_.no_macro_vibrato && !(seven_ && n >= 4))
 			return false;
 		v.vib_speed = b_.vibrato_even ? (b1 & 0xFE) : b1;
 		v.vib_delta = s8(uint32_t(b3));

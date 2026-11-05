@@ -50,7 +50,7 @@ struct Behaviour {
 	                          // (Pro, except Turrican 2's 7V build)
 	bool no_macro_jumps;      // 06, 15 and 16 are ignored (Turrican 3's small build)
 	bool no_lock;             // pattern FC is ignored (Turrican 3's small build)
-	bool no_macro_vibrato;    // macro 0C is ignored (Hexuma's in-game build)
+	bool no_macro_vibrato;    // macro 0C is ignored on hardware voices (Hexuma)
 };
 
 Behaviour behaviour_of(tfmx_variant variant, const Module &module);
