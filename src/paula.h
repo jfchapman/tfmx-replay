@@ -72,8 +72,9 @@ public:
 	void mix_latch(int n, int period, int volume);
 
 	// 7V, once a tick: the block mixed last tick starts playing on hardware voice 3, and the next one
-	// is mixed from the voices as they are now. 'bytes' at Paula period 'period'.
-	void mix_block(int bytes, int period);
+	// is mixed from the voices as they are now: 'mixed' bytes at Paula period 'period', of which the
+	// first 'bytes' are played, then 'silence' bytes of nothing.
+	void mix_block(int bytes, int period, int mixed, int silence = 0);
 
 	// The block just mixed (for tests).
 	const std::vector<int8_t> &mix_next() const { return mix_back_; }

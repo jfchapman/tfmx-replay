@@ -73,8 +73,7 @@ int main(int argc, char **argv) {
 	std::vector<PaulaWrite> log;
 	r.init(&m, behaviour_of(variant, m), &paula);
 	r.log = &log;
-	if (argc > 7)
-		r.set_mix_setting(atoi(argv[7]));
+	r.set_mix_setting(argc > 7 ? atoi(argv[7]) : 0);
 	r.start(m.subsongs[index]);
 	static const char *names[] = {"LC", "LEN", "PER", "VOL", "DMA_OFF", "DMA_ON", "NOTE"};
 	printf("variant %d subsong %d\n", int(variant), m.subsongs[index].number);

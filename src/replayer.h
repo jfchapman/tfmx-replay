@@ -163,6 +163,9 @@ private:
 	bool seven_ = false;
 	int seven_adjust_ = 0;
 	int mix_setting_ = 18;
+	bool mix_restart_ = false;  // a mid-song EFFE0003 restarted the mixer this tick
+	int playing_words_ = 0;     // the mix block playing this tick, 0 = none yet
+	int next_words_ = 0;        // the block mixed last
 	int master_ = 64;
 	uint32_t tick_count_ = 0;
 	int current_track_ = 0;     // the track being processed (for the test log)

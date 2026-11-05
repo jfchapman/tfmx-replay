@@ -1,6 +1,6 @@
 # TFMX (Chris Hülsbeck) — working format notes
 
-A consolidated description of the Amiga TFMX song format, written for a clean libopenmpt loader.
+A consolidated description of the Amiga TFMX song format, written for a clean-room implementation.
 It combines three sources and a scan of the 368 songs in the modland collection's `modules\TFMX` folder:
 
 | Tag | Source |
@@ -15,8 +15,8 @@ It combines three sources and a scan of the 368 songs in the modland collection'
 Throughout, **⚠ Disagreement** marks places where the sources conflict, and **? Unknown** marks gaps.
 Both are things to settle with traces from the original replayer running in UAE.
 
-Everything here is a description of behaviour in my own words. No code was copied.
-Both tfmxplays are GPL and Pickard's file has a restrictive redistribution notice, so the loader should be written from these notes, not from those sources.
+This documentation was generated using AI development tools (Claude Code by Anthropic). No code was copied.
+Both tfmxplays are GPL and Pickard's file has a restrictive redistribution notice, so the loader was written using these notes, not from those sources.
 
 All values are big-endian. "Word" means 16 bits and "long" means 32 bits. A "tick" (Pickard's "jiffy") is one call of the replayer, 50 Hz by default.
 
@@ -845,16 +845,22 @@ The mix buffer can be read straight out of the original replayer's memory, so th
 
 **Timing.** The handler writes the buffer pointer, mixes into that buffer, and then runs the replayer, whose hardware writes therefore land late in the tick (about 82% of the way through in the *Turrican 2* title; the mixing is what takes the time). The block plays from the next block start. Period, volume, sample start and length, and DMA off reach the mixer a tick after the same value would reach a hardware voice. A new note is the exception: it's mixed in the tick of its DMA start, with the volume and period as they stood at the 01 command.
 
-**Mixer settings,** read from the games: 18 (period 199) in *Turrican 2*'s title, *Apidya*, *Carl Lewis Challenge*, *Anstoss* and *Mega-lo-Mania*, 16 (224) in *Bundesliga Manager*, 14 (256) in *Turrican 3* and *Hexuma*, 9 (398) in *B.C. Kid*. The period is about 3580 / setting. The WinUAE recording fits 18, not the 12 seen earlier in that game. Rounding moves the tick slightly between settings, so the setting has a small effect on tempo. `tfmx_settings.mix_setting` overrides it.
+**Mixer settings,** read from the games: 18 (period 199) in *Turrican 2*'s title, *Apidya*'s title, *Carl Lewis Challenge*, *Anstoss* and *Mega-lo-Mania*, 17 (211) in *Apidya*'s end sequence, 16 (224) in *Bundesliga Manager*, 14 (256) in *Turrican 3*'s intro animation and *Hexuma*, 9 (398) in *B.C. Kid*. One game can use more than one, even for one song: *Turrican 3* plays its title music at 14 in the intro animation and at 20 (179) in its jukebox. TFMXreplay uses the jukebox's, the cleaner of the two. The period is about 3580 / setting. The WinUAE recording fits 18, not the 12 seen earlier in that game. Rounding moves the tick slightly between settings, so the setting has a small effect on tempo. `tfmx_settings.mix_setting` overrides it.
 
 **Replayer findings.** 01 with b1 = 0 holds effects back only on hardware voices: voices 4–7 aren't held back in any build tested, and *Turrican 2*'s 7V build doesn't hold back any voice, so an envelope right after DMA on steps a tick sooner there. The mixer buffers showed both, on voices the Paula traces can't see.
 
 **Results (mix buffers, byte for byte, with the song in slow RAM where it doesn't fit the game's own space):**
-- *Apidya* end song, subsong 1, all 6:13 on Apidya's own build: 17,148 of 18,200 ticks identical, 1,470 bytes differing in all (0.02%), nearly all single bytes at a loop point. Hardware voices 0–2: 0 of 18,201 ticks differ.
-- *Carl Lewis Challenge*: all 1,200 of 1,200 ticks identical. *Apidya* title: 1,499 of 1,500 (one block length at a mid-song change). *Turrican 3* intro: 1,478 of 1,500.
+- *Apidya* end song, subsong 1, all 6:12 on Apidya's own build at setting 17: 16,230 of 18,100 ticks identical, 6,132 bytes differing (0.1%), mostly single bytes at a loop point. Hardware voices 0–2: 0 of 18,201 ticks differ. Subsong 0, 3,900 ticks: 3,595 identical, 1,463 bytes differing, plus the two restarts.
+- *Carl Lewis Challenge*: all 1,200 of 1,200 ticks identical. *Apidya* title: 1,499 of 1,500 (one block length at a mid-song change). *Turrican 3* intro, all 5:08 at setting 20: 14,970 of 15,000 (at 14: 13,764). About 20 of the rest are one-tick differences where two notes reach voice 4 a tick apart: the original briefly starts the first, and TFMXreplay doesn't.
 - *Turrican 2* title, subsong 0: 1,997 of the first 2,000 ticks. Those 3 ticks are a 1F with no previous note, which reads a period from outside the table, so only that build's memory can answer. Over 6,000 ticks the rest are single bytes.
 - *Hexuma* title: 1,186 of 1,200, not yet explained.
 - *B.C. Kid*'s build runs setting 13 when the harness asks for 9, so its results are at 13; the game itself uses 9.
 - The WinUAE recording of *Turrican 2*: left channel at gain 1.00 with residuals down to −41 dB, and the offset from the hardware voices within 2 samples. In the first two minutes the game itself loses a few ticks, which the song's timing doesn't explain.
 
 **Song ends.** A trackstep line that stops every track is the end of a song, not a loop, even though the sequencer's state then repeats. 606 of the 1,608 subsongs in the modland collection end this way and had been counted as looped, with "loops" of at most 0.16 s; 13 of them are songs of 30 s or more. They now play on for the two seconds that let the last notes ring out.
+
+**Mixer restart.** Trackstep EFFE0003 with 7V already on restarts the mixer. In that tick the block is mixed at the old length as usual, so the voices step through all of it, but only its first 2 words play, and the mix then stays silent for one block of the new length before the next block plays. The ticks wait with it, so each change costs a tick. The harness shows the 2-word block and the stepping, but not the gap, which needs a real recording: a WinUAE recording of the *Apidya* end music shows a gap of about 20 ms at each change, and with it the song stays locked to the recording from start to end.
+
+**The *Apidya* end music against that recording.** Setting 17 fits, read from a savestate of the running game: at 18, the song drifts over a second behind by the end. Left channel at gain 1.00 with residuals down to −36 dB. The percussion loop is one 29,504-word sample at period 158, restarted every 128 ticks. At setting 17 that leaves a gap of about 6 ms, in which the sample starts again before the restart cuts it off, and this click is in the original too. The restarts land within about 2 ms of the recording, on either side: the moment of a hardware write varies with how much the mixer has to do, which a fixed 82% can't follow.
+
+**The *Turrican 3* title music against a WinUAE recording.** In the jukebox it stays locked for the whole song, to within a millisecond, with the left channel at gain 1.00 and residuals down to −30 dB. In the intro animation the song loses about 90 ms in steps, as the *Turrican 2* title's timing also steps, which comes from the game rather than the song. The time of the hardware writes depends on the mixer's work: against the fixed 82% of a tick, the recordings put them about 1.5 ms later at setting 20 and about 1.5 ms earlier at 14.

@@ -91,6 +91,8 @@ void Replayer::start(const Subsong &subsong) {
 	}
 	seven_ = false;
 	seven_adjust_ = 0;
+	mix_restart_ = false;
+	playing_words_ = next_words_ = 0;
 	master_ = 64;
 	fading_ = false;
 	ended_ = false;
@@ -126,7 +128,7 @@ double Replayer::tick_seconds() const {
 	if (seven_) {
 		// The tick is one block of the mix buffer on voice 3, 4 CPU cycles per word and period unit.
 		// That's about 20.2 ms at x = 0 (§15.15).
-		return mix_words() * mix_period() * 4 / 7093790.0;
+		return (playing_words_ ? playing_words_ : mix_words()) * mix_period() * 4 / 7093790.0;
 	}
 	if (bpm_ >= 16) {
 		// A BPM tempo programs a CIA timer (PAL clock 709,379 Hz). Pro builds use 1,790,456 / BPM
@@ -218,6 +220,7 @@ void Replayer::load_line() {
 				break;
 			case 3:  // 7-voice mode
 				if (!(w4 & 0x8000)) {
+					mix_restart_ = seven_;
 					seven_ = true;
 					seven_adjust_ = s8(w4);
 					paula_->set_7v(true);
@@ -543,7 +546,6 @@ void Replayer::tick() {
 	tick_count_++;
 	const int count = seven_ ? 8 : 4;
 	const int *order = seven_ ? kOrder7 : kOrder4;
-	const int mix_bytes = 2 * mix_words(), mix_per = mix_period();  // before any change this tick
 
 	// Deferred cuts (00/13 with b1 != 0) happen together at the start of the macro phase.
 	auto deferred_cuts = [&] {
@@ -593,8 +595,17 @@ void Replayer::tick() {
 		track_phase();
 		macro_phase();
 	}
-	if (seven_)
-		paula_->mix_block(mix_bytes, mix_per);
+	if (seven_) {
+		// The tick lasts as long as the block playing, which was mixed last tick. A tempo change in
+		// mid-song restarts the mixer: the block is mixed at the old length, as usual, but only 2 words
+		// of it play, and then there's a silent gap as long as a new block.
+		const int gap = mix_restart_ ? 2 * mix_words() : 0;
+		const int bytes = mix_restart_ ? 4 : 2 * mix_words();
+		paula_->mix_block(bytes, mix_period(), mix_restart_ ? 2 * next_words_ : bytes, gap);
+		playing_words_ = next_words_ ? next_words_ : (bytes + gap) / 2;
+		next_words_ = (bytes + gap) / 2;
+		mix_restart_ = false;
+	}
 	for (Voice &v : voice_)
 		if (v.lock > 0)
 			v.lock--;

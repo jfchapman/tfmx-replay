@@ -171,13 +171,13 @@ void Paula::mix_latch(int n, int period, int volume) {
 	c.mix_vol = volume;
 }
 
-void Paula::mix_block(int bytes, int period) {
+void Paula::mix_block(int bytes, int period, int mixed, int silence) {
 	mix_play_ = mix_front_.empty() ? 0 : mix_play_ - double(mix_front_.size());
 	mix_old_.swap(mix_front_);
 	mix_front_.swap(mix_back_);
 	mix_period_ = period;
 
-	std::vector<int> sum(size_t(bytes), 0);
+	std::vector<int> sum(size_t(std::max(bytes, mixed)), 0);
 	for (size_t n = 4; n < ch_.size(); n++) {
 		Channel &c = ch_[n];
 		if (!c.mix_on || c.mix_bytes < kMixMinimumBytes)
@@ -186,7 +186,7 @@ void Paula::mix_block(int bytes, int period) {
 		const uint32_t step =
 		    c.mix_held ? 0 : uint32_t(period) * (1u << kMixFraction) / uint32_t(std::max(c.mix_per, 1));
 		const int volume = std::min(c.mix_vol, 63);  // a table of 64 volumes
-		for (int i = 0; i < bytes; i++) {
+		for (int i = 0; i < mixed; i++) {
 			const uint32_t addr = c.mix_lc + (c.mix_pos >> kMixFraction);
 			if (smpl_ && addr < smpl_->size())
 				sum[size_t(i)] += (int(int8_t((*smpl_)[addr])) * volume) >> 6;
@@ -207,7 +207,7 @@ void Paula::mix_block(int bytes, int period) {
 		c.mix_vol = c.mix_volume;
 		c.mix_held = !c.dma;
 	}
-	mix_back_.resize(size_t(bytes));
+	mix_back_.assign(size_t(bytes + silence), 0);
 	for (int i = 0; i < bytes; i++)
 		mix_back_[size_t(i)] = int8_t(std::clamp(sum[size_t(i)], -128, 127));
 }
