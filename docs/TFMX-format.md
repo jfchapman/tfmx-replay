@@ -666,7 +666,6 @@ Pro builds also hold internal dispatch tables of 15 entries (pattern commands) a
 - *Turrican 3* has three: 7V (for the intro and the menu's music player, which also plays level songs in 4-voice mode), small (loading music) and in-game. The in-game build gives the same results as the 7V build, apart from skipping voice 2's notes from track 6 in stretches of *level 1* subsong 4, most likely to keep a voice free for sound effects.
 - *Turrican 2*'s 7V build differs from the other Pro builds only by running effects in a note's first update, as far as is known.
 - *Denny* was never released, so *denny-title* has no game.
-- *Rock'n'Roll*'s title screen plays modland's *take off song*, not *rocknroll-intro*.
 - *Bundesliga Manager*'s and *Anstoss*'s 7V builds initialise through operating system library calls, and a game's own title song can have a slightly different copy from modland's. *B.C. Kid*'s `bckid-titel` is 80 bytes shorter in memory.
 
 ---
