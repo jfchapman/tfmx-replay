@@ -1,0 +1,5298 @@
+== pro
+variant 1 subsong 0
+start
+ 0 VOL 0
+ 0 DMA_OFF 0
+ 1 VOL 0
+ 1 DMA_OFF 0
+ 2 VOL 0
+ 2 DMA_OFF 0
+ 3 VOL 0
+ 3 DMA_OFF 0
+tick 0 line 0 blocks 0 0 0 0
+ 0 VOL 0
+ 1 VOL 0
+ 2 VOL 0
+ 3 VOL 0
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 1 line 0 blocks 0 0 0 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 VOL 30
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 VOL 30
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 2 line 0 blocks 3 3 0 0
+ 0 VOL 30
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 3 line 0 blocks 6 6 0 0
+ 0 VOL 10
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 4 line 0 blocks 8 8 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 5 line 0 blocks 11 11 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 6 line 0 blocks 13 13 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 7 line 1 blocks 16 16 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 8 line 1 blocks 19 19 0 0
+ 0 VOL 11
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 9 line 1 blocks 21 21 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 10 line 1 blocks 24 24 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 11 line 1 blocks 26 26 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 12 line 1 blocks 29 29 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 13 line 1 blocks 32 32 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 14 line 1 blocks 34 34 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 15 line 1 blocks 37 37 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 16 line 1 blocks 39 39 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 17 line 1 blocks 42 42 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 18 line 1 blocks 45 45 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 19 line 0 blocks 47 47 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 20 line 0 blocks 47 47 0 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 VOL 30
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 VOL 30
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 21 line 0 blocks 50 50 0 0
+ 0 VOL 30
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 22 line 0 blocks 53 53 0 0
+ 0 VOL 10
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 23 line 0 blocks 55 55 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 24 line 0 blocks 58 58 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 25 line 0 blocks 60 60 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 26 line 1 blocks 63 63 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 27 line 1 blocks 66 66 0 0
+ 0 VOL 11
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 28 line 1 blocks 68 68 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 29 line 1 blocks 71 71 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 30 line 0 blocks 73 73 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 31 line 0 blocks 73 73 0 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 VOL 30
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 VOL 30
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 32 line 0 blocks 76 76 0 0
+ 0 VOL 30
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 33 line 0 blocks 79 79 0 0
+ 0 VOL 10
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 34 line 0 blocks 81 81 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 35 line 0 blocks 84 84 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 36 line 0 blocks 86 86 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 37 line 1 blocks 89 89 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 38 line 1 blocks 92 92 0 0
+ 0 VOL 11
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 39 line 1 blocks 94 94 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 40 line 1 blocks 97 97 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 41 line 0 blocks 99 99 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 42 line 0 blocks 99 99 0 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 VOL 30
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 VOL 30
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 43 line 0 blocks 102 102 0 0
+ 0 VOL 30
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 44 line 0 blocks 105 105 0 0
+ 0 VOL 10
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 45 line 0 blocks 107 107 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 46 line 0 blocks 110 110 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 47 line 0 blocks 112 112 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 48 line 1 blocks 115 115 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 49 line 1 blocks 118 118 0 0
+ 0 VOL 11
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 50 line 1 blocks 120 120 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 51 line 1 blocks 123 123 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 52 line 0 blocks 125 125 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 53 line 0 blocks 125 125 0 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 VOL 30
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 VOL 30
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 54 line 0 blocks 128 128 0 0
+ 0 VOL 30
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 55 line 0 blocks 131 131 0 0
+ 0 VOL 10
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 56 line 0 blocks 133 133 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 57 line 0 blocks 136 136 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 58 line 0 blocks 138 138 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 59 line 1 blocks 141 141 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 60 line 1 blocks 144 144 0 0
+ 0 VOL 11
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 61 line 1 blocks 146 146 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 62 line 1 blocks 149 149 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 63 line 0 blocks 151 151 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 64 line 0 blocks 151 151 0 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 VOL 30
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 VOL 30
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 65 line 0 blocks 154 154 0 0
+ 0 VOL 30
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 66 line 0 blocks 157 157 0 0
+ 0 VOL 10
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 67 line 0 blocks 159 159 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 68 line 0 blocks 162 162 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 69 line 0 blocks 164 164 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 70 line 1 blocks 167 167 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 71 line 1 blocks 170 170 0 0
+ 0 VOL 11
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 72 line 1 blocks 172 172 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 73 line 1 blocks 175 175 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 74 line 0 blocks 177 177 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 75 line 0 blocks 177 177 0 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 VOL 30
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 VOL 30
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 76 line 0 blocks 180 180 0 0
+ 0 VOL 30
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 77 line 0 blocks 183 183 0 0
+ 0 VOL 10
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 78 line 0 blocks 185 185 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 79 line 0 blocks 188 188 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+== turrican2
+variant 7 subsong 0
+start
+ 0 VOL 0
+ 0 DMA_OFF 0
+ 1 VOL 0
+ 1 DMA_OFF 0
+ 2 VOL 0
+ 2 DMA_OFF 0
+ 3 VOL 0
+ 3 DMA_OFF 0
+tick 0 line 0 blocks 0 0 0 0
+ 0 VOL 0
+ 1 VOL 0
+ 2 VOL 0
+ 3 VOL 0
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 1 line 0 blocks 0 0 0 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 PER 1AC
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 2 line 0 blocks 3 3 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 30
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+tick 3 line 0 blocks 6 6 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 4 line 0 blocks 8 8 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 5 line 0 blocks 11 11 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 6 line 0 blocks 13 13 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 7 line 1 blocks 16 16 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 8 line 1 blocks 19 19 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 9 line 1 blocks 21 21 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 10 line 1 blocks 24 24 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 11 line 1 blocks 26 26 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 12 line 1 blocks 29 29 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 13 line 1 blocks 32 32 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 14 line 1 blocks 34 34 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 15 line 1 blocks 37 37 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 16 line 1 blocks 39 39 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 17 line 1 blocks 42 42 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 18 line 1 blocks 45 45 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 19 line 0 blocks 47 47 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 20 line 0 blocks 47 47 0 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 PER 1AC
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 21 line 0 blocks 50 50 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 30
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+tick 22 line 0 blocks 53 53 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 23 line 0 blocks 55 55 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 24 line 0 blocks 58 58 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 25 line 0 blocks 60 60 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 26 line 1 blocks 63 63 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 27 line 1 blocks 66 66 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 28 line 1 blocks 68 68 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 29 line 1 blocks 71 71 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 30 line 0 blocks 73 73 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 31 line 0 blocks 73 73 0 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 PER 1AC
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 32 line 0 blocks 76 76 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 30
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+tick 33 line 0 blocks 79 79 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 34 line 0 blocks 81 81 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 35 line 0 blocks 84 84 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 36 line 0 blocks 86 86 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 37 line 1 blocks 89 89 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 38 line 1 blocks 92 92 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 39 line 1 blocks 94 94 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 40 line 1 blocks 97 97 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 41 line 0 blocks 99 99 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 42 line 0 blocks 99 99 0 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 PER 1AC
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 43 line 0 blocks 102 102 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 30
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+tick 44 line 0 blocks 105 105 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 45 line 0 blocks 107 107 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 46 line 0 blocks 110 110 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 47 line 0 blocks 112 112 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 48 line 1 blocks 115 115 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 49 line 1 blocks 118 118 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 50 line 1 blocks 120 120 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 51 line 1 blocks 123 123 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 52 line 0 blocks 125 125 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 53 line 0 blocks 125 125 0 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 PER 1AC
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 54 line 0 blocks 128 128 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 30
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+tick 55 line 0 blocks 131 131 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 56 line 0 blocks 133 133 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 57 line 0 blocks 136 136 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 58 line 0 blocks 138 138 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 59 line 1 blocks 141 141 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 60 line 1 blocks 144 144 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 61 line 1 blocks 146 146 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 62 line 1 blocks 149 149 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 63 line 0 blocks 151 151 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 64 line 0 blocks 151 151 0 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 PER 1AC
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 65 line 0 blocks 154 154 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 30
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+tick 66 line 0 blocks 157 157 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 67 line 0 blocks 159 159 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 68 line 0 blocks 162 162 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 69 line 0 blocks 164 164 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 70 line 1 blocks 167 167 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 71 line 1 blocks 170 170 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 72 line 1 blocks 172 172 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 73 line 1 blocks 175 175 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 74 line 0 blocks 177 177 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 75 line 0 blocks 177 177 0 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 PER 1AC
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 76 line 0 blocks 180 180 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 30
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+tick 77 line 0 blocks 183 183 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 78 line 0 blocks 185 185 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 79 line 0 blocks 188 188 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+== t3small
+variant 8 subsong 0
+start
+ 0 VOL 0
+ 0 DMA_OFF 0
+ 1 VOL 0
+ 1 DMA_OFF 0
+ 2 VOL 0
+ 2 DMA_OFF 0
+ 3 VOL 0
+ 3 DMA_OFF 0
+tick 0 line 0 blocks 0 0 0 0
+ 0 VOL 0
+ 1 VOL 0
+ 2 VOL 0
+ 3 VOL 0
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 1 line 0 blocks 0 0 0 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 VOL 30
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 VOL 30
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 2 line 0 blocks 3 3 0 0
+ 0 VOL 30
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 3 line 0 blocks 6 6 0 0
+ 0 VOL 10
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 4 line 0 blocks 8 8 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 5 line 0 blocks 11 11 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 6 line 0 blocks 13 13 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 7 line 1 blocks 16 16 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 8 line 1 blocks 19 19 0 0
+ 0 VOL 11
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 9 line 1 blocks 21 21 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 10 line 1 blocks 24 24 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 11 line 1 blocks 26 26 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 12 line 1 blocks 29 29 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 13 line 1 blocks 32 32 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 14 line 1 blocks 34 34 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 15 line 1 blocks 37 37 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 16 line 1 blocks 39 39 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 17 line 1 blocks 42 42 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 18 line 1 blocks 45 45 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 19 line 0 blocks 47 47 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 20 line 0 blocks 47 47 0 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 VOL 30
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 VOL 30
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 21 line 0 blocks 50 50 0 0
+ 0 VOL 30
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 22 line 0 blocks 53 53 0 0
+ 0 VOL 10
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 23 line 0 blocks 55 55 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 24 line 0 blocks 58 58 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 25 line 0 blocks 60 60 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 26 line 1 blocks 63 63 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 27 line 1 blocks 66 66 0 0
+ 0 VOL 11
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 28 line 1 blocks 68 68 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 29 line 1 blocks 71 71 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 30 line 0 blocks 73 73 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 31 line 0 blocks 73 73 0 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 VOL 30
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 VOL 30
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 32 line 0 blocks 76 76 0 0
+ 0 VOL 30
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 33 line 0 blocks 79 79 0 0
+ 0 VOL 10
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 34 line 0 blocks 81 81 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 35 line 0 blocks 84 84 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 36 line 0 blocks 86 86 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 37 line 1 blocks 89 89 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 38 line 1 blocks 92 92 0 0
+ 0 VOL 11
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 39 line 1 blocks 94 94 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 40 line 1 blocks 97 97 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 41 line 0 blocks 99 99 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 42 line 0 blocks 99 99 0 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 VOL 30
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 VOL 30
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 43 line 0 blocks 102 102 0 0
+ 0 VOL 30
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 44 line 0 blocks 105 105 0 0
+ 0 VOL 10
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 45 line 0 blocks 107 107 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 46 line 0 blocks 110 110 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 47 line 0 blocks 112 112 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 48 line 1 blocks 115 115 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 49 line 1 blocks 118 118 0 0
+ 0 VOL 11
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 50 line 1 blocks 120 120 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 51 line 1 blocks 123 123 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 52 line 0 blocks 125 125 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 53 line 0 blocks 125 125 0 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 VOL 30
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 VOL 30
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 54 line 0 blocks 128 128 0 0
+ 0 VOL 30
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 55 line 0 blocks 131 131 0 0
+ 0 VOL 10
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 56 line 0 blocks 133 133 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 57 line 0 blocks 136 136 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 58 line 0 blocks 138 138 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 59 line 1 blocks 141 141 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 60 line 1 blocks 144 144 0 0
+ 0 VOL 11
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 61 line 1 blocks 146 146 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 62 line 1 blocks 149 149 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 63 line 0 blocks 151 151 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 64 line 0 blocks 151 151 0 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 VOL 30
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 VOL 30
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 65 line 0 blocks 154 154 0 0
+ 0 VOL 30
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 66 line 0 blocks 157 157 0 0
+ 0 VOL 10
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 67 line 0 blocks 159 159 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 68 line 0 blocks 162 162 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 69 line 0 blocks 164 164 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 70 line 1 blocks 167 167 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 71 line 1 blocks 170 170 0 0
+ 0 VOL 11
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 72 line 1 blocks 172 172 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 73 line 1 blocks 175 175 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 74 line 0 blocks 177 177 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 75 line 0 blocks 177 177 0 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 VOL 30
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 VOL 30
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 76 line 0 blocks 180 180 0 0
+ 0 VOL 30
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 77 line 0 blocks 183 183 0 0
+ 0 VOL 10
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 78 line 0 blocks 185 185 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 79 line 0 blocks 188 188 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+== hexuma
+variant 9 subsong 0
+start
+ 0 VOL 0
+ 0 DMA_OFF 0
+ 1 VOL 0
+ 1 DMA_OFF 0
+ 2 VOL 0
+ 2 DMA_OFF 0
+ 3 VOL 0
+ 3 DMA_OFF 0
+tick 0 line 0 blocks 0 0 0 0
+ 0 VOL 0
+ 1 VOL 0
+ 2 VOL 0
+ 3 VOL 0
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 1 line 0 blocks 0 0 0 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 VOL 30
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 VOL 30
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 2 line 0 blocks 3 3 0 0
+ 0 VOL 30
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 3 line 0 blocks 6 6 0 0
+ 0 VOL 10
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 4 line 0 blocks 8 8 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 5 line 0 blocks 11 11 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 6 line 0 blocks 13 13 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 7 line 1 blocks 16 16 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 8 line 1 blocks 19 19 0 0
+ 0 VOL 11
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 9 line 1 blocks 21 21 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 10 line 1 blocks 24 24 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 11 line 1 blocks 26 26 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 12 line 1 blocks 29 29 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 13 line 1 blocks 32 32 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 14 line 1 blocks 34 34 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 15 line 1 blocks 37 37 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 16 line 1 blocks 39 39 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 17 line 1 blocks 42 42 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 18 line 1 blocks 45 45 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 19 line 0 blocks 47 47 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 20 line 0 blocks 47 47 0 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 VOL 30
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 VOL 30
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 21 line 0 blocks 50 50 0 0
+ 0 VOL 30
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 22 line 0 blocks 53 53 0 0
+ 0 VOL 10
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 23 line 0 blocks 55 55 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 24 line 0 blocks 58 58 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 25 line 0 blocks 60 60 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 26 line 1 blocks 63 63 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 27 line 1 blocks 66 66 0 0
+ 0 VOL 11
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 28 line 1 blocks 68 68 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 29 line 1 blocks 71 71 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 30 line 0 blocks 73 73 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 31 line 0 blocks 73 73 0 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 VOL 30
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 VOL 30
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 32 line 0 blocks 76 76 0 0
+ 0 VOL 30
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 33 line 0 blocks 79 79 0 0
+ 0 VOL 10
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 34 line 0 blocks 81 81 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 35 line 0 blocks 84 84 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 36 line 0 blocks 86 86 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 37 line 1 blocks 89 89 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 38 line 1 blocks 92 92 0 0
+ 0 VOL 11
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 39 line 1 blocks 94 94 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 40 line 1 blocks 97 97 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 41 line 0 blocks 99 99 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 42 line 0 blocks 99 99 0 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 VOL 30
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 VOL 30
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 43 line 0 blocks 102 102 0 0
+ 0 VOL 30
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 44 line 0 blocks 105 105 0 0
+ 0 VOL 10
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 45 line 0 blocks 107 107 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 46 line 0 blocks 110 110 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 47 line 0 blocks 112 112 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 48 line 1 blocks 115 115 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 49 line 1 blocks 118 118 0 0
+ 0 VOL 11
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 50 line 1 blocks 120 120 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 51 line 1 blocks 123 123 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 52 line 0 blocks 125 125 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 53 line 0 blocks 125 125 0 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 VOL 30
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 VOL 30
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 54 line 0 blocks 128 128 0 0
+ 0 VOL 30
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 55 line 0 blocks 131 131 0 0
+ 0 VOL 10
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 56 line 0 blocks 133 133 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 57 line 0 blocks 136 136 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 58 line 0 blocks 138 138 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 59 line 1 blocks 141 141 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 60 line 1 blocks 144 144 0 0
+ 0 VOL 11
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 61 line 1 blocks 146 146 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 62 line 1 blocks 149 149 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 63 line 0 blocks 151 151 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 64 line 0 blocks 151 151 0 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 VOL 30
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 VOL 30
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 65 line 0 blocks 154 154 0 0
+ 0 VOL 30
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 66 line 0 blocks 157 157 0 0
+ 0 VOL 10
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 67 line 0 blocks 159 159 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 68 line 0 blocks 162 162 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 69 line 0 blocks 164 164 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 70 line 1 blocks 167 167 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 71 line 1 blocks 170 170 0 0
+ 0 VOL 11
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 72 line 1 blocks 172 172 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 73 line 1 blocks 175 175 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 74 line 0 blocks 177 177 0 0
+ 0 VOL 30
+ 1 VOL 31
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 75 line 0 blocks 177 177 0 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 VOL 30
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 VOL 30
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 76 line 0 blocks 180 180 0 0
+ 0 VOL 30
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 77 line 0 blocks 183 183 0 0
+ 0 VOL 10
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 78 line 0 blocks 185 185 0 0
+ 0 VOL 11
+ 1 VOL 12
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 79 line 0 blocks 188 188 0 0
+ 0 VOL 10
+ 1 VOL 13
+ 2 VOL 0
+ 3 VOL 0
+ 0 PER 1AC
+ 1 PER 1AC
+== gemx
+variant 6 subsong 0
+start
+ 0 VOL 0
+ 0 DMA_OFF 0
+ 1 VOL 0
+ 1 DMA_OFF 0
+ 2 VOL 0
+ 2 DMA_OFF 0
+ 3 VOL 0
+ 3 DMA_OFF 0
+tick 0 line 0 blocks 0 0 0 0
+ 0 VOL 0
+ 1 VOL 0
+ 2 VOL 0
+ 3 VOL 0
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 1 line 0 blocks 0 0 0 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 PER 1AC
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 2 line 0 blocks 3 3 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 30
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+tick 3 line 0 blocks 6 6 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 4 line 0 blocks 8 8 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 5 line 0 blocks 11 11 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 6 line 0 blocks 13 13 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 7 line 1 blocks 16 16 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 8 line 1 blocks 19 19 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 9 line 1 blocks 21 21 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 10 line 1 blocks 24 24 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 11 line 1 blocks 26 26 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 12 line 1 blocks 29 29 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 13 line 1 blocks 32 32 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 14 line 1 blocks 34 34 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 15 line 1 blocks 37 37 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 16 line 1 blocks 39 39 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 17 line 1 blocks 42 42 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 18 line 1 blocks 45 45 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 19 line 0 blocks 47 47 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 20 line 0 blocks 47 47 0 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 PER 1AC
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 21 line 0 blocks 50 50 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 30
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+tick 22 line 0 blocks 53 53 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 23 line 0 blocks 55 55 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 24 line 0 blocks 58 58 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 25 line 0 blocks 60 60 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 26 line 1 blocks 63 63 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 27 line 1 blocks 66 66 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 28 line 1 blocks 68 68 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 29 line 1 blocks 71 71 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 30 line 0 blocks 73 73 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 31 line 0 blocks 73 73 0 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 PER 1AC
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 32 line 0 blocks 76 76 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 30
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+tick 33 line 0 blocks 79 79 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 34 line 0 blocks 81 81 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 35 line 0 blocks 84 84 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 36 line 0 blocks 86 86 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 37 line 1 blocks 89 89 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 38 line 1 blocks 92 92 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 39 line 1 blocks 94 94 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 40 line 1 blocks 97 97 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 41 line 0 blocks 99 99 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 42 line 0 blocks 99 99 0 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 PER 1AC
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 43 line 0 blocks 102 102 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 30
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+tick 44 line 0 blocks 105 105 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 45 line 0 blocks 107 107 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 46 line 0 blocks 110 110 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 47 line 0 blocks 112 112 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 48 line 1 blocks 115 115 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 49 line 1 blocks 118 118 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 50 line 1 blocks 120 120 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 51 line 1 blocks 123 123 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 52 line 0 blocks 125 125 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 53 line 0 blocks 125 125 0 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 PER 1AC
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 54 line 0 blocks 128 128 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 30
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+tick 55 line 0 blocks 131 131 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 56 line 0 blocks 133 133 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 57 line 0 blocks 136 136 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 58 line 0 blocks 138 138 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 59 line 1 blocks 141 141 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 60 line 1 blocks 144 144 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 61 line 1 blocks 146 146 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 62 line 1 blocks 149 149 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 63 line 0 blocks 151 151 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 64 line 0 blocks 151 151 0 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 PER 1AC
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 65 line 0 blocks 154 154 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 30
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+tick 66 line 0 blocks 157 157 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 67 line 0 blocks 159 159 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 68 line 0 blocks 162 162 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 69 line 0 blocks 164 164 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 70 line 1 blocks 167 167 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 71 line 1 blocks 170 170 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 72 line 1 blocks 172 172 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 73 line 1 blocks 175 175 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 74 line 0 blocks 177 177 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 75 line 0 blocks 177 177 0 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 PER 1AC
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 76 line 0 blocks 180 180 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 30
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+tick 77 line 0 blocks 183 183 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 78 line 0 blocks 185 185 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 79 line 0 blocks 188 188 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+== masterblazer
+variant 3 subsong 0
+start
+ 0 VOL 0
+ 0 DMA_OFF 0
+ 1 VOL 0
+ 1 DMA_OFF 0
+ 2 VOL 0
+ 2 DMA_OFF 0
+ 3 VOL 0
+ 3 DMA_OFF 0
+tick 0 line 0 blocks 0 0 0 0
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+ 2 VOL 0
+ 3 VOL 0
+tick 1 line 0 blocks 0 0 0 0
+ 0 VOL 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 PER 1AC
+ 1 VOL 0
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 PER 1AC
+tick 2 line 0 blocks 3 3 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 30
+ 1 PER 1AC
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+tick 3 line 0 blocks 6 6 0 0
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+tick 4 line 0 blocks 8 8 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 PER 1AC
+tick 5 line 0 blocks 11 11 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 PER 1AC
+tick 6 line 0 blocks 13 13 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+tick 7 line 1 blocks 16 16 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+tick 8 line 1 blocks 19 19 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+tick 9 line 1 blocks 21 21 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+tick 10 line 1 blocks 24 24 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 PER 1AC
+tick 11 line 1 blocks 26 26 0 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 12 line 1 blocks 29 29 0 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 13 line 1 blocks 32 32 0 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 14 line 1 blocks 34 34 0 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 15 line 1 blocks 37 37 0 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 16 line 1 blocks 39 39 0 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 17 line 1 blocks 42 42 0 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 18 line 1 blocks 45 45 0 0
+ 0 PER 1AC
+ 1 PER 1AC
+tick 19 line 0 blocks 47 47 0 0
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 20 line 0 blocks 47 47 0 0
+ 0 PER 1AC
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 PER 1AC
+ 1 PER 1AC
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 PER 1AC
+tick 21 line 0 blocks 50 50 0 0
+ 0 PER 1AC
+ 1 VOL 30
+ 1 PER 1AC
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+tick 22 line 0 blocks 53 53 0 0
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+tick 23 line 0 blocks 55 55 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 PER 1AC
+tick 24 line 0 blocks 58 58 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 PER 1AC
+tick 25 line 0 blocks 60 60 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+tick 26 line 1 blocks 63 63 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+tick 27 line 1 blocks 66 66 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+tick 28 line 1 blocks 68 68 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+tick 29 line 1 blocks 71 71 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 PER 1AC
+tick 30 line 0 blocks 73 73 0 0
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 31 line 0 blocks 73 73 0 0
+ 0 PER 1AC
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 PER 1AC
+ 1 PER 1AC
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 PER 1AC
+tick 32 line 0 blocks 76 76 0 0
+ 0 PER 1AC
+ 1 VOL 30
+ 1 PER 1AC
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+tick 33 line 0 blocks 79 79 0 0
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+tick 34 line 0 blocks 81 81 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 PER 1AC
+tick 35 line 0 blocks 84 84 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 PER 1AC
+tick 36 line 0 blocks 86 86 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+tick 37 line 1 blocks 89 89 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+tick 38 line 1 blocks 92 92 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+tick 39 line 1 blocks 94 94 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+tick 40 line 1 blocks 97 97 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 PER 1AC
+tick 41 line 0 blocks 99 99 0 0
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 42 line 0 blocks 99 99 0 0
+ 0 PER 1AC
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 PER 1AC
+ 1 PER 1AC
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 PER 1AC
+tick 43 line 0 blocks 102 102 0 0
+ 0 PER 1AC
+ 1 VOL 30
+ 1 PER 1AC
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+tick 44 line 0 blocks 105 105 0 0
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+tick 45 line 0 blocks 107 107 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 PER 1AC
+tick 46 line 0 blocks 110 110 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 PER 1AC
+tick 47 line 0 blocks 112 112 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+tick 48 line 1 blocks 115 115 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+tick 49 line 1 blocks 118 118 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+tick 50 line 1 blocks 120 120 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+tick 51 line 1 blocks 123 123 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 PER 1AC
+tick 52 line 0 blocks 125 125 0 0
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 53 line 0 blocks 125 125 0 0
+ 0 PER 1AC
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 PER 1AC
+ 1 PER 1AC
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 PER 1AC
+tick 54 line 0 blocks 128 128 0 0
+ 0 PER 1AC
+ 1 VOL 30
+ 1 PER 1AC
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+tick 55 line 0 blocks 131 131 0 0
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+tick 56 line 0 blocks 133 133 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 PER 1AC
+tick 57 line 0 blocks 136 136 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 PER 1AC
+tick 58 line 0 blocks 138 138 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+tick 59 line 1 blocks 141 141 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+tick 60 line 1 blocks 144 144 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+tick 61 line 1 blocks 146 146 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+tick 62 line 1 blocks 149 149 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 PER 1AC
+tick 63 line 0 blocks 151 151 0 0
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 64 line 0 blocks 151 151 0 0
+ 0 PER 1AC
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 PER 1AC
+ 1 PER 1AC
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 PER 1AC
+tick 65 line 0 blocks 154 154 0 0
+ 0 PER 1AC
+ 1 VOL 30
+ 1 PER 1AC
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+tick 66 line 0 blocks 157 157 0 0
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+tick 67 line 0 blocks 159 159 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 PER 1AC
+tick 68 line 0 blocks 162 162 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 PER 1AC
+tick 69 line 0 blocks 164 164 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+tick 70 line 1 blocks 167 167 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+tick 71 line 1 blocks 170 170 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+tick 72 line 1 blocks 172 172 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+tick 73 line 1 blocks 175 175 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 PER 1AC
+tick 74 line 0 blocks 177 177 0 0
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+tick 75 line 0 blocks 177 177 0 0
+ 0 PER 1AC
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 PER 1AC
+ 1 PER 1AC
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 PER 1AC
+tick 76 line 0 blocks 180 180 0 0
+ 0 PER 1AC
+ 1 VOL 30
+ 1 PER 1AC
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+tick 77 line 0 blocks 183 183 0 0
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+tick 78 line 0 blocks 185 185 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 PER 1AC
+tick 79 line 0 blocks 188 188 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 PER 1AC
+== 1.5
+variant 2 subsong 0
+start
+ 0 VOL 0
+ 0 DMA_OFF 0
+ 1 VOL 0
+ 1 DMA_OFF 0
+ 2 VOL 0
+ 2 DMA_OFF 0
+ 3 VOL 0
+ 3 DMA_OFF 0
+tick 0 line 0 blocks 0 0 0 0
+ 0 VOL 0
+ 1 VOL 0
+ 2 VOL 0
+ 3 VOL 0
+tick 1 line 0 blocks 0 0 0 0
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+ 2 VOL 0
+ 3 VOL 0
+tick 2 line 0 blocks 0 0 0 0
+ 0 VOL 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 PER 1AC
+ 1 VOL 0
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 3 line 0 blocks 3 3 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 30
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+tick 4 line 0 blocks 6 6 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 5 line 0 blocks 8 8 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 6 line 0 blocks 11 11 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 7 line 0 blocks 13 13 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 8 line 1 blocks 16 16 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 9 line 1 blocks 19 19 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 10 line 1 blocks 21 21 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 11 line 1 blocks 24 24 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 12 line 1 blocks 26 26 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 13 line 1 blocks 29 29 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 14 line 1 blocks 32 32 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 15 line 1 blocks 34 34 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 16 line 1 blocks 37 37 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 17 line 1 blocks 39 39 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 18 line 1 blocks 42 42 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 19 line 1 blocks 45 45 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 20 line 1 blocks 47 47 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 21 line 1 blocks 50 50 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 22 line 1 blocks 52 52 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 23 line 1 blocks 55 55 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 24 line 1 blocks 58 58 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 25 line 1 blocks 60 60 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 26 line 1 blocks 63 63 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 27 line 1 blocks 65 65 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 28 line 1 blocks 68 68 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 29 line 1 blocks 71 71 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 30 line 1 blocks 73 73 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 31 line 1 blocks 76 76 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 32 line 1 blocks 78 78 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 33 line 1 blocks 81 81 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 34 line 1 blocks 84 84 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 35 line 1 blocks 86 86 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 36 line 1 blocks 89 89 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 37 line 1 blocks 91 91 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 38 line 1 blocks 94 94 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 39 line 1 blocks 96 96 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 40 line 1 blocks 99 99 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 41 line 1 blocks 102 102 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 42 line 1 blocks 104 104 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 43 line 1 blocks 107 107 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 44 line 1 blocks 109 109 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 45 line 1 blocks 112 112 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 46 line 1 blocks 115 115 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 47 line 1 blocks 117 117 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 48 line 1 blocks 120 120 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 49 line 1 blocks 122 122 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 50 line 1 blocks 125 125 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 51 line 1 blocks 128 128 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 52 line 1 blocks 130 130 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 53 line 1 blocks 133 133 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 54 line 1 blocks 135 135 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 55 line 1 blocks 138 138 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 56 line 1 blocks 141 141 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 57 line 1 blocks 143 143 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 58 line 1 blocks 146 146 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 59 line 1 blocks 148 148 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 60 line 1 blocks 151 151 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 61 line 1 blocks 154 154 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 62 line 1 blocks 156 156 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 63 line 1 blocks 159 159 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 64 line 1 blocks 161 161 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 65 line 1 blocks 164 164 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 66 line 1 blocks 167 167 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 67 line 1 blocks 169 169 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 68 line 1 blocks 172 172 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 69 line 1 blocks 174 174 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 70 line 1 blocks 177 177 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 71 line 1 blocks 179 179 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 72 line 1 blocks 182 182 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 73 line 1 blocks 185 185 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 74 line 1 blocks 187 187 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 75 line 1 blocks 190 190 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 76 line 1 blocks 192 192 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 77 line 1 blocks 195 195 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 78 line 1 blocks 198 198 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 79 line 1 blocks 200 200 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+== xout
+variant 4 subsong 0
+start
+ 0 VOL 0
+ 0 DMA_OFF 0
+ 1 VOL 0
+ 1 DMA_OFF 0
+ 2 VOL 0
+ 2 DMA_OFF 0
+ 3 VOL 0
+ 3 DMA_OFF 0
+tick 0 line 0 blocks 0 0 0 0
+ 0 VOL 0
+ 1 VOL 0
+ 2 VOL 0
+ 3 VOL 0
+tick 1 line 0 blocks 0 0 0 0
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+ 2 VOL 0
+ 3 VOL 0
+tick 2 line 0 blocks 0 0 0 0
+ 0 VOL 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 PER 1AC
+ 1 VOL 0
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 3 line 0 blocks 3 3 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 30
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+tick 4 line 0 blocks 6 6 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 5 line 0 blocks 8 8 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 6 line 0 blocks 11 11 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 7 line 0 blocks 13 13 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 8 line 1 blocks 16 16 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 9 line 1 blocks 19 19 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 10 line 1 blocks 21 21 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 11 line 1 blocks 24 24 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 12 line 1 blocks 26 26 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 13 line 1 blocks 29 29 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 14 line 1 blocks 32 32 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 15 line 1 blocks 34 34 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 16 line 1 blocks 37 37 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 17 line 1 blocks 39 39 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 18 line 1 blocks 42 42 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 19 line 1 blocks 45 45 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 20 line 1 blocks 47 47 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 21 line 1 blocks 50 50 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 22 line 1 blocks 52 52 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 23 line 1 blocks 55 55 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 24 line 1 blocks 58 58 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 25 line 1 blocks 60 60 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 26 line 1 blocks 63 63 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 27 line 1 blocks 65 65 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 28 line 1 blocks 68 68 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 29 line 1 blocks 71 71 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 30 line 1 blocks 73 73 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 31 line 1 blocks 76 76 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 32 line 1 blocks 78 78 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 33 line 1 blocks 81 81 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 34 line 1 blocks 84 84 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 35 line 1 blocks 86 86 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 36 line 1 blocks 89 89 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 37 line 1 blocks 91 91 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 38 line 1 blocks 94 94 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 39 line 1 blocks 96 96 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 40 line 1 blocks 99 99 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 41 line 1 blocks 102 102 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 42 line 1 blocks 104 104 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 43 line 1 blocks 107 107 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 44 line 1 blocks 109 109 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 45 line 1 blocks 112 112 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 46 line 1 blocks 115 115 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 47 line 1 blocks 117 117 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 48 line 1 blocks 120 120 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 49 line 1 blocks 122 122 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 50 line 1 blocks 125 125 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 51 line 1 blocks 128 128 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 52 line 1 blocks 130 130 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 53 line 1 blocks 133 133 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 54 line 1 blocks 135 135 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 55 line 1 blocks 138 138 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 56 line 1 blocks 141 141 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 57 line 1 blocks 143 143 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 58 line 1 blocks 146 146 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 59 line 1 blocks 148 148 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 60 line 1 blocks 151 151 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 61 line 1 blocks 154 154 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 62 line 1 blocks 156 156 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 63 line 1 blocks 159 159 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 64 line 1 blocks 161 161 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 65 line 1 blocks 164 164 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 66 line 1 blocks 167 167 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 67 line 1 blocks 169 169 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 68 line 1 blocks 172 172 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 69 line 1 blocks 174 174 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 70 line 1 blocks 177 177 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 71 line 1 blocks 179 179 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 72 line 1 blocks 182 182 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 73 line 1 blocks 185 185 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 74 line 1 blocks 187 187 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 75 line 1 blocks 190 190 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 76 line 1 blocks 192 192 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 77 line 1 blocks 195 195 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 78 line 1 blocks 198 198 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 79 line 1 blocks 200 200 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+== rocknroll
+variant 5 subsong 0
+start
+ 0 VOL 0
+ 0 DMA_OFF 0
+ 1 VOL 0
+ 1 DMA_OFF 0
+ 2 VOL 0
+ 2 DMA_OFF 0
+ 3 VOL 0
+ 3 DMA_OFF 0
+tick 0 line 0 blocks 0 0 0 0
+ 0 VOL 0
+ 1 VOL 0
+ 2 VOL 0
+ 3 VOL 0
+tick 1 line 0 blocks 0 0 0 0
+ 0 NOTE 1800F0
+ 1 NOTE 1801F0
+ 0 VOL 0
+ 1 VOL 0
+ 2 VOL 0
+ 3 VOL 0
+tick 2 line 0 blocks 0 0 0 0
+ 0 DMA_OFF 0
+ 0 LC 4
+ 0 LEN 20
+ 0 PER 1AC
+ 1 DMA_OFF 0
+ 1 LC 4
+ 1 LEN 20
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 3 line 0 blocks 3 3 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 30
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+ 0 DMA_ON 0
+ 1 DMA_ON 0
+tick 4 line 0 blocks 6 6 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 5 line 0 blocks 8 8 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 6 line 0 blocks 11 11 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 7 line 0 blocks 13 13 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 8 line 1 blocks 16 16 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 12
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 9 line 1 blocks 19 19 0 0
+ 0 VOL 10
+ 0 PER 1AC
+ 1 VOL 13
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 10 line 1 blocks 21 21 0 0
+ 0 VOL 11
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 11 line 1 blocks 24 24 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 12 line 1 blocks 26 26 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 13 line 1 blocks 29 29 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 14 line 1 blocks 32 32 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 15 line 1 blocks 34 34 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 16 line 1 blocks 37 37 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 17 line 1 blocks 39 39 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 18 line 1 blocks 42 42 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 19 line 1 blocks 45 45 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 20 line 1 blocks 47 47 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 21 line 1 blocks 50 50 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 22 line 1 blocks 52 52 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 23 line 1 blocks 55 55 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 24 line 1 blocks 58 58 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 25 line 1 blocks 60 60 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 26 line 1 blocks 63 63 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 27 line 1 blocks 65 65 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 28 line 1 blocks 68 68 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 29 line 1 blocks 71 71 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 30 line 1 blocks 73 73 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 31 line 1 blocks 76 76 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 32 line 1 blocks 78 78 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 33 line 1 blocks 81 81 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 34 line 1 blocks 84 84 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 35 line 1 blocks 86 86 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 36 line 1 blocks 89 89 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 37 line 1 blocks 91 91 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 38 line 1 blocks 94 94 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 39 line 1 blocks 96 96 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 40 line 1 blocks 99 99 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 41 line 1 blocks 102 102 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 42 line 1 blocks 104 104 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 43 line 1 blocks 107 107 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 44 line 1 blocks 109 109 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 45 line 1 blocks 112 112 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 46 line 1 blocks 115 115 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 47 line 1 blocks 117 117 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 48 line 1 blocks 120 120 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 49 line 1 blocks 122 122 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 50 line 1 blocks 125 125 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 51 line 1 blocks 128 128 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 52 line 1 blocks 130 130 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 53 line 1 blocks 133 133 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 54 line 1 blocks 135 135 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 55 line 1 blocks 138 138 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 56 line 1 blocks 141 141 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 57 line 1 blocks 143 143 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 58 line 1 blocks 146 146 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 59 line 1 blocks 148 148 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 60 line 1 blocks 151 151 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 61 line 1 blocks 154 154 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 62 line 1 blocks 156 156 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 63 line 1 blocks 159 159 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 64 line 1 blocks 161 161 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 65 line 1 blocks 164 164 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 66 line 1 blocks 167 167 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 67 line 1 blocks 169 169 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 68 line 1 blocks 172 172 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 69 line 1 blocks 174 174 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 70 line 1 blocks 177 177 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 71 line 1 blocks 179 179 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 72 line 1 blocks 182 182 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 73 line 1 blocks 185 185 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 74 line 1 blocks 187 187 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 75 line 1 blocks 190 190 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 76 line 1 blocks 192 192 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 77 line 1 blocks 195 195 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 78 line 1 blocks 198 198 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0
+tick 79 line 1 blocks 200 200 0 0
+ 0 VOL 30
+ 0 PER 1AC
+ 1 VOL 31
+ 1 PER 1AC
+ 2 VOL 0
+ 3 VOL 0

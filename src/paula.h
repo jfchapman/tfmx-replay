@@ -1,4 +1,4 @@
-// TFMXreplay: the Amiga's sound chip, Paula, as far as TFMX uses it (docs/TFMX-format.md, 5.4).
+// TFMXreplay: the Amiga's sound chip, Paula, as far as TFMX uses it (docs/TFMX-format.md, section 8).
 #pragma once
 
 #include <cstdint>

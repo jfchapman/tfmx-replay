@@ -11,7 +11,7 @@ namespace tfmx {
 
 namespace {
 
-// Â§5.5: four octaves, then the top octave again.
+// §9: four octaves, then the top octave again.
 const uint16_t kPeriods[64] = {
 	1710, 1614, 1524, 1438, 1357, 1281, 1209, 1141, 1077, 1017, 960, 908,
 	856, 810, 764, 720, 680, 642, 606, 571, 539, 509, 480, 454,
@@ -57,7 +57,7 @@ void Replayer::write(int voice, PaulaWrite::Reg reg, uint32_t value) {
 		break;
 	case PaulaWrite::DMA_ON:
 		// In 7V the replayer runs after the tick's mixing, so its DMA starts come when that's done:
-		// measured from recordings of eight songs, 2.4 ms + 0.08 ms per word of the block (§15.21).
+		// measured from recordings of eight songs, 2.4 ms + 0.08 ms per word of the block (§11.4).
 		paula_->dma_on(voice, seven_ ? 0.0024 + 0.00008 * (playing_words_ ? playing_words_ : mix_words()) : 0.0);
 		break;
 	case PaulaWrite::NOTE: break;
@@ -126,7 +126,7 @@ int Replayer::mix_period() const { return (3580 + mix_setting_ / 2) / mix_settin
 double Replayer::tick_seconds() const {
 	if (seven_) {
 		// The tick is one block of the mix buffer on voice 3, 4 CPU cycles per word and period unit.
-		// That's about 20.2 ms at x = 0 (§15.15).
+		// That's about 20.2 ms at x = 0 (§11.2).
 		return (playing_words_ ? playing_words_ : mix_words()) * mix_period() * 4 / 7093790.0;
 	}
 	if (bpm_ >= 16) {
@@ -140,7 +140,7 @@ double Replayer::tick_seconds() const {
 
 int Replayer::period_of(int note, int finetune) const {
 	const int base = kPeriods[note & 0x3F];
-	// Â§15 (periods.py): Pro-style builds scale, older builds add.
+	// §9: Pro-style builds scale, older builds add.
 	if (b_.scaled_effects)
 		return base * (256 + finetune) >> 8;
 	return base + finetune;
@@ -979,7 +979,7 @@ bool Replayer::exec(int n, const uint8_t *c) {
 			note_on(other, note, b1, vel, s8(uint32_t(b3)));
 		}
 		return false;
-	// SID (Â§15.10)
+	// SID (§12)
 	case 0x22:
 		v.sid_source = l123;
 		return false;
@@ -1032,7 +1032,7 @@ void Replayer::effects(int n) {
 	if (v.vib_speed) {
 		v.vib_offset += v.vib_delta;
 		// The counter starts at speed / 2 and turns the vibrato when it reaches exactly 0, so
-		// speed 1 (counter 0) never turns: the period keeps moving one way (vibspeed.py).
+		// speed 1 (counter 0) never turns: the period keeps moving one way.
 		if (--v.vib_counter == 0) {
 			v.vib_counter = v.vib_speed;
 			v.vib_delta = -v.vib_delta;
@@ -1107,7 +1107,7 @@ void Replayer::effects(int n) {
 }
 
 void Replayer::fade_step() {
-	// One step per voice per tick at speed 1 (Â§15.8).
+	// One step per voice per tick at speed 1 (§7.5).
 	if (!fading_)
 		return;
 	if (--fade_counter_ <= 0) {
@@ -1119,7 +1119,7 @@ void Replayer::fade_step() {
 }
 
 void Replayer::run_sid(int n) {
-	// Â§15.10: rebuild the voice's buffer from the source window, then advance the sweeps.
+	// §12: rebuild the voice's buffer from the source window, then advance the sweeps.
 	Voice &v = voice_[n];
 	std::vector<uint8_t> &s = m_->smpl;
 	const uint32_t out = 4 + 0x100u * unsigned(n);

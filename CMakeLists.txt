@@ -56,6 +56,13 @@ if(TFMX_BUILD_TOOLS)
 		set_property(TARGET tfmxrender tfmxtrace PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 		target_compile_definitions(tfmxrender PRIVATE _CRT_SECURE_NO_WARNINGS)
 	endif()
+	# The self-contained tests, for ctest. They need Python, so they're left out without it.
+	enable_testing()
+	find_package(Python3 COMPONENTS Interpreter QUIET)
+	if(Python3_Interpreter_FOUND)
+		add_test(NAME selftest COMMAND Python3::Interpreter ${CMAKE_CURRENT_SOURCE_DIR}/tests/selftest.py
+			--tool $<TARGET_FILE:tfmxtrace> --render $<TARGET_FILE:tfmxrender>)
+	endif()
 endif()
 
 include(GNUInstallDirs)

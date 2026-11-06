@@ -62,7 +62,7 @@ Behaviour behaviour_of(tfmx_variant variant, const Module &module) {
 		b.f7_time = true;
 		b.note_skips_effects = variant != TFMX_VARIANT_GEMX && variant != TFMX_VARIANT_TURRICAN2;
 		b.no_macro_vibrato = variant == TFMX_VARIANT_HEXUMA;
-		// Pattern FA works in some Pro builds and not others (§15.19), but no song written for one
+		// Pattern FA works in some Pro builds and not others (§14.5), but no song written for one
 		// that ignores it uses it, so it's on.
 		b.fa_fade = variant != TFMX_VARIANT_GEMX;
 		if (variant == TFMX_VARIANT_TURRICAN3_SMALL) {

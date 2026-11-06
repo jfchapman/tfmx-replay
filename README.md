@@ -6,6 +6,8 @@ and others also used, from 1989 to the mid-1990s.
 
 - Plain C API (`include/tfmxreplay.h`), static or shared library, no dependencies.
 - Builds with CMake or a plain Makefile; tested with MSVC (x64 and 32-bit).
+- Also builds for the web as WebAssembly (wasm). For an example web-based player, please visit
+  [modplayer](https://mods.chapzero.com).
 - Two-file songs (`mdat.*` + `smpl.*`) and single-file TFHD songs.
 - Subsongs, with lengths and loop points, seeking, and the song's text. Finds the main subsong and
   subsongs that repeat another's music, and tells songs that loop from ones that end in silence.
@@ -92,6 +94,18 @@ Run it without arguments for all the options. The smpl file is found from the md
 
 `tfmxtrace` prints the Paula register writes the replayer makes, tick by tick, for testing.
 
+## Tests
+
+`python tests/selftest.py` needs only Python and a build of the tools (`ctest` runs it too, after
+a CMake build). It builds tiny songs in memory, and checks the replayer's output on every variant
+against saved results in `tests/expected`, along with variant detection and a render through the
+public API. A failure means the behaviour has changed. If that was intended, check the difference
+and run it again with `--update`.
+
+The other scripts in `tests/` need a TFMX song collection, and `regress.py` and `check_song.py`
+also need traces of the original replayers, which can't be distributed as they come from the
+games themselves.
+
 ## Accuracy
 
 TFMX never had a specification, and every game shipped its own build of the replayer. The
@@ -141,8 +155,10 @@ Current state:
 - All 368 songs in the modland collection open (bar one 540-byte file with no playable
   subsong), and all but 7 of their 1,608 subsongs get a length.
 
+## AI Disclaimer
+
+This project uses AI development tools (Claude Code by Anthropic).
+
 ## Licence
 
-MIT: see [LICENSE](LICENSE). The format description in `docs/` was written from black-box
-measurements and from public descriptions, in its own words; no code from other TFMX players
-was used.
+MIT: see [LICENSE](LICENSE).

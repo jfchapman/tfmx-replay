@@ -1,4 +1,4 @@
-// TFMXreplay: the sequencer and macro engine (docs/TFMX-format.md, sections 3-8 and 15).
+// TFMXreplay: the sequencer and macro engine (docs/TFMX-format.md, sections 4-13).
 #pragma once
 
 #include <cstdint>

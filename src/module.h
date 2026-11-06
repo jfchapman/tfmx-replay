@@ -1,4 +1,4 @@
-// TFMXreplay: song file parsing (docs/TFMX-format.md, sections 1-4).
+// TFMXreplay: song file parsing (docs/TFMX-format.md, sections 2-5).
 #pragma once
 
 #include <cstddef>

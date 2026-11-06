@@ -3,12 +3,17 @@
 Usage: python regress.py <modland TFMX folder> [profile ...]
 Finds each song's mdat under the folder by name, runs check_song.py with the profile's variant,
 and prints one line per song. Micro test songs (not found under the folder) are skipped.
+
+The reference traces and captures come from the original replayers, which aren't distributed, so
+without them this has nothing to compare and says so. selftest.py needs none of that.
 """
 import glob
 import os
 import re
 import subprocess
 import sys
+
+from common import find_tool, usage
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 TRACES = os.path.join(HERE, '..', 'build', 'traces')
@@ -42,11 +47,12 @@ CAPTURES = [
     ('apidya-capture2.txt', '5C00', 'E000', '343F2', 'mdat.apidya (title)', 0, 'pro', '012'),
     ('apidya-capture3.txt', '5C00', 'E000', '343F2', 'mdat.apidya (title)', 0, 'pro', '012'),
 ]
-CAPTURE_DIR = os.path.join(HERE, '..', '..', 'tfmx-trace')
-TFMXTRACE = os.path.join(HERE, '..', 'build', 'x64', 'Release', 'tfmxtrace.exe')
+CAPTURE_DIR = os.environ.get('TFMX_TRACE', os.path.join(HERE, '..', '..', 'tfmx-trace'))
 
 
 def check_captures(songs):
+    tfmxtrace = find_tool('tfmxtrace', 'TFMX_TRACE_TOOL')
+    compared = 0
     for cap, pc0, pc1, smpl, name, sub, variant, voices in CAPTURES:
         path = os.path.join(CAPTURE_DIR, cap)
         mdat = songs.get(name.lower())
@@ -59,17 +65,21 @@ def check_captures(songs):
                            stdout=f, check=True)
         smpl_file = mdat.replace('mdat.', 'smpl.')
         with open(ours, 'w') as f:
-            subprocess.run([TFMXTRACE, mdat, smpl_file, str(sub), '3000', variant], stdout=f, check=True)
+            subprocess.run([tfmxtrace, mdat, smpl_file, str(sub), '3000', variant], stdout=f, check=True)
         r = subprocess.run([sys.executable, os.path.join(HERE, 'compare.py'), ref, ours, '--voices', voices,
                             '--search', '2500', '--show', '1'], capture_output=True, text=True)
         lines = r.stdout.strip().splitlines()
         print('%-12s %-36s %s  %s' % ('capture', cap, lines[0] if lines else '?',
                                      lines[1].strip() if len(lines) > 1 else ''))
+        compared += 1
+    return compared
 
 
 def main():
+    usage(__doc__, 1)
     root = sys.argv[1]
     only = set(sys.argv[2:])
+    compared = 0
     songs = {os.path.basename(p).lower(): p for p in glob.glob(os.path.join(root, '**', 'mdat.*'), recursive=True)}
     for ref in sorted(glob.glob(os.path.join(TRACES, '*.ref.txt'))):
         stem = os.path.basename(ref)[:-8]
@@ -92,8 +102,12 @@ def main():
         lines = (r.stdout + r.stderr).strip().splitlines()
         print('%-12s %-36s %s  %s' % (prof, name + ('' if sub == '0' else ' #' + sub), lines[0] if lines else '?',
                                      lines[1].strip() if len(lines) > 1 else ''))
+        compared += 1
     if not only or 'capture' in only:
-        check_captures(songs)
+        compared += check_captures(songs)
+    if not compared:
+        print('Skipped: nothing to compare. This needs reference traces or captures of the original '
+              'replayers, and the songs. selftest.py runs without them.')
 
 
 if __name__ == '__main__':

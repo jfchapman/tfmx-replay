@@ -10,12 +10,13 @@ import subprocess
 import sys
 import time
 
-HERE = os.path.dirname(os.path.abspath(__file__))
+from common import find_tool, usage
 
 
 def main():
+    usage(__doc__, 1)
     root = sys.argv[1]
-    tool = sys.argv[2] if len(sys.argv) > 2 else os.path.join(HERE, '..', 'build', 'x64', 'Release', 'tfmxrender.exe')
+    tool = sys.argv[2] if len(sys.argv) > 2 else find_tool('tfmxrender')
     songs = sorted(p for p in glob.glob(os.path.join(root, '**', '*'), recursive=True)
                    if os.path.basename(p).lower().startswith('mdat.') or p.lower().endswith('.mdat'))
     stats = collections.Counter()

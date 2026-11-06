@@ -1,4 +1,4 @@
-// TFMXreplay: replayer behaviour switches (docs/TFMX-format.md, sections 15.2-15.9).
+// TFMXreplay: replayer behaviour switches (docs/TFMX-format.md, section 14).
 #pragma once
 
 #include "module.h"

@@ -3,17 +3,19 @@
 Usage: python check_song.py <profile> <mdat> [song number] [ticks] [--variant V] [--voices 0123]
 
 Needs the trace harness (TFMX_TRACE, default ../../tfmx-trace), which runs the game's own
-replayer from a WinUAE savestate, and a build of tfmxtrace (TFMX_TRACE_TOOL, default
-../build/x64/Release/tfmxtrace.exe). The smpl file is found from the mdat's name.
+replayer from a WinUAE savestate. It isn't distributed, as the savestates hold the games. Also
+needs a build of tfmxtrace (TFMX_TRACE_TOOL, otherwise the usual build folders). The smpl file is
+found from the mdat's name.
 """
 import argparse
 import os
 import subprocess
 import sys
 
+from common import find_tool
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 HARNESS = os.environ.get('TFMX_TRACE', os.path.join(HERE, '..', '..', 'tfmx-trace'))
-TOOL = os.environ.get('TFMX_TRACE_TOOL', os.path.join(HERE, '..', 'build', 'x64', 'Release', 'tfmxtrace.exe'))
 OUT = os.path.join(HERE, '..', 'build', 'traces')
 
 
@@ -37,6 +39,9 @@ def main():
     ap.add_argument('--show', type=int, default=12)
     ap.add_argument('--ignore', default='')
     args = ap.parse_args()
+    if not os.path.isdir(HARNESS):
+        raise SystemExit('Skipped: the trace harness was not found at ' + os.path.normpath(HARNESS))
+    tool = find_tool('tfmxtrace', 'TFMX_TRACE_TOOL')
     args.mdat = os.path.abspath(args.mdat)
     smpl = smpl_of(args.mdat)
     os.makedirs(OUT, exist_ok=True)
@@ -56,7 +61,7 @@ def main():
             os.remove(ref)
             raise
     with open(ours, 'w') as f:
-        cmd = [TOOL, args.mdat, smpl, str(args.song), str(args.ticks)] + ([args.variant] if args.variant else [])
+        cmd = [tool, args.mdat, smpl, str(args.song), str(args.ticks)] + ([args.variant] if args.variant else [])
         subprocess.run(cmd, stdout=f, check=True)
     subprocess.run([sys.executable, os.path.join(HERE, 'compare.py'), ref, ours, '--voices', args.voices,
                     '--show', str(args.show), '--ignore', args.ignore], check=True)

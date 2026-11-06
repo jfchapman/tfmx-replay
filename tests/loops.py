@@ -17,7 +17,8 @@ import sys
 import tempfile
 import wave
 
-HERE = os.path.dirname(os.path.abspath(__file__))
+from common import find_tool, usage
+
 RATE = 11025
 SKIP = 1         # seconds to skip after the loop point, where old notes still ring
 SECONDS = 3      # how much to compare
@@ -71,8 +72,9 @@ def one(args):
 
 
 def main():
+    usage(__doc__, 1)
     root = sys.argv[1]
-    tool = sys.argv[2] if len(sys.argv) > 2 else os.path.join(HERE, '..', 'build', 'x64', 'Release', 'tfmxrender.exe')
+    tool = sys.argv[2] if len(sys.argv) > 2 else find_tool('tfmxrender')
     songs = sorted(glob.glob(os.path.join(glob.escape(root), '**', 'mdat.*'), recursive=True))
     with concurrent.futures.ThreadPoolExecutor(max_workers=os.cpu_count()) as pool:
         results = [x for r in pool.map(one, [(tool, s) for s in songs]) for x in r]
