@@ -440,6 +440,13 @@ const char *tfmx_variant_name(tfmx_variant v) {
 
 int tfmx_voice_count(const tfmx_module *m) { return m ? m->replayer.voices() : 0; }
 
+int tfmx_set_voice_mask(tfmx_module *m, unsigned mask) {
+	if (!m)
+		return -1;
+	m->paula.set_voice_mask(mask & 0xFF);
+	return 0;
+}
+
 int tfmx_select_subsong(tfmx_module *m, int index) {
 	if (!m || index < 0 || index >= tfmx_subsong_count(m))
 		return -1;

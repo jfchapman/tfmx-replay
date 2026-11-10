@@ -32,6 +32,7 @@ static void usage(void) {
 	        "  -m <us>       volume ramping in microseconds, 0 = off (default 2000)\n"
 	        "  -v <variant>  pro, 1.5, masterblazer, xout, rocknroll, gemx, turrican2, t3small, hexuma, logical (default: detect)\n"
 	        "  -x <setting>  7V mixer setting, 8-22 (default: the song's game, or 18)\n"
+	        "  -V <voices>   hear only these voices, e.g. 03 (default: all; 7V songs mix 4-7 onto 3)\n"
 	        "  -n            print the song's information only\n"
 	        "\n"
 	        "If the smpl file isn't given, it's found from the mdat name: mdat.<name> -> smpl.<name>,\n"
@@ -180,6 +181,8 @@ int main(int argc, char **argv) {
 	tfmx_settings settings;
 	const char *out = NULL, *mdat_path = NULL, *smpl_path = NULL;
 	int subsong = 0, all = 0, info = 0, i, result = 0;
+	unsigned voice_mask = 0xFF;
+	const char *c;
 	void *mdat, *smpl = NULL;
 	size_t mdat_size, smpl_size = 0;
 	char *derived = NULL;
@@ -205,7 +208,7 @@ int main(int argc, char **argv) {
 			settings.led_filter = 1;
 		} else if (!strcmp(a, "-d")) {
 			subsong = -1;
-		} else if (value && strchr("osrlipmvfFx", a[1]) && !a[2]) {
+		} else if (value && strchr("osrlipmvfFxV", a[1]) && !a[2]) {
 			i++;
 			switch (a[1]) {
 			case 'o': out = value; break;
@@ -216,6 +219,12 @@ int main(int argc, char **argv) {
 			case 'x': settings.mix_setting = atoi(value); break;
 			case 'p': settings.stereo_separation = atoi(value); break;
 			case 'm': settings.volume_ramping = atoi(value); break;
+			case 'V':
+				voice_mask = 0;
+				for (c = value; *c; c++)
+					if (*c >= '0' && *c <= '7')
+						voice_mask |= 1u << (*c - '0');
+				break;
 			case 'i':
 				settings.interpolation = !strcmp(value, "none")     ? TFMX_INTERPOLATION_NONE
 				                         : !strcmp(value, "linear") ? TFMX_INTERPOLATION_LINEAR
@@ -277,6 +286,8 @@ int main(int argc, char **argv) {
 		fprintf(stderr, "%s: %s\n", mdat_path, tfmx_error_string(error));
 		return 1;
 	}
+
+	tfmx_set_voice_mask(module, voice_mask);
 
 	if (info) {
 		const char *text = tfmx_text(module);

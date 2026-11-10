@@ -185,7 +185,7 @@ void Paula::mix_block(int bytes, int period, int mixed, int silence) {
 		// DMA off doesn't silence a voice: the mixer stops stepping, and holds the sample it was on.
 		const uint32_t step =
 		    c.mix_held ? 0 : uint32_t(period) * (1u << kMixFraction) / uint32_t(std::max(c.mix_per, 1));
-		const int volume = std::min(c.mix_vol, 63);  // a table of 64 volumes
+		const int volume = heard(n) ? std::min(c.mix_vol, 63) : 0;  // a table of 64 volumes
 		for (int i = 0; i < mixed; i++) {
 			const uint32_t addr = c.mix_lc + (c.mix_pos >> kMixFraction);
 			if (smpl_ && addr < smpl_->size())
@@ -277,7 +277,7 @@ void Paula::render(float *out, int frames) {
 				} else {
 					c.ramp_vol = target;
 				}
-				if (c.ramp_vol > 0)
+				if (c.ramp_vol > 0 && heard(n))
 					side[s] += voice_sample(c) * c.ramp_vol / 64.0f;
 				step(c, kPaulaClock / std::max<int>(c.per, kMinPeriod) / rate_);
 				if (pass && c.ramp_vol <= 0)

@@ -77,6 +77,8 @@ The header documents every function. Points worth knowing:
 - `tfmx_subsong_duration` runs the song quickly without mixing (a few milliseconds).
 - Subsong indexes are 0 to `tfmx_subsong_count() - 1`; `tfmx_subsong_number` gives the song's
   own number (0-31) for display.
+- `tfmx_set_voice_mask` mutes voices in the output (for a player's channel mutes, or for testing)
+  without changing how the song plays.
 
 ## Tools
 
@@ -101,6 +103,19 @@ a CMake build). It builds tiny songs in memory, and checks the replayer's output
 against saved results in `tests/expected`, along with variant detection and a render through the
 public API. A failure means the behaviour has changed. If that was intended, check the difference
 and run it again with `--update`.
+
+After a change to the library, `python tests/everysong.py <song folder> <old tfmxrender>` renders
+every subsong in a collection with a build from before the change and with the current one, and
+lists the subsongs that sound different, with the size of each difference. It shows which songs a
+change reaches, not whether the new output is right.
+
+`tests/wav/` has tools for comparing renders with recordings from an emulator, run with Node.js
+(no packages needed). `locate.js` finds a song in a recording and measures how well a render
+fits it, `voicefit.js` fits each voice separately (from `tfmxrender -V` renders) to compare two
+builds against a recording, `transfer.js` shows the match by frequency, `cut.js` copies and filters
+stretches of WAV files, and `splice.js` makes a blind listening test: random stretches of two or
+more versions joined into one file, with an answer key. Each prints its usage when run without
+arguments. Section 16.2 of [the format document](docs/TFMX-format.md) describes the method.
 
 The other scripts in `tests/` need a TFMX song collection, and `regress.py` and `check_song.py`
 also need traces of the original replayers, which can't be distributed as they come from the

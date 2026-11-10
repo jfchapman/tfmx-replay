@@ -321,6 +321,26 @@ def check_render(render, folder):
     return None
 
 
+def check_voice_mask(render, folder):
+    """tfmxrender -V (tfmx_set_voice_mask): the test song plays on voice 0 only, so hearing voice 0
+    gives the full render, and hearing the others gives silence of the same length."""
+    mdat, _ = song_end()
+    paths = write_song(folder, 'mask', mdat)
+    out = {}
+    for name, voices in (('all', None), ('0', '0'), ('others', '123')):
+        wav = os.path.join(folder, 'mask-%s.wav' % name)
+        run(render, *(['-V', voices] if voices else []), '-o', wav, paths[0])
+        with open(wav, 'rb') as f:
+            out[name] = f.read()
+    if out['0'] != out['all']:
+        return 'voice 0 alone differs from the full render'
+    if len(out['others']) != len(out['all']):
+        return 'muting changed the length'
+    if any(out['others'][44:]):
+        return 'muted voices are still heard'
+    return None
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('--tool', help='path of tfmxtrace')
@@ -336,6 +356,7 @@ def main():
         if not args.only:
             checks.append(('detection', lambda: check_detection_expected(tool, folder, args.update)))
             checks.append(('render', lambda: None if args.update else check_render(render, folder)))
+            checks.append(('voice mask', lambda: None if args.update else check_voice_mask(render, folder)))
         for name, check in checks:
             result = check()
             if result is None:

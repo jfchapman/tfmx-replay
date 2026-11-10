@@ -369,6 +369,20 @@ Replayers read INTREQR every tick and clear each voice's audio interrupt as part
 ### 8.4 The output filter
 Bit 1 of CIA-A's port controls the Amiga's LED filter. Every replayer build examined sets the bit, which turns the filter off, and none has code that clears it. The format has no command for it, so a TFMX song can't turn the filter on. *GemX*'s title has a bit-toggle in the game's own code, outside the replayer. The fixed low-pass filter in the machine's output is always there.
 
+### 8.5 After DMA off
+**On the hardware,** a voice whose DMA is switched off isn't silenced. Paula stops fetching sample words, but the voice's DAC keeps the last byte it was given, so the voice outputs a constant level, at its current volume, until its volume changes or DMA starts it again. The waveform stops, so nothing is heard while the level holds, but the voices' held levels add up to a DC offset on each output. The 7V mixer behaves the same way (§11.3). On an Amiga the output capacitors drain the offset over about a second. In a WinUAE recording with its filter off it stays.
+
+**TFMXreplay** silences a hardware voice at DMA off (holding applies only to the 7V mixer). The difference shows in three places:
+- **At DMA off,** the hardware level stays where it was, where TFMXreplay drops to 0.
+- **At the next start,** the hardware steps from the held level to the new sample's first byte, where TFMXreplay steps from 0.
+- **On a volume change while held,** the hardware level steps, and TFMXreplay has nothing to change.
+
+So TFMXreplay's steps fall at different moments and have different sizes, and its output has no DC offset. The volume ramping setting softens its step at DMA off.
+
+**Measured.** A version that holds the last byte was compared with WinUAE recordings of ten songs from three games, with each voice fitted on its own (§16.2). Of the 20 sides, it matched better on 13, about the same on 6, and worse on one: *Rock'n'Roll*'s *take off song*, right side, −11.7 dB against −10.3 dB without the hold. It also changes most of the collection: 1,230 of the 1,608 subsongs, by more than −20 dB above 30 Hz in 412 of them. Which byte is held depends on exactly when DMA off lands within the sample, so the time of the write inside the tick matters. That probably explains the one worse side, since *Rock'n'Roll*'s replayer switches each voice on and off at its own point in the tick (§16.2).
+
+**What it means for listening.** In a blind test, a WinUAE recording of *lovely feelings*, TFMXreplay's render without the hold and its render with it were spliced together in random stretches of 3–9 seconds, with crossfades at the joins. No change of source could be heard, though the left side's DC steps showed in a waveform view. The difference is a measurable one, not an audible one, and the hold has been left out for now: holding would change nearly every song for no audible gain, and the one side where it does worse is unexplained.
+
 ---
 
 ## 9. Periods
@@ -714,7 +728,33 @@ Three other references check the first:
 
 The replayers were run, not disassembled. The exceptions are automated searches of memory images for jump tables and for writes to particular hardware registers. The savestates hold the games themselves, so they and the test rig aren't distributed, and the comparisons with the originals can't be rerun without them. `tests/selftest.py` guards the same behaviour without them, using small test songs and saved output from a verified build.
 
-### 16.2 Results
+### 16.2 What each reference can see
+The sound passes through three stages, and each reference sees a different part of it:
+
+1. **The replayer.** The game's 68000 code reads the song and writes Paula's registers every tick: LC, LEN, PER, VOL, and DMA on and off through DMACON.
+2. **Paula.** Between writes it fetches sample words from chip RAM by itself, steps through them at the period, reloads LC and LEN when a block ends, and raises the voice's audio interrupt.
+3. **The output.** On an Amiga, Paula's DACs, the analogue filter and the output capacitors. In WinUAE, the emulator's conversion of its output to the recording's sample rate.
+
+| | Replayer logic | Game code outside the replayer | Time of a write within the tick | What Paula does with the writes | Output stage |
+|---|---|---|---|---|---|
+| Harness (savestate replayer) | Yes, exactly | No | No | No (its interrupts are modelled) | No |
+| WinUAE memwatch capture | Yes, exactly | Yes, by the writing PC | Order only | Only through the real audio interrupts | No |
+| WinUAE recording | Indirectly | Indirectly | Yes | Yes | WinUAE's, not the hardware's |
+
+- **The harness** runs only the replayer, with one interrupt per tick, and logs its writes per tick. A match there means TFMXreplay sends Paula exactly what the original does. It says nothing about the sound, because it doesn't run Paula: what follows a write is only known from recordings.
+- **A memwatch capture** logs the writes of the running game: register, value and the PC that wrote it. It adds whatever the game itself writes, and audio interrupts from WinUAE's Paula rather than a model of it. It carries no beam position, so it shows the order of the writes but not their exact times.
+- **A recording** is the only reference for Paula's own behaviour, for example when new LC and LEN take effect, the delay before a new sample starts, the shortest period, and what a voice outputs after DMA off. It's also the only one that sees the timing of writes within a tick. But it is indirect: a difference shows that something differs, not why, and WinUAE's output stage adds its own differences, which an Amiga doesn't have.
+
+**Comparing with a recording.** A plain subtraction of TFMXreplay's output from a recording leaves a large residual, which can sound like a lot when played back, even when the two sound alike. As with comparing a WAV and an MP3 of it, most of it is inaudible. In the *Rock'n'Roll* recordings, three things that can't be heard made up nearly all of it:
+- **A DC offset.** After DMA off a voice keeps outputting its last sample, so idle voices leave a constant level on the output (+0.051 on the left through *lovely feelings*), which TFMXreplay, at 0, doesn't have.
+- **Per-voice timing.** The game writes the voices in turn, about 0.12 ms apart, where TFMXreplay writes all four at once. A fit that gives a side one time offset breaks down wherever its two voices play together.
+- **Detail above about 6 kHz.** With no interpolation, the two emulators' sample steps fall differently at 48 kHz, so above about 6 kHz the outputs no longer line up.
+
+Taking those out (a 20 Hz high-pass, a 5 kHz low-pass, and each voice rendered on its own with `tfmxrender -V` and fitted with its own time offset by `tests/wav/voicefit.js`) leaves gains of 0.98–1.00 and residuals of −12 to −16 dB, except *lovely feelings*' right side at −7.6 dB, not yet explained. Between 20 Hz and 6 kHz, *lovely feelings*' left side matches within 0.1 dB.
+
+**Changes and regressions.** `tests/everysong.py` renders every subsong of a collection with two builds of `tfmxrender` and lists the ones that differ, and by how much. It shows which songs a change reaches, not whether the new output is right. That still needs the references above. Whether a difference can be heard is a separate question: `tests/wav/splice.js` joins random stretches of two or more versions into one file for a blind listening test (§8.5 has an example).
+
+### 16.3 Results
 Hardware-voice comparisons cover every register of every tick, over 1,500 ticks (30 seconds) of each song unless noted. In 7V they cover voices 0–2.
 
 | Build or games | Result |
@@ -722,7 +762,7 @@ Hardware-voice comparisons cover every register of every tick, over 1,500 ticks 
 | *Apidya*, 4-voice | All seven songs exact |
 | *Turrican 1*, both builds | All 14 songs exact, including BPM subsongs |
 | *X-Out* family | All 17 songs exact |
-| *Rock'n'Roll* | All 10 songs exact |
+| *Rock'n'Roll* | All 10 songs exact. A WinUAE capture of *lovely feelings* in the game: 458 of 458 ticks, and every Paula write comes from the replayer |
 | *Masterblazer* | Loader, intro, title and *Z-Out* title exact. *museum* and *lucasarts* differ only in a start-up volume left over from the game. *race* is exact on voices 0–1, and voices 2–3 use 1B |
 | *GemX* | All 8 subsongs exact |
 | *Monkey Island* | 22 subsongs exact apart from start-up leftovers, except that in three of them a 1A wait ends a tick early now and then |
@@ -772,6 +812,7 @@ The *Apidya* end music's percussion is one 29,504-word sample at period 158, res
 - *Turrican 3*'s small build, *level 1:* differs on voice 3 from tick 642, probably state left over from the loading music.
 - In the 7V mixer, two notes reaching voice 4 a tick apart: the original briefly starts the first.
 - *Turrican 2*'s title mix: 3 ticks are a 1F with no previous note, which reads a period from outside the table, so only that build's memory can answer.
+- Hardware voices are silenced at DMA off, where the hardware holds the last byte as a DC level (§8.5). The difference can't be heard. A hold model fits recordings better on most songs, but not *Rock'n'Roll*'s *take off song*.
 - Hardware write time in 7V is a fitted average (§11.4). The real time varies a little with how much the mixer has to do.
 
 **Unknown or unmeasured.**

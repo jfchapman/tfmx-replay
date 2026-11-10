@@ -238,6 +238,15 @@ TFMX_API double tfmx_song_position(const tfmx_module *module);
  */
 TFMX_API int tfmx_set_settings(tfmx_module *module, const tfmx_settings *settings);
 
+/*
+ * Chooses which voices are heard, one bit per voice: bit n is voice n, and 0xFF (the default) is
+ * all of them. Bits 0-3 are the hardware voices. In a 7-voice song, voices 4-7 are mixed onto
+ * hardware voice 3 and bit 3 does nothing. Muted voices keep playing, so the song itself doesn't change; they're
+ * only left out of the output. Takes effect at once and lasts until it's changed, across subsongs.
+ * Lengths, gains and other analysis ignore it. Returns 0 on success.
+ */
+TFMX_API int tfmx_set_voice_mask(tfmx_module *module, unsigned mask);
+
 #ifdef __cplusplus
 }
 #endif

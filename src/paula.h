@@ -65,6 +65,11 @@ public:
 	// Mixes 'frames' stereo frames, added into out (left, right interleaved).
 	void render(float *out, int frames);
 
+	// Which voices are heard: bit n for channel n (in 7V, bits 4-7 are the mixed voices, and bit 3 does
+	// nothing). Muted voices still play, so the song runs exactly as before; they're only left out of the
+	// output. Kept across reset().
+	void set_voice_mask(unsigned mask) { mask_ = mask; }
+
 	// 7V: hardware voice 3 plays a software mix of voices 4-7 instead.
 	void set_7v(bool on) { seven_ = on; }
 
@@ -99,6 +104,8 @@ private:
 	float ramp_step_ = 0;  // volume units per output frame, 0 = no ramping
 	float sep_ = 1.0f;
 	float gain_ = 1.0f;
+	unsigned mask_ = 0xFF;
+	bool heard(size_t n) const { return (mask_ >> n) & 1; }
 	bool seven_ = false;
 
 	// The 7V mix: the block before, the block playing, the next, and the position in the middle one.
