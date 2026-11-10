@@ -30,7 +30,7 @@ static void usage(void) {
 	        "  -L            turn on the LED filter\n"
 	        "  -p <percent>  stereo separation, 0-100 (default 100)\n"
 	        "  -m <us>       volume ramping in microseconds, 0 = off (default 2000)\n"
-	        "  -v <variant>  pro, 1.5, masterblazer, xout, rocknroll, gemx, turrican2, t3small, hexuma (default: detect)\n"
+	        "  -v <variant>  pro, 1.5, masterblazer, xout, rocknroll, gemx, turrican2, t3small, hexuma, logical (default: detect)\n"
 	        "  -x <setting>  7V mixer setting, 8-22 (default: the song's game, or 18)\n"
 	        "  -n            print the song's information only\n"
 	        "\n"
@@ -236,6 +236,7 @@ int main(int argc, char **argv) {
 				                   : !strcmp(value, "turrican2")    ? TFMX_VARIANT_TURRICAN2
 				                   : !strcmp(value, "t3small")      ? TFMX_VARIANT_TURRICAN3_SMALL
 				                   : !strcmp(value, "hexuma")       ? TFMX_VARIANT_HEXUMA
+				                   : !strcmp(value, "logical")      ? TFMX_VARIANT_LOGICAL
 				                                                    : TFMX_VARIANT_AUTO;
 				break;
 			}

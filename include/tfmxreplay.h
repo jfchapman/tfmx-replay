@@ -102,8 +102,10 @@ typedef enum tfmx_variant {
 	TFMX_VARIANT_TURRICAN3_SMALL, /* Turrican 3's small 4-voice build (its loading music): Pro
 	                                 without the AddBegin sweep, 06/15/16, 1C/1D and FC. The game's
 	                                 other builds (7V and in-game) are plain Pro. Known songs */
-	TFMX_VARIANT_HEXUMA         /* Hexuma's in-game build: Pro, but macro vibrato (0C) does
+	TFMX_VARIANT_HEXUMA,        /* Hexuma's in-game build: Pro, but macro vibrato (0C) does
 	                                 nothing. Known songs */
+	TFMX_VARIANT_LOGICAL        /* Logical's build: GemX-like, but with pattern fade (FA) and
+	                                 track mute (header words 0x1C0-0x1CF). Known songs */
 } tfmx_variant;
 
 typedef struct tfmx_settings {

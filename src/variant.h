@@ -51,6 +51,8 @@ struct Behaviour {
 	bool no_macro_jumps;      // 06, 15 and 16 are ignored (Turrican 3's small build)
 	bool no_lock;             // pattern FC is ignored (Turrican 3's small build)
 	bool no_macro_vibrato;    // macro 0C is ignored on hardware voices (Hexuma)
+	bool track_mute;          // a non-zero header word at 0x1C0 + 2t mutes track t: it runs, but
+	                          // starts no notes (Logical, B.C. Kid, Masterblazer)
 };
 
 Behaviour behaviour_of(tfmx_variant variant, const Module &module);

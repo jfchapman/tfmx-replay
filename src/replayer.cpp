@@ -335,6 +335,9 @@ bool Replayer::run_track(int t) {
 		tr.wait--;
 		return false;
 	}
+	// A muted track (header word 0x1C0 + 2t, re-read every row) runs as usual, but skips the note
+	// start for its notes and porta notes; their waits still count.
+	const bool muted = b_.track_mute && m_->word_at(0x1C0 + 2u * unsigned(t)) != 0;
 	for (int guard = 0; guard < 256; guard++) {
 		const uint32_t at = tr.pattern + 4 * tr.step;
 		if (at + 4 > m_->mdat.size()) {
@@ -349,7 +352,8 @@ bool Replayer::run_track(int t) {
 		if (b0 < 0xC0) {
 			// Note: 00-7F then fetch on; 80-BF then wait b3 rows.
 			const int note = ((b0 & 0x3F) + tr.transpose) & 0x3F;
-			note_on(b2 & 0x0F, note, b1, b2 >> 4, b0 < 0x80 ? s8(uint32_t(b3)) : 0);
+			if (!muted)
+				note_on(b2 & 0x0F, note, b1, b2 >> 4, b0 < 0x80 ? s8(uint32_t(b3)) : 0);
 			if (b0 >= 0x80) {
 				tr.wait = b3;
 				return false;
@@ -360,7 +364,9 @@ bool Replayer::run_track(int t) {
 			// Portamento to a note: b1 = speed, b3 = rate. Doesn't restart the macro.
 			const int n = voice;
 			const int note = ((b0 & 0x3F) + tr.transpose) & 0x3F;
-			if (after_update(n)) {
+			if (muted) {
+				// A muted track's porta note does nothing.
+			} else if (after_update(n)) {
 				// The voice was already updated this tick: it applies at the next update.
 				Voice &v = voice_[n];
 				v.queued_porta = true;

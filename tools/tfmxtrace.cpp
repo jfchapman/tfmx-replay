@@ -47,6 +47,7 @@ int main(int argc, char **argv) {
 		          : !strcmp(v, "turrican2")    ? TFMX_VARIANT_TURRICAN2
 		          : !strcmp(v, "t3small")      ? TFMX_VARIANT_TURRICAN3_SMALL
 		          : !strcmp(v, "hexuma")       ? TFMX_VARIANT_HEXUMA
+		          : !strcmp(v, "logical")      ? TFMX_VARIANT_LOGICAL
 		                                       : TFMX_VARIANT_AUTO;
 	}
 	const bool show_mix = argc > 6 && !strcmp(argv[6], "mix");

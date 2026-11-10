@@ -78,7 +78,7 @@ The header occupies 0x000–0x1FF.
 | 0x100 | 32 words | Subsong start positions (trackstep line numbers) |
 | 0x140 | 32 words | Subsong end positions |
 | 0x180 | 32 words | Subsong tempo (§10.2) |
-| 0x1C0 | 8 words | Unknown. Non-zero in 7 files, and no replayer behaviour is known to use them |
+| 0x1C0 | 8 words | Track mute, one word per track, in some builds (§4.4). Non-zero in 7 files |
 | 0x1D0 | long | File offset of the trackstep |
 | 0x1D4 | long | File offset of the pattern pointer table |
 | 0x1D8 | long | File offset of the macro pointer table |
@@ -142,6 +142,24 @@ One file named "(4ch)" uses 0003 with bit 15 set, which leaves it in 4-voice mod
 When **any** track's pattern reaches *End* (F0, §5.3), the whole trackstep advances one position. After the subsong's end position it wraps to the subsong's start. The new line is loaded straight away, and **every track is processed again in the same tick**, including tracks that keep their pattern (0x80) and were already processed, so their waits count down twice.
 
 In practice one "master" track ends each pattern with F0, and the others end with *Stop* (F4). F4 is used 18,862 times and F0 24,977 times.
+
+### 4.4 Track mute
+In the builds that have it, a non-zero header word at 0x1C0 + 2 × *track* mutes that track. The replayer reads the word again at every row, so a game can mute and unmute a track while the song plays. A muted track runs as usual (its pattern, waits, commands and transpose all go on), but its notes and portamento notes don't start a macro. Voices that are already sounding carry on.
+
+Each build was tested by playing one song with and without its words through that build's own replayer.
+
+| | Builds |
+|---|---|
+| Honour the words | Rudolf Stember's 4-voice builds (*Logical*, *B.C. Kid*, *Bifi 2*, *Software Manager*), *Masterblazer*'s loader and level select, *Rock'n'Roll* |
+| Ignore them | *Turrican 1* (both), *Turrican 2* (both), *Turrican 3* (all three), *Apidya* (both), *GemX*, *Hexuma* (both), *Monkey Island*, *Mega-lo-Mania* (both), *Carl Lewis Challenge*, *Blade of Destiny*, *B.C. Kid*'s 7V build, *Z-Out* (both), *X-Out*, *Fly Harder*, *Abandoned Places* |
+| Untested | *Masterblazer*'s title build, *Bundesliga Manager*, *Anstoss* |
+
+Among the Pro-era builds, only Stember's 4-voice ones have it. TFMXreplay honours the words in its Pro, *Logical*, *Masterblazer* and *Rock'n'Roll* variants. No modland song in the Pro-era builds that ignore them sets any word (apart from the two below), so this changes no song.
+
+Only 7 modland files set any word:
+- *logical-levelmusic1* to *4* mute track 7, and play that way in the game.
+- *softwaremanager-titel2* and *bifi2-ongame* set words that their games' own copies don't have. *Software Manager*'s title song in memory has all eight words at 0, starts 7.7 s earlier and is otherwise the same music. A recording of the game matches it, and not the muted file. TFMXreplay ignores the words in these two files (by checksum). *bifi2-ongame* hasn't been checked against its game.
+- *circus attractions-title* is an *X-Out* song, so the word is ignored.
 
 ---
 
@@ -570,7 +588,7 @@ More detail on the tracks-first and volume-late builds:
 ### 14.3 Choosing a build for a song
 Nothing in a song says which build it was written for, except that a TFHD header gives a rough variant. TFMXreplay decides in this order:
 
-1. A table of mdat checksums, for songs that can't be told from their contents, each checked on its own game's replayer: *Turrican 2*'s songs, the *Turrican 3* loader, *Hexuma*'s songs, *Masterblazer*'s intro, *Z-Out*'s songs (they look like 1.5 but play on *Masterblazer*'s rules), *Rock'n'Roll*'s intro and *Turrican*'s bonus song.
+1. A table of mdat checksums, for songs that can't be told from their contents, each checked on its own game's replayer: *Turrican 2*'s songs, the *Turrican 3* loader, *Hexuma*'s songs, *Masterblazer*'s intro, *Z-Out*'s songs (they look like 1.5 but play on *Masterblazer*'s rules), *Rock'n'Roll*'s intro, *Turrican*'s bonus song and *Logical*'s six songs (a *GemX*-generation build with FA and track mute). A second checksum list turns track mute off for two files (§4.4).
 2. `"TFMX "` magic: *Rock'n'Roll*.
 3. `"tfmxsong"` magic: *Masterblazer*.
 4. 7V: Pro.
@@ -588,6 +606,9 @@ These are the probe results for every build profiled. Short test songs were run 
 | *Apidya*, 7V | M>P | 1 | 0 | +1 | cont | end | end | end | cont | end | cont | 3 / inf | 3 / inf | 3 | 0 |
 | *Apidya*, 4-voice | M>P | 1 | 0 | +1 | cont | end | end | end | cont | end | cont | 3 / inf | 3 / inf | 3 | 0 |
 | *B.C. Kid*, *Blade of Destiny* | M>P | 1 | 0 | +1 | cont | end | end | end | cont | end | cont | 3 / inf | 3 / inf | 3 | 0 |
+| *Software Manager* | M>P | 1 | 0 | +1 | cont | end | end | end | cont | end | cont | 3 / inf | 3 / inf | 3 | 0 |
+| *Bifi 2* | M>P | 1 | 0 | +1 | cont | end | end | end | cont | end | cont | 3 / 10 | 3 / inf | 3 | −3 |
+| *Logical* | M>P | 1 | 1 | +1 | cont | end | end | end | cont | end | cont | 3 / inf | 3 / inf | 3 | 0 |
 | *Turrican 2* small | M>P | 1 | 1 | +1 | cont | end | end | end | cont | end | cont | 3 / inf | 3 / inf | 3 | 0 |
 | *GemX* | M>P | 1 | 1 | same | cont | end | end | end | cont | end | cont | 3 / inf | 3 / inf | 3 | 0 |
 | *Monkey Island* | M>P | 1 | 1 | same | cont | end | end | end | cont | end | cont | 3 / inf | 3 / inf | 3 | 0 |
@@ -757,7 +778,9 @@ The *Apidya* end music's percussion is one 29,504-word sample at period 158, res
 - FC in the older builds, because the probe's notes come too close together for them.
 - 1A in the builds other than *Apidya*, where the test rig can't show it, and in T3 small.
 - *Masterblazer* title build's BPM row timing.
-- The header words at 0x1C0, and TFHD byte 0x09.
+- TFHD byte 0x09.
+- *bifi2-ongame*'s mute word, until the song is caught playing in its game (§4.4).
+- *Bifi 2*'s build plays a macro loop with count 0 ten times, where the other Pro-era builds loop forever, and its key-up comes 3 ticks earlier (§14.4). Not looked at further, and not modelled.
 - The ends of *X-Out* family songs with BPM tempos (§13).
 
 ---
