@@ -37,6 +37,10 @@ struct Behaviour {
 	bool split_jumps;         // 1C/1D jump if note/volume > b1 (otherwise ignored)
 	bool play_macro;          // 21 works
 	bool sid;                 // 22-29 work
+	bool sid_filter_carry;    // the SID slew filter keeps its value from tick to tick (Pro builds);
+	                          // otherwise it restarts every tick
+	bool sid_effects_gate;    // a SID buffer is rebuilt only in ticks where the voice's effects run
+	                          // and its macro ran no DMA off (Pro builds, Turrican 2's small build)
 	int mix_setting;          // the 7V mixer setting of the song's game
 	bool dmaon_delays_effects;  // 01 with b1 = 0 holds the effects back until the next tick
 	bool bpm_coarse;          // BPM tempo sets only the CIA timer's high byte: 7093 / BPM (1.5)

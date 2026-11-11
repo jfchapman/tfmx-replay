@@ -51,6 +51,7 @@ int main(int argc, char **argv) {
 		                                       : TFMX_VARIANT_AUTO;
 	}
 	const bool show_mix = argc > 6 && !strcmp(argv[6], "mix");
+	const bool show_sid = argc > 6 && !strcmp(argv[6], "sid");
 	Module m;
 	if (!m.load(mdat.data(), mdat.size(), smpl.data(), smpl.size())) {
 		fprintf(stderr, "not a TFMX song\n");
@@ -85,6 +86,13 @@ int main(int argc, char **argv) {
 		log.clear();
 		r.tick();
 		paula.advance(r.tick_seconds());
+		if (show_sid) {
+			// The four SID buffers (smpl + 4, $100 bytes per voice) after the tick, as hex.
+			for (size_t i = 4; i < 0x404 && i < m.smpl.size(); i++)
+				printf("%02x", unsigned(m.smpl[i]));
+			printf("\n");
+			continue;
+		}
 		if (show_mix) {
 			for (int8_t b : paula.mix_next())
 				printf("%02x", unsigned(uint8_t(b)));

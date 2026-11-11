@@ -66,6 +66,10 @@ Behaviour behaviour_of(tfmx_variant variant, const Module &module) {
 		b.split_jumps = true;
 		b.play_macro = true;
 		b.sid = true;
+		// Measured on Super Gem'Z and the Turrican 3 loader (Pro), against GemX and Turrican 2's
+		// small build (§12).
+		b.sid_filter_carry = variant != TFMX_VARIANT_GEMX;
+		b.sid_effects_gate = variant != TFMX_VARIANT_GEMX || t2_small;
 		b.dmaon_delays_effects = variant != TFMX_VARIANT_TURRICAN2;
 		b.dma_wait_from_command = true;
 		b.f7_time = true;

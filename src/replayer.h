@@ -121,6 +121,11 @@ private:
 		Sweep sid_step_sweep, sid_accel_sweep, sid_limit_sweep;
 		bool sid_filter = false;
 		int32_t sid_limit = 0;  // in 1/16
+		int sid_y = 0;          // the slew filter's value at the end of the last rebuild
+		bool sid_dma_off = false;     // the voice's macro ran a DMA off this tick
+		bool sid_effects_ran = false; // the voice's effects ran this tick
+		uint32_t start_macro = 0;     // the macro the voice's last note started (30)
+		bool same_macro = false;      // ... and the one before started the same one
 	};
 
 	// Trackstep and patterns

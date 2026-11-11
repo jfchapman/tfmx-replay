@@ -230,7 +230,7 @@ Each voice holds this state: current and previous note, velocity, macro pointer,
 | 08 | AddNote ⏸ | Period from note (current note + signed `b1`) with detune = note finetune + signed `b2b3` (§9) | 362 |
 | 09 | SetNote ⏸ | As 08, with note `b1` directly | 231 |
 | 0A | Reset | Clear all effects | 30 |
-| 0B | Portamento | Every `b1` ticks, slide the period by rate `b2b3` toward the destination (§7.3). Starts from the current period. On its own, with no note to slide to, it does nothing | 139 |
+| 0B | Portamento | Every `b1` ticks, slide the period by rate `b2b3` toward the destination (§7.3). Starts from the current period. On its own, with no note to slide to, it does nothing. Rate 0 is no slide: the period follows the notes (measured on 9 builds) | 139 |
 | 0C | Vibrato | Speed `b1`, signed depth `b3` (§7.2). Puts the period back to the note's base, so 0C 00 turns the vibrato off and drops its offset | 254 |
 | 0D | AddVolume | Volume = (velocity × 3 + `b3`) & 0xFF. Not capped at 64, as Paula's VOL register has rules of its own (§8.3) | 354 |
 | 0E | SetVolume | Volume = `b3` | 263 |
@@ -243,7 +243,7 @@ Each voice holds this state: current and previous note, velocity, macro pointer,
 | 15 | Gosub | Save the return point, then as 06. One level, in every build | 20 |
 | 16 | Return | Back to the saved point | 19 |
 | 17 | SetPeriod | Period = `b2b3` directly | 23 |
-| 18 | SampleLoop | Begin += `b2b3` (made even), length −= `b2b3` / 2 words. Sets the loop part of a sample | 327 |
+| 18 | SampleLoop | Begin += `b2b3`, odd or not (measured on 12 builds; it only matters for a sample that starts at an odd address), length −= `b2b3` / 2 words. Sets the loop part of a sample | 327 |
 | 19 | One-shot | Begin = 0, length = 1 word: the silent start of smpl. A sample plays once and then goes quiet. Stops an AddBegin sweep | 328 |
 | 1A | Wait on DMA ⏸ | Hold the macro until `b2b3` + 1 Paula audio interrupts have happened (§6.5) | 22 |
 | 1B | Random play | Only partly measured, and not implemented (§17) | 2 |
@@ -254,7 +254,8 @@ Each voice holds this state: current and previous note, velocity, macro pointer,
 | 20 | Signal | Writes `b2b3` into a cue word in the replayer's variables, for the game to read. No audio effect | 2 |
 | 21 | Play macro | Start macro `b1` on voice `b2` with the current note and velocity, and finetune `b3`. Only in some builds (§14.6) | 3 |
 | 22–29 | SID | A per-tick wavetable oscillator with a slew filter (§12) | 9 |
-| 30, 31 | Unknown | 31 is safe to ignore. 30 only appears just after a SID setup (§12) | 4, 1 |
+| 30 | Same-macro jump | *Gem'Z*: if the voice's previous note started this macro, jump to step `b2b3` (§12) | 4 |
+| 31 | Unknown | Safe to ignore | 1 |
 
 Changes to begin and length land at Paula's next loop point (§8). A typical macro is therefore SetBegin, SetLen, DMA on, Wait, then SampleLoop or One-shot, and the first pass plays the attack while later passes play the loop.
 
@@ -505,35 +506,41 @@ Macros 22–29 are a **per-tick wavetable oscillator with a slew filter**, named
 
 | Cmd | Parameters | Meaning |
 |---|---|---|
-| 29 | `b1` = 1 on, 0 off | 29 01 starts SID for this voice, and the next DMA on plays its buffer (LC = the buffer, LEN = buffer length / 2). 29 00 stops the buffer updates from the next tick. Songs follow it with One-shot. `b3` = 1 (*factor5-fx*) made no measured difference |
-| 22 | `b1b2b3` | Source: 24-bit offset into smpl |
-| 23 | `b1` = buffer length in bytes, `b2b3` = source mask | Output length (for example $20 = 32 bytes, 16 words). The source index wraps with `& mask`, which is length − 1 (for example $0F for 16 bytes) |
-| 24 | `b2b3` | Read step, 8.8 fixed point ($0100 = one source byte per output byte). `b1` is ignored |
-| 25 | `b1` = count, `b2b3` = signed delta | Per-tick change of the step, in 1/65536 of a source byte ($1000 = +1/16 per tick). The direction reverses every `b1` ticks, a triangle like AddBegin. `b1` = 0 never reverses |
-| 26 | `b1b2b3` | Acceleration: the step grows by this much (1/65536 units) on every output byte, which bends the waveform. Values are taken modulo the source size in effect, so $0FFFF0 on a 16-byte source acts as a tiny negative acceleration |
-| 27 | `b1` = count, `b2b3` = signed delta | Per-tick change of the acceleration, a triangle as for 25 |
-| 28 | `b1` = count, `b2` = signed delta, `b3` = limit | Slew filter. The limit is a signed byte. `b2` changes it every tick in 1/16 units ($10 = +1 per tick), reversing every `b1` ticks |
+| 22 | `b1b2b3` | Source: 24-bit offset into smpl. Also writes the voice's LC at once, pointing Paula at the voice's buffer, as SetBegin would |
+| 23 | `b1` = buffer length in bytes, `b2b3` = source mask | Output length (for example $20 = 32 bytes, 16 words). The source index wraps with `& mask`, which is length − 1 (for example $0F for 16 bytes). Also writes LEN (length / 2) at once, and **starts the buffer updates**: no 29 is needed, and many macros have none |
+| 24 | `b2b3` | Read step, 8.8 fixed point ($0100 = one source byte per output byte). `b1` is ignored. Sets the current step, so a running sweep starts again from it |
+| 25 | `b1` = count, `b2b3` = signed delta | Per-tick change of the step, in 1/65536 of a source byte ($1000 = +1/16 per tick). The direction reverses every `b1` ticks, a triangle like AddBegin. `b1` = 0 never reverses. Sets only the sweep: without a 24 the step carries on from where it is |
+| 26 | `b1b2b3` | Acceleration: the step grows by this much (1/65536 units) on every output byte, which bends the waveform. Values are taken modulo the source size in effect, so $0FFFF0 on a 16-byte source acts as a tiny negative acceleration. Sets the current value, like 24 |
+| 27 | `b1` = count, `b2b3` = signed delta | Per-tick change of the acceleration, a triangle as for 25, and like 25 it sets only the sweep |
+| 28 | `b1` = count, `b2` = signed delta, `b3` = limit | Slew filter. The limit is a signed byte. `b2` changes it every tick in 1/16 units ($10 = +1 per tick), reversing every `b1` ticks. A limit of 0 means no filtering |
+| 29 | `b1` = 1 on, 0 off | 29 00 stops the buffer updates from the next tick; songs follow it with One-shot. 29 01 restarts them, with the filter off, the sweeps cleared and the acceleration at 0. `b3` = 1 (*factor5-fx*) made no measured difference |
+| 30 | `b2b3` = step | *Gem'Z*: if the voice's previous note started this same macro, jump to macro step `b2b3`; otherwise nothing. Placed after 23, it skips the following 24 and 25, so a repeated note on the same instrument keeps its step sweep going instead of restarting it |
 
 **Buffer generation, each tick.** This reproduces every measured byte:
 
 ```
-step  = 24's step (as 16.16: b2b3 << 8) + 25's swept offset
-accel = 26's value + 27's swept offset
+step  = the current step (24's b2b3 << 8 as 16.16, plus 25's sweep since)
+accel = the current acceleration (26's value, plus 27's sweep since)
 phase = 0
+y     = the filter's value (see below)
 for each output byte i in 0 .. length-1:
     step  += accel
     phase += step
     x = smpl[source + ((phase >> 16) & mask)]     # signed byte
-    y = slew(y, x, limit)                         # only if a 28 has been given
-    buffer[i] = y
+    y = slew(y, x, limit)                         # only if a 28 has been given, and limit != 0
+    buffer[i] = y                                 # (otherwise buffer[i] = x)
 ```
 
 - Phase, step and acceleration restart every tick from the current swept values, so the buffer is the same every tick unless something sweeps.
 - `slew(y, x, L)`: if x > y, n = y + L; if x < y, n = y − L, with L as a signed byte. If n passes x, or leaves the signed byte range, y = x. Otherwise y = n. With positive L that's a plain slew-rate limit ($10 turns a square into a triangle). Negative L gives odd but deterministic shapes, and real songs use them ($90 in *Denny* and *Gem'Z*). This fits all 12 measured limits.
-- The filter's y also restarts every tick, from a stored value that's normally 0. In the *Turrican 2* game it was 52, left over from the game's own songs.
-- **Buffer location:** smpl + 4 + voice × $100, whatever SetBegin says. So the first $404 bytes of a SID song's smpl are reserved, and every source offset is $404 or more.
+- **The filter's starting y** differs by build. *GemX* restarts it every tick from a stored value that's normally 0, and the *Turrican 2* small build does the same (in that game the stored value was 52, left over from its own songs). The Pro builds (*Gem'Z*, the *Turrican 3* loader) carry it over: each tick starts from the last value of the tick before.
+- **Buffer location:** smpl + 4 + voice × $100. So the first $404 bytes of a SID song's smpl are reserved, and every source offset is $404 or more. 22 and 23 point the voice at it, but a later SetBegin or SetLen replaces that as usual, and a macro can play another voice's buffer with SetBegin.
+- **Which ticks rebuild the buffer.** *GemX* rebuilds it every tick while the updates run. The Pro builds and the *Turrican 2* small build rebuild it as part of the voice's effects: only in ticks where the effects run (so not in the tick of a DMA on with `b1` = 0, which holds the effects back), and not in a tick whose macro ran a DMA off. 23 counts as an update in its own tick.
+- **Stopping.** 00 (DMA off with reset) stops the updates, as does 29 00. 13 (DMA off without reset) doesn't, so a note can keep playing a buffer that another macro is still updating.
 - **Timing:** the *Turrican 2* small build writes the first buffer in the DMA on tick. *GemX* writes it one tick earlier, and its sweeps run one tick ahead. The arithmetic is the same.
-- **Macro 30** (*Gem'Z*, *Denny*, always just after a SID setup) breaks the *GemX* build, which doesn't know it. It needs a later build.
+- **Macro 30** (*Gem'Z*, *Denny*) breaks the *GemX* build, which doesn't know it.
+
+Measured by reading the buffers out of each game's memory, tick by tick: *Gem'Z* credits matches in every byte of all four voices over the whole song (5:42), apart from the first tick, which starts from a filter value left in the game. The *Turrican 2* loading and *Turrican 3* loader songs match on every voice that can be compared, except one (§17). In listening tests, songs that use SID without 29 (*Gem'Z*, *Denny*, the *Turrican 2* and *Turrican 3* loaders) had notes missing or cut short before these rules.
 
 ---
 
@@ -765,6 +772,7 @@ Hardware-voice comparisons cover every register of every tick, over 1,500 ticks 
 | *Rock'n'Roll* | All 10 songs exact. A WinUAE capture of *lovely feelings* in the game: 458 of 458 ticks, and every Paula write comes from the replayer |
 | *Masterblazer* | Loader, intro, title and *Z-Out* title exact. *museum* and *lucasarts* differ only in a start-up volume left over from the game. *race* is exact on voices 0–1, and voices 2–3 use 1B |
 | *GemX* | All 8 subsongs exact |
+| *Super Gem'Z* | *gemz-credits*: all 17,090 ticks of the whole song exact, and two WinUAE captures of the game (732 and 663 ticks) exact, with every Paula write from the replayer. Its SID buffers match too (§12). *gemz-loader* and *gemz-title* exact on the same build |
 | *Monkey Island* | 22 subsongs exact apart from start-up leftovers, except that in three of them a 1A wait ends a tick early now and then |
 | *Turrican 2*, small build | 13 of 15 subsongs exact (§17) |
 | *Apidya*, 7V | End music exact. Title exact against three WinUAE captures, apart from a few notes at the edges of each capture |
@@ -798,7 +806,7 @@ The *Apidya* end music's percussion is one 29,504-word sample at period 158, res
 **Not implemented.**
 - **Macro 1B** (random play), used only by *Masterblazer race*. Partly measured on the loader build: voice 2 gets a new table note every 6 ticks (`b2` = 06), and voice 3 repeats each one 4 ticks later. With `b3` = 0 it cycles a fixed sequence of 10 notes, and other parameters mostly held one note in the probes. It crashes several other builds.
 - **Macro 1E,** only in *Masterblazer race*.
-- **Macros 30 and 31.** These need a *Gem'Z*, *Denny* or *Turrican 3* build.
+- **Macro 31.** It needs a *Gem'Z*, *Denny* or *Turrican 3* build to measure. 30 is now known (§12), measured on *Gem'Z*'s build only.
 - **Pattern FB's `b3`.** In the probes the transpose didn't show, but *Denny* uses 0, 5, 2, 7, which looks like one.
 
 **Known differences.**
@@ -808,7 +816,10 @@ The *Apidya* end music's percussion is one 29,504-word sample at period 158, res
 - *turrican 2 level 5-aliens* subsong 0: a pattern portamento reaching $100 lands on $FF. The original keeps $FF for a tick, and its vibrato then centres two lower. Not clamping fixes the first tick but not the rest, and breaks songs that do clamp.
 - *turrican 2 level 1-desert* subsong 2 differs in 4 ticks: a 1F plays the "previous note" the game's own music left in the replayer.
 - *Monkey Island* subsongs 1, 3 and 4: a 1A wait ends a tick early now and then. A 4 KB first block ends within a fraction of a tick of a tick boundary, and the original starts DMA a little way into the tick, its own run time, which the model doesn't have.
-- *turrican 3 loader:* SID voices differ. The original also rewrites LEN and LC every tick, and some periods differ. SID as a whole hasn't been compared song by song.
+- *turrican 3 loader:* voice 2's SID buffer differs in both subsongs (voices 0, 1 and 3 match). The original also rewrites LEN and LC every tick, and some periods differ.
+- SID buffers, small remainders: *gemz-loader* subsong 1, voice 0, is out by ±1 in some bytes; *gemz-title* subsong 4, voice 0, by up to about 9, an error 36 dB below the signal; *gemxtitle* subsong 0, voice 1, in 35 of 3,000 ticks. Probably a sweep a step out of phase. None was audible in listening tests.
+- *turrican 2 level 2-cave* song 9 (subsong index 8), voice 1 from tick 70: the original slides the period ($29E, $290, $283, …) where TFMXreplay holds $2A0.
+- *Denny*: no savestate, so its SID songs rest on the rules measured on the other builds, and on listening.
 - *Turrican 3*'s small build, *level 1:* differs on voice 3 from tick 642, probably state left over from the loading music.
 - In the 7V mixer, two notes reaching voice 4 a tick apart: the original briefly starts the first.
 - *Turrican 2*'s title mix: 3 ticks are a 1F with no previous note, which reads a period from outside the table, so only that build's memory can answer.

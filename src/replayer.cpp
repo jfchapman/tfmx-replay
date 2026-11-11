@@ -522,6 +522,8 @@ void Replayer::start_note(int n, int note, int macro, int velocity, int finetune
 	v.velocity = velocity;
 	v.finetune = finetune;
 	v.key = true;
+	v.same_macro = mac == v.start_macro;
+	v.start_macro = mac;
 	v.macro = mac;
 	v.step = 0;
 	v.wait = 0;
@@ -653,6 +655,7 @@ void Replayer::run_voice(int n) {
 			v.effects = true;
 		} else if (v.effects) {
 			effects(n);
+			v.sid_effects_ran = true;
 		}
 		// In 7V the fade steps for the seven real voices, not for hardware voice 3 (the mix).
 		if (!(seven_ && n == 3))
@@ -704,8 +707,11 @@ void Replayer::run_voice(int n) {
 		run_macro(n);
 		run_effects();
 	}
-	if (v.sid)
+	// Pro rebuilds a SID buffer as part of the voice's effects, and not in a tick whose macro ran
+	// a DMA off.
+	if (v.sid && (!b_.sid_effects_gate || (v.sid_effects_ran && !v.sid_dma_off)))
 		run_sid(n);
+	v.sid_effects_ran = v.sid_dma_off = false;
 	if (!b_.volume_late)
 		write_volume();
 }
@@ -757,6 +763,9 @@ bool Replayer::exec(int n, const uint8_t *c) {
 		return true;
 	};
 	auto dma_off = [&](bool reset) {
+		v.sid_dma_off = true;
+		if (reset)
+			v.sid = false;  // 00's reset stops the SID buffer updates too
 		if (b1 && b_.dmaoff_defer) {
 			// A DMAon earlier in this tick still starts the sample; the cut comes next tick.
 			// The AddBegin sweep only stops with the cut, so it steps once more this tick; the
@@ -794,10 +803,6 @@ bool Replayer::exec(int n, const uint8_t *c) {
 		}
 		return dma_off(true);
 	case 0x01:  // DMA on; b1 = effects: 0 next tick, 1-7F now, 80-FF off
-		if (v.sid) {
-			set_begin(n, 4 + 0x100u * unsigned(n));
-			set_len(n, uint16_t(std::max(v.sid_length / 2, 1)));
-		}
 		v.dma_on_request = true;
 		if (seven_ && n >= 4)
 			paula_->mix_latch(n, v.period, v.volume);
@@ -885,7 +890,7 @@ bool Replayer::exec(int n, const uint8_t *c) {
 		v.porta_speed = std::max(b1, 1);
 		v.porta_rate = int(w23);
 		v.porta_counter = 0;
-		v.porta = true;
+		v.porta = w23 != 0;  // rate 0: no slide, the period follows the notes
 		return false;
 	case 0x0C:  // vibrato
 		// Hexuma's builds: it never reaches the hardware voices, but the mixer's voices have it.
@@ -947,8 +952,8 @@ bool Replayer::exec(int n, const uint8_t *c) {
 	case 0x17:  // set period
 		set_period(n, int(w23));
 		return b_.setperiod_ends;
-	case 0x18:  // sample loop: begin += b2b3, length -= b2b3 / 2
-		set_begin(n, v.begin + (w23 & ~1u));
+	case 0x18:  // sample loop: begin += b2b3 (all of it, odd or not), length -= b2b3 / 2
+		set_begin(n, v.begin + w23);
 		set_len(n, uint16_t(v.len - (w23 >> 1)));
 		return false;
 	case 0x19:  // one-shot: the null sample at the start of smpl; it also stops an AddBegin sweep
@@ -986,24 +991,36 @@ bool Replayer::exec(int n, const uint8_t *c) {
 		}
 		return false;
 	// SID (§12)
-	case 0x22:
+	case 0x22:  // source; Paula plays the voice's buffer from now on
 		v.sid_source = l123;
+		if (b_.sid) {
+			v.addbegin = false;
+			set_begin(n, 4 + 0x100u * unsigned(n));
+		}
 		return false;
-	case 0x23:
+	case 0x23:  // length and mask; the buffer updates start
 		v.sid_length = b1 ? b1 : 256;
 		v.sid_mask = w23;
+		if (b_.sid) {
+			set_len(n, uint16_t(std::max(v.sid_length / 2, 1)));
+			v.sid = true;
+		}
 		return false;
-	case 0x24:
+	case 0x24:  // sets the step itself, so the sweep starts again from it
 		v.sid_step = w23 << 8;
+		v.sid_step_sweep.offset = 0;
 		return false;
-	case 0x25:
-		v.sid_step_sweep.set(b1, s16(w23));
+	case 0x25:  // the step's sweep; the step carries on from where it is
+		v.sid_step_sweep.count = v.sid_step_sweep.counter = b1;
+		v.sid_step_sweep.delta = s16(w23);
 		return false;
 	case 0x26:
 		v.sid_accel = l123;
+		v.sid_accel_sweep.offset = 0;
 		return false;
 	case 0x27:
-		v.sid_accel_sweep.set(b1, s16(w23));
+		v.sid_accel_sweep.count = v.sid_accel_sweep.counter = b1;
+		v.sid_accel_sweep.delta = s16(w23);
 		return false;
 	case 0x28:
 		v.sid_filter = true;
@@ -1013,13 +1030,18 @@ bool Replayer::exec(int n, const uint8_t *c) {
 	case 0x29:
 		v.sid = b1 && b_.sid;
 		if (v.sid) {
+			v.sid_accel = 0;
 			v.sid_filter = false;
 			v.sid_step_sweep = Sweep();
 			v.sid_accel_sweep = Sweep();
 			v.sid_limit_sweep = Sweep();
 		}
 		return false;
-	default:  // 1B, 1E, 20, 30, 31 and unknown commands: no audible effect known
+	case 0x30:  // if the voice's last note started this same macro, jump to step b2b3 (Gem'Z)
+		if (v.same_macro)
+			v.step = w23;
+		return false;
+	default:  // 1B, 1E, 20, 31 and unknown commands: no audible effect known
 		return false;
 	}
 }
@@ -1132,14 +1154,14 @@ void Replayer::run_sid(int n) {
 	uint32_t step = v.sid_step + uint32_t(v.sid_step_sweep.offset);
 	const uint32_t accel = v.sid_accel + uint32_t(v.sid_accel_sweep.offset);
 	uint32_t phase = 0;
-	int y = 0;
+	int y = b_.sid_filter_carry ? v.sid_y : 0;
 	const int limit = int8_t(uint8_t((v.sid_limit + v.sid_limit_sweep.offset) >> 4));
 	for (int i = 0; i < v.sid_length; i++) {
 		step += accel;
 		phase += step;
 		const uint32_t src = v.sid_source + ((phase >> 16) & v.sid_mask);
 		int x = src < s.size() ? int8_t(s[src]) : 0;
-		if (v.sid_filter) {
+		if (v.sid_filter && limit != 0) {  // a limit of 0 means no filtering
 			if (x > y) {
 				const int next = y + limit;
 				y = (next >= x || next > 127 || next < -128) ? x : next;
@@ -1152,6 +1174,8 @@ void Replayer::run_sid(int n) {
 		if (out + unsigned(i) < s.size())
 			s[out + unsigned(i)] = uint8_t(x);
 	}
+	if (v.sid_filter)
+		v.sid_y = y;
 	v.sid_step_sweep.run();
 	v.sid_accel_sweep.run();
 	v.sid_limit_sweep.run();
