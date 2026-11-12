@@ -302,7 +302,7 @@ size_t render(tfmx_module *m, size_t frames, Out out) {
 
 extern "C" {
 
-const char *tfmx_version(void) { return "0.1.0"; }
+const char *tfmx_version(void) { return "0.2.0"; }
 
 const char *tfmx_error_string(tfmx_error error) {
 	switch (error) {

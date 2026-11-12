@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(TFMXreplay VERSION 0.1.0 LANGUAGES C CXX)
+project(TFMXreplay VERSION 0.2.0 LANGUAGES C CXX)
 
 option(TFMX_BUILD_SHARED "Build a shared library (DLL / .so / .dylib) instead of a static one" OFF)
 option(TFMX_BUILD_TOOLS "Build tfmxrender and tfmxtrace" ON)

@@ -48,7 +48,7 @@ extern "C" {
 #endif
 
 #define TFMX_VERSION_MAJOR 0
-#define TFMX_VERSION_MINOR 1
+#define TFMX_VERSION_MINOR 2
 #define TFMX_VERSION_PATCH 0
 
 /* Returns the library version as "major.minor.patch". */
