@@ -108,6 +108,9 @@ private:
 		bool porta = false;
 		int porta_speed = 1, porta_rate = 0, porta_counter = 0;		bool envelope = false;
 		int env_step = 0, env_time = 0, env_counter = 0, env_target = 0;
+		int env_overshoot = -1;  // Danger Freak: the volume an envelope stepped past its target to
+		int env_from = -1;       // ... and where the next envelope's first step starts
+		bool had_period = false; // a period has been written since the song started
 		bool addbegin = false;
 		int ab_count = 0, ab_counter = 0;
 		int32_t ab_delta = 0;

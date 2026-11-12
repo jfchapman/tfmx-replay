@@ -64,7 +64,7 @@ bool valid(const tfmx_settings &s) {
 	return s.sample_rate >= 8000 && s.sample_rate <= 192000 && s.stereo_separation >= 0 &&
 	       s.stereo_separation <= 100 && s.interpolation >= TFMX_INTERPOLATION_NONE &&
 	       s.interpolation <= TFMX_INTERPOLATION_CUBIC && s.volume_ramping >= 0 && s.loop_count >= -1 &&
-	       s.variant >= TFMX_VARIANT_AUTO && s.variant <= TFMX_VARIANT_LOGICAL && s.gain >= 0 &&
+	       s.variant >= TFMX_VARIANT_AUTO && s.variant <= TFMX_VARIANT_DANGERFREAK && s.gain >= 0 &&
 	       s.amiga_model >= TFMX_AMIGA_A500 && s.amiga_model <= TFMX_AMIGA_NONE && s.fade_seconds >= 0 &&
 	       (s.mix_setting == 0 || (s.mix_setting >= 8 && s.mix_setting <= 22));
 }
@@ -434,6 +434,7 @@ const char *tfmx_variant_name(tfmx_variant v) {
 	case TFMX_VARIANT_TURRICAN3_SMALL: return "TFMX Pro (Turrican 3 small build)";
 	case TFMX_VARIANT_HEXUMA: return "TFMX Pro (Hexuma)";
 	case TFMX_VARIANT_LOGICAL: return "TFMX (Logical)";
+	case TFMX_VARIANT_DANGERFREAK: return "TFMX (Danger Freak)";
 	}
 	return "unknown";
 }

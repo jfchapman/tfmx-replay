@@ -104,8 +104,11 @@ typedef enum tfmx_variant {
 	                                 other builds (7V and in-game) are plain Pro. Known songs */
 	TFMX_VARIANT_HEXUMA,        /* Hexuma's in-game build: Pro, but macro vibrato (0C) does
 	                                 nothing. Known songs */
-	TFMX_VARIANT_LOGICAL        /* Logical's build: GemX-like, but with pattern fade (FA) and
+	TFMX_VARIANT_LOGICAL,       /* Logical's build: GemX-like, but with pattern fade (FA) and
 	                                 track mute (header words 0x1C0-0x1CF). Known songs */
+	TFMX_VARIANT_DANGERFREAK    /* Danger Freak's early build (1989): X-Out-like, but DMA on
+	                                 takes effect at once and the volume isn't late, among other
+	                                 differences. Known songs */
 } tfmx_variant;
 
 typedef struct tfmx_settings {

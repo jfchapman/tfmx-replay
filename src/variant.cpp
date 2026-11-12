@@ -153,6 +153,7 @@ Behaviour behaviour_of(tfmx_variant variant, const Module &module) {
 		break;
 	case TFMX_VARIANT_XOUT:
 	case TFMX_VARIANT_ROCKNROLL:
+	case TFMX_VARIANT_DANGERFREAK:
 		// X-Out, Fly Harder, Abandoned Places; Rock'n'Roll differs only in 17.
 		b.no_bpm = true;
 		b.macros_first = false;
@@ -166,6 +167,7 @@ Behaviour behaviour_of(tfmx_variant variant, const Module &module) {
 		b.effects_first = variant != TFMX_VARIANT_ROCKNROLL;
 		b.note_tick_skips = variant != TFMX_VARIANT_ROCKNROLL;
 		b.interleaved = variant == TFMX_VARIANT_ROCKNROLL;
+		b.porta_from_dest = variant == TFMX_VARIANT_ROCKNROLL;
 		b.scaled_effects = false;
 		b.vibrato_even = true;
 		b.addbegin_sweep = false;
@@ -176,6 +178,24 @@ Behaviour behaviour_of(tfmx_variant variant, const Module &module) {
 		b.split_jumps = false;
 		b.play_macro = false;
 		b.sid = false;
+		if (variant == TFMX_VARIANT_DANGERFREAK) {
+			// Danger Freak's build (1989), checked against the game's replayer on all its songs
+			// and against a recording of the title (§14.x). Tracks run first, but a note's macro
+			// starts in the same tick; VOL isn't late; 01 starts DMA at once, so a sample set
+			// before it plays even when its loop is set later in the tick.
+			b.volume_late = false;
+			b.note_tick_skips = false;
+			b.effects_first = true;  // here: effects, then the macro
+			b.note_same_tick = true;
+			b.dmaon_immediate = true;
+			b.note_resets_effects = true;
+			b.env_overshoot = true;
+			b.loop_exit_ends = true;
+			b.periods_48 = true;
+			b.porta_from_dest = true;
+			b.fa_line_jump = true;
+			b.track_mute = true;
+		}
 		break;
 	}
 	for (const uint64_t checksum : kIgnoreMute)
@@ -222,6 +242,9 @@ const KnownSong kKnownSongs[] = {
 	{0xF9A638697B1C9AEBull, TFMX_VARIANT_LOGICAL},          // logical-levelmusic2
 	{0x0C8BD2FF04132506ull, TFMX_VARIANT_LOGICAL},          // logical-levelmusic3
 	{0x3CC00FA7FF2FBA76ull, TFMX_VARIANT_LOGICAL},          // logical-levelmusic4
+	{0x4F158ECB9B28BCD8ull, TFMX_VARIANT_DANGERFREAK},      // danger freak
+	{0x9D33CE111A234864ull, TFMX_VARIANT_DANGERFREAK},      // danger freak-1
+	{0x0C48F9523A28B6DCull, TFMX_VARIANT_DANGERFREAK},      // danger freak-2
 };
 
 tfmx_variant detect_variant(const Module &m) {

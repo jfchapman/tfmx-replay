@@ -57,6 +57,17 @@ struct Behaviour {
 	bool no_macro_vibrato;    // macro 0C is ignored on hardware voices (Hexuma)
 	bool track_mute;          // a non-zero header word at 0x1C0 + 2t mutes track t: it runs, but
 	                          // starts no notes (Logical, B.C. Kid, Masterblazer)
+	bool note_same_tick;      // with tracks first, a note's macro starts in the same tick
+	bool note_resets_effects; // a note stops the voice's effects (vibrato, portamento, envelope)
+	bool loop_exit_ends;      // 05 ends the tick when its count runs out
+	bool porta_from_dest;     // 0B starts from the last slide's destination, even if the slide
+	                          // hadn't got there (Rock'n'Roll, Danger Freak)
+	bool periods_48;          // the period table has four octaves; notes 48-63 give period 0
+	bool fa_line_jump;        // a trackstep line starting FAxx jumps to the line in word 2
+	bool env_overshoot;       // an envelope ending past its target writes the target, but the
+	                          // next envelope starts from the value past it
+	bool dmaon_immediate;     // 01 writes DMA on at once, so Paula takes the sample set before it
+	                          // rather than one set later in the tick (Danger Freak)
 };
 
 Behaviour behaviour_of(tfmx_variant variant, const Module &module);

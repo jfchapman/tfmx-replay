@@ -124,6 +124,8 @@ The high byte is a pattern number or code, and the low byte is a signed transpos
 | 0xFE | Stop the voice given in the low byte (once). The track is then idle |
 | 0x90 and above | Track idle. 0xFF is the usual value |
 
+In *Danger Freak*'s build, a line whose first word is 0xFAxx is a jump instead: play continues at the line given by the second word, every time it's reached. Its two in-game songs loop this way, with FA01 (§14.2).
+
 ### 4.2 Command lines
 A line whose first word is 0xEFFE is a command. The second word selects the command, and the third and fourth words (*w3*, *w4*) are its parameters.
 
@@ -388,7 +390,7 @@ So TFMXreplay's steps fall at different moments and have different sizes, and it
 
 ## 9. Periods
 
-The period table has 64 entries and is the same in every build measured:
+The period table has 64 entries and is the same in every build measured, except *Danger Freak*'s (below):
 
 ```
 1710 1614 1524 1438 1357 1281 1209 1141 1077 1017  960  908
@@ -399,7 +401,7 @@ The period table has 64 entries and is the same in every build measured:
  214  202  191  180
 ```
 
-Entry 0x0C is 856 (ProTracker C-1), 0x18 is 428, 0x24 is 214, and 0x2F is 113 (ProTracker B-3). Entries 0x30–0x3F repeat the top octave.
+Entry 0x0C is 856 (ProTracker C-1), 0x18 is 428, 0x24 is 214, and 0x2F is 113 (ProTracker B-3). Entries 0x30–0x3F repeat the top octave. *Danger Freak*'s build has only the first 48 entries, followed by zeros, so notes 0x30–0x3F give period 0 whatever the detune. Its title song slides to one of them, all the way down to period 0.
 
 Macro note commands use the note & 0x3F, with a detune that is the note's finetune plus the signed word `b2b3`:
 
@@ -565,6 +567,7 @@ Each game shipped its own build of the replayer, and some shipped several. *Apid
 | Generation | Games |
 |---|---|
 | *Rock'n'Roll* (1989) | *Rock'n'Roll* |
+| *Danger Freak* (1989) | *Danger Freak*. Tracks first and no note + wait, like the *X-Out* family, but with its own timing (§14.2) |
 | *X-Out* family (1990–93) | *X-Out*, *Fly Harder*, *Abandoned Places*. All three have different code layouts but match on every probe, so this is a whole family |
 | TFMX 1.5 (1990) | *Turrican 1* |
 | *Masterblazer* (autumn 1990) | *Masterblazer*, *Z-Out* |
@@ -604,12 +607,23 @@ More detail on the tracks-first and volume-late builds:
 - **In the *Masterblazer* loader and level-select builds**, at master volume 64, VOL is only written when the voice's unscaled volume changes. So the last step of a fade up to 64 never reaches Paula until the voice's volume next changes, and a 00 VOL write can stick. The title build and *Z-Out* write every tick.
 - **In *Hexuma*'s title and in-game builds**, macro vibrato (0C) doesn't reach the hardware voices, though voices 4–7 of the mixer have it. Both builds write VOL and PER only when they change.
 - **T3 small** ignores macros 06, 15, 16, 1C and 1D and pattern FC, and has no AddBegin sweep. Everything else tested behaves as in Pro.
+- ***Danger Freak*'s build** is closest to the *X-Out* family (tracks first, no note + wait, linear and even-speed vibrato, no AddBegin sweep), and differs from it in these ways:
+  - A note's macro starts in the same tick as its row, and VOL isn't late: it's written when the macro or an effect changes it.
+  - The effects run before the macro, so a 0C or 0F from the macro first acts in the next tick.
+  - 01 writes DMA on at once, where every other build collects the starts and writes them at the end of the tick. Paula therefore takes the sample set before the 01, even when the loop is set later in the same tick. The title song's opening depends on this: each note sets its sample, starts DMA, then sets a one-word silent loop in the same tick. With the starts collected, Paula takes the loop and the first 7 seconds are silent, which is how every other build plays it.
+  - A note stops the voice's vibrato, portamento and envelope, even if its macro has no 00.
+  - 05 ends the tick when its count runs out.
+  - An envelope that steps past its target writes the target to Paula but keeps the value it stepped to, and the next envelope's first step starts from that value. So after 0F 07 01 17 from 1F (31, 24, then 17 written as 23), a 0F 02 01 00 starts at 15, not 21.
+  - 0B starts the slide from the previous slide's destination, as *Rock'n'Roll* does, but still writes the old period in that tick.
+  - The period table has 48 entries (§9), and a period of 0 is written like any other.
+  - A trackstep line starting 0xFAxx jumps to the line in its second word (§4.1). There is no EFFE command in its songs.
+  - It reads the track mute words (§4.4). Its songs don't set them.
 - **Pro's AddBegin sweep and the 00 reset.** Every Pro build steps the sweep once more in a deferred 00's tick. *Turrican 2*'s small build runs effects before the macro in that update, so with 00 `b1` = 0 its sweep also steps once more before the cut.
 
 ### 14.3 Choosing a build for a song
 Nothing in a song says which build it was written for, except that a TFHD header gives a rough variant. TFMXreplay decides in this order:
 
-1. A table of mdat checksums, for songs that can't be told from their contents, each checked on its own game's replayer: *Turrican 2*'s songs, the *Turrican 3* loader, *Hexuma*'s songs, *Masterblazer*'s intro, *Z-Out*'s songs (they look like 1.5 but play on *Masterblazer*'s rules), *Rock'n'Roll*'s intro, *Turrican*'s bonus song and *Logical*'s six songs (a *GemX*-generation build with FA and track mute). A second checksum list turns track mute off for two files (§4.4).
+1. A table of mdat checksums, for songs that can't be told from their contents, each checked on its own game's replayer: *Turrican 2*'s songs, the *Turrican 3* loader, *Hexuma*'s songs, *Masterblazer*'s intro, *Z-Out*'s songs (they look like 1.5 but play on *Masterblazer*'s rules), *Rock'n'Roll*'s intro, *Turrican*'s bonus song, *Logical*'s six songs (a *GemX*-generation build with FA and track mute) and *Danger Freak*'s three songs. A second checksum list turns track mute off for two files (§4.4).
 2. `"TFMX "` magic: *Rock'n'Roll*.
 3. `"tfmxsong"` magic: *Masterblazer*.
 4. 7V: Pro.
@@ -687,7 +701,7 @@ The Stember builds take the first sweep step in the same tick as the 11 command,
 | FD Cue | No audio effect in any build, and the word wasn't stored anywhere in RAM |
 
 ### 14.7 Build notes
-**Calling a replayer.** Builds start with a jump table of BRA.W entries, 17 to 25 depending on the build, with a similar layout across builds:
+**Calling a replayer.** Builds start with a jump table of BRA.W entries, 17 to 25 depending on the build (9 in *Danger Freak*), with a similar layout across builds:
 
 | Entry | Use |
 |---|---|
@@ -708,6 +722,7 @@ Pro builds also hold internal dispatch tables of 15 entries (pattern commands) a
 - *Turrican 3* has three: 7V (for the intro and the menu's music player, which also plays level songs in 4-voice mode), small (loading music) and in-game. The in-game build gives the same results as the 7V build, apart from skipping voice 2's notes from track 6 in stretches of *level 1* subsong 4, most likely to keep a voice free for sound effects.
 - *Turrican 2*'s 7V build differs from the other Pro builds only by running effects in a note's first update, as far as is known.
 - *Denny* was never released, so *denny-title* has no game.
+- *Danger Freak*'s build dispatches pattern and macro commands by storing the handler's address into the operand of the JMP instruction that follows the store, then running it. A 68000 jumps to the new address. An emulator that caches translated code (the harness's) jumps to the one stored for the previous command instead. That gives behaviour that looks consistent but isn't the game's: every command runs with the previous command's handler, which also makes macro voices and pattern tracks seem to share a command. The harness now reads such a JMP's target from memory (§16.1).
 - *Bundesliga Manager*'s and *Anstoss*'s 7V builds initialise through operating system library calls, and a game's own title song can have a slightly different copy from modland's. *B.C. Kid*'s `bckid-titel` is 80 bytes shorter in memory.
 
 ---
@@ -732,6 +747,8 @@ Three other references check the first:
 - **WinUAE memwatch captures** of the running game, converted by `tests/capture.py`. These are the most direct reference, and they count wherever the emulator's rough CPU timing differs, as with 1A waits in 7V.
 - **The 7V mix buffers,** read straight out of the original replayer's memory and compared byte by byte.
 - **WinUAE recordings** of the songs, with no filter and no interpolation, compared with TFMXreplay's output as sound.
+
+The emulator caches translated code, so a replayer that rewrites its own instructions can run differently there than on a 68000. Only *Danger Freak*'s build does this among the savestates (§14.7), and a recording is what showed it: the harness's version of the song, matched exactly, didn't sound like the game.
 
 The replayers were run, not disassembled. The exceptions are automated searches of memory images for jump tables and for writes to particular hardware registers. The savestates hold the games themselves, so they and the test rig aren't distributed, and the comparisons with the originals can't be rerun without them. `tests/selftest.py` guards the same behaviour without them, using small test songs and saved output from a verified build.
 
@@ -770,6 +787,7 @@ Hardware-voice comparisons cover every register of every tick, over 1,500 ticks 
 | *Turrican 1*, both builds | All 14 songs exact, including BPM subsongs |
 | *X-Out* family | All 17 songs exact |
 | *Rock'n'Roll* | All 10 songs exact. A WinUAE capture of *lovely feelings* in the game: 458 of 458 ticks, and every Paula write comes from the replayer |
+| *Danger Freak* | All 9 subsongs of its three songs exact at full length: the title's 11,000 ticks (3:40), and the two in-game songs for 11,000 ticks each, through two passes of their loops. Against a WinUAE recording of the title, fitted per voice: residuals −11.6 dB left and −15.0 dB right, against −9.5 and −11.4 dB for the earlier X-Out-family playback, which also missed the first 7 seconds |
 | *Masterblazer* | Loader, intro, title and *Z-Out* title exact. *museum* and *lucasarts* differ only in a start-up volume left over from the game. *race* is exact on voices 0–1, and voices 2–3 use 1B |
 | *GemX* | All 8 subsongs exact |
 | *Super Gem'Z* | *gemz-credits*: all 17,090 ticks of the whole song exact, and two WinUAE captures of the game (732 and 663 ticks) exact, with every Paula write from the replayer. Its SID buffers match too (§12). *gemz-loader* and *gemz-title* exact on the same build |
@@ -825,6 +843,7 @@ The *Apidya* end music's percussion is one 29,504-word sample at period 158, res
 - *Turrican 2*'s title mix: 3 ticks are a 1F with no previous note, which reads a period from outside the table, so only that build's memory can answer.
 - Hardware voices are silenced at DMA off, where the hardware holds the last byte as a DC level (§8.5). The difference can't be heard. A hold model fits recordings better on most songs, but not *Rock'n'Roll*'s *take off song*.
 - Hardware write time in 7V is a fitted average (§11.4). The real time varies a little with how much the mixer has to do.
+- *Danger Freak*'s build writes each register as its command runs (§14.2), so how far into the tick a write lands depends on how much the replayer did before it. Against the title's recording, all four voices sit at a steady offset for most of the song, and about 1.5 ms later for stretches of a few seconds in some sections. TFMXreplay writes a tick's registers at its start and has no model of the CPU's run time. In a spliced listening test the joins could be heard as a slight timing shift; each version on its own sounded right.
 
 **Unknown or unmeasured.**
 - FC in the older builds, because the probe's notes come too close together for them.

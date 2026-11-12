@@ -139,6 +139,9 @@ double Replayer::tick_seconds() const {
 }
 
 int Replayer::period_of(int note, int finetune) const {
+	// Danger Freak's table has four octaves, then zeros: those notes stay at period 0.
+	if (b_.periods_48 && (note & 0x3F) >= 48)
+		return 0;
 	const int base = kPeriods[note & 0x3F];
 	// §9: Pro-style builds scale, older builds add.
 	if (b_.scaled_effects)
@@ -187,6 +190,15 @@ void Replayer::load_line() {
 		if (line_time_[size_t(line_)] < 0)
 			line_time_[size_t(line_)] = time_;
 		const uint8_t *l = m_->trackstep_line(line_);
+		if (b_.fa_line_jump && l[0] == 0xFA) {
+			// Danger Freak: FAxx in a line's first word jumps to the line in its second word,
+			// every time (the songs loop this way; only FA01 is used).
+			const int to = be16(l + 2);
+			if (to <= line_)
+				mark_loop(line_time_[size_t(to)]);
+			line_ = to;
+			continue;
+		}
 		if (be16(l) == 0xEFFE) {
 			const int cmd = be16(l + 2), w3 = be16(l + 4), w4 = be16(l + 6);
 			switch (cmd) {
@@ -490,7 +502,7 @@ void Replayer::note_on(int n, int note, int macro, int velocity, int finetune) {
 		return;
 	}
 	// The macro first runs on the next tick. With tracks first, that means skipping this one.
-	start_note(n, note, macro, velocity, finetune, b_.macros_first ? 0 : 1);
+	start_note(n, note, macro, velocity, finetune, b_.macros_first || b_.note_same_tick ? 0 : 1);
 	v.skip_update = b_.volume_late;
 	v.skip_effects = b_.note_skips_effects;
 }
@@ -532,6 +544,8 @@ void Replayer::start_note(int n, int note, int macro, int velocity, int finetune
 	v.has_return = false;
 	v.macro_on = true;
 	v.start_delay = delay;
+	if (b_.note_resets_effects)
+		reset_effects(v);
 }
 
 // --- macros -------------------------------------------------------------------------------
@@ -579,9 +593,11 @@ void Replayer::tick() {
 			}
 		}
 		for (int i = 0; i < count && !b_.volume_late; i++) {
-			const Voice &v = voice_[order[i]];
-			if (v.period)
+			Voice &v = voice_[order[i]];
+			// With Danger Freak's short table a slide can end on period 0, which is written too.
+			if (v.period || (b_.periods_48 && v.had_period))
 				write(order[i], PaulaWrite::PER, uint32_t(v.period));
+			v.had_period |= v.period != 0;
 		}
 	};
 	auto track_phase = [&] {
@@ -703,6 +719,11 @@ void Replayer::run_voice(int n) {
 		if (v.period && writes)
 			write(n, PaulaWrite::PER, uint32_t(v.period));
 		run_macro(n);
+	} else if (b_.effects_first) {
+		// Danger Freak: the effects run before the macro, so a macro's 0C first moves the period
+		// a tick later; the volume is still written after both.
+		run_effects();
+		run_macro(n);
 	} else {
 		run_macro(n);
 		run_effects();
@@ -803,7 +824,10 @@ bool Replayer::exec(int n, const uint8_t *c) {
 		}
 		return dma_off(true);
 	case 0x01:  // DMA on; b1 = effects: 0 next tick, 1-7F now, 80-FF off
-		v.dma_on_request = true;
+		if (b_.dmaon_immediate && !(seven_ && n >= 4))
+			write(n, PaulaWrite::DMA_ON, 0);
+		else
+			v.dma_on_request = true;
 		if (seven_ && n >= 4)
 			paula_->mix_latch(n, v.period, v.volume);
 		// Pro clears the voice's audio interrupt here, so a request still pending from an
@@ -837,7 +861,7 @@ bool Replayer::exec(int n, const uint8_t *c) {
 			return false;  // key up: fall through, leaving the counter alone
 		if (v.loop == 0) {
 			v.loop = -1;
-			return false;
+			return b_.loop_exit_ends;  // Danger Freak: leaving the loop ends the tick
 		}
 		if (--v.loop < 0)
 			v.loop = b1 - 1;
@@ -882,10 +906,13 @@ bool Replayer::exec(int n, const uint8_t *c) {
 		reset_effects(v);
 		return false;
 	case 0x0B:  // portamento from the current period toward the destination
-		if (b_.interleaved) {
-			// Rock'n'Roll: the slide starts from the last note's period (the previous slide's
-			// destination), even if that slide hadn't got there.
-			v.base = v.period = v.dest_period;
+		if (b_.porta_from_dest) {
+			// Rock'n'Roll, Danger Freak: the slide starts from the last note's period (the
+			// previous slide's destination), even if that slide hadn't got there.
+			// Danger Freak still writes the old period in this tick (its effects ran first).
+			v.base = v.dest_period;
+			if (b_.interleaved)
+				v.period = v.dest_period;
 		}
 		v.porta_speed = std::max(b1, 1);
 		v.porta_rate = int(w23);
@@ -912,9 +939,11 @@ bool Replayer::exec(int n, const uint8_t *c) {
 		return false;
 	case 0x0D:  // volume = velocity * 3 + b3, not capped at 64 but kept to a byte
 		v.volume = (v.velocity * 3 + b3) & 0xFF;
+		v.env_overshoot = -1;
 		return false;
 	case 0x0E:  // set volume
 		v.volume = b3;
+		v.env_overshoot = -1;
 		return false;
 	case 0x0F:  // envelope: step b1 every b2 + 1 ticks toward b3
 		v.env_step = b1;
@@ -922,6 +951,10 @@ bool Replayer::exec(int n, const uint8_t *c) {
 		v.env_counter = b2;
 		v.env_target = b3;
 		v.envelope = true;
+		// Danger Freak: Paula got the target, but the voice kept the value past it; the new
+		// envelope's first step starts from there.
+		v.env_from = v.env_overshoot;
+		v.env_overshoot = -1;
 		return false;
 	case 0x11:  // add to sample begin, once or as a sweep
 		v.begin = (v.begin + uint32_t(s16(w23))) & 0xFFFFFF;
@@ -1115,15 +1148,23 @@ void Replayer::effects(int n) {
 			v.env_counter--;
 		} else {
 			v.env_counter = v.env_time;
+			if (v.env_from >= 0) {
+				v.volume = v.env_from;
+				v.env_from = -1;
+			}
 			if (v.volume < v.env_target) {
 				v.volume += v.env_step;
 				if (v.volume >= v.env_target) {
+					if (b_.env_overshoot)
+						v.env_overshoot = v.volume;
 					v.volume = v.env_target;
 					v.envelope = false;
 				}
 			} else if (v.volume > v.env_target) {
 				v.volume -= v.env_step;
 				if (v.volume <= v.env_target) {
+					if (b_.env_overshoot)
+						v.env_overshoot = v.volume;
 					v.volume = v.env_target;
 					v.envelope = false;
 				}
