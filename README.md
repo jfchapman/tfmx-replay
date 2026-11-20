@@ -112,9 +112,10 @@ change reaches, not whether the new output is right.
 `tests/wav/` has tools for comparing renders with recordings from an emulator, run with Node.js
 (no packages needed). `locate.js` finds a song in a recording and measures how well a render
 fits it, `voicefit.js` fits each voice separately (from `tfmxrender -V` renders) to compare two
-builds against a recording, `transfer.js` shows the match by frequency, `cut.js` copies and filters
-stretches of WAV files, and `splice.js` makes a blind listening test: random stretches of two or
-more versions joined into one file, with an answer key. Each prints its usage when run without
+builds against a recording, `specfit.js` compares songs with a recording tick by tick by level and
+spectrum (so sub-millisecond timing differences don't count), `transfer.js` shows the match by
+frequency, `cut.js` copies and filters stretches of WAV files, and `splice.js` makes a blind
+listening test: random stretches of two or more versions joined into one file, with an answer key. Each prints its usage when run without
 arguments. Section 16.2 of [the format document](docs/TFMX-format.md) describes the method.
 
 The other scripts in `tests/` need a TFMX song collection, and `regress.py` and `check_song.py`
